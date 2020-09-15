@@ -1,6 +1,0 @@
-
-    a:link {color:#000000;}      /* 未访问链接*/
-    a:visited {color:#000dc0;}  /* 已访问链接 */
-    a:hover {color:#000000;}  /* 鼠标移动到链接上 */
-    a:active {color:#ff0000;}  /* 鼠标点击时 */
-    p{font-family: "Monospace";}
