@@ -1,5 +1,5 @@
 # 一些基础设置
-baseURL = "http://blog.kawayi.moe/"
+baseURL = "https://blog.kawayi.moe/"
 languageCode = "zh-cn"
 title = "MingMoe的网络博客"
 
