@@ -9,6 +9,9 @@ theme = "ming"
 # 设置分页
 paginate = 8
 
+# 设置文章输出路径
+publishDir = "docs"
+
 # 设置文章的永久链接
 [permalinks]
   post = "/:year/:monthname/:weekdayname/:title/"
