@@ -1,0 +1,34 @@
+# 一些基础设置
+baseURL = "http://blog.kawayi.moe/"
+languageCode = "zh-cn"
+title = "MingMoe的网络博客"
+
+# 设置主题
+theme = "ming"
+
+# 设置分页
+paginate = 8
+
+# 设置文章的永久链接
+[permalinks]
+  post = "/:year/:monthname/:weekdayname/:title/"
+
+[params]
+    # 用于设置大小标题
+    Subtitle = "一个技术宅的博客┗|｀O′|┛ 嗷~~"
+    Title = "大明酱的网络日志📚"
+
+    # 用于设置图片
+    HeadImage = "/Ming.png"
+
+    # 设置背景图片
+    BackgroundImage = "/Background.jpg"
+
+    # 设置作者名称
+    Author = "MingMoe"
+
+# 设置分类法
+[taxonomies]
+    category = "categories"
+    tag = "tags"
+    archives = "archives"

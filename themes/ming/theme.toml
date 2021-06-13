@@ -1,0 +1,15 @@
+# 主题配置文件
+
+name = "Ming"
+license = "MIT"
+licenselink = "https://github.com/GOSCPS/ming/blob/master/LICENSE"
+description = "A pretty hugo theme"
+homepage = "https://github.com/GOSCPS/ming"
+tags = ["Hugo"]
+features = ["blog"]
+min_version = "0.41.0"
+
+[author]
+  name = "chhdao"
+  homepage = "https://github.com/chhdao"
+

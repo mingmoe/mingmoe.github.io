@@ -1,0 +1,31 @@
+{{/* ming 单个页面 */}}
+
+{{/* 设置标题 */}}
+{{ define "title" }}
+{{ .Title }} &ndash; {{ .Site.Title }}
+{{ end }}
+
+{{/* 设置页面 */}}
+{{ define "body" }}
+
+<div class="mingSingleMain">
+
+  <!-- 设置页首 -->
+  <div class="mingSingleHead">
+    <p>{{ .Date.Format "Monday, January 2, 2006" }} - {{ .Params.categories }}</p>
+    <h1>{{ .Title }}</h1>
+  </div>
+
+  <!-- 内容 -->
+  <div class="mingMarkdownStyle">
+    {{ .Content }}
+  </div>
+
+  <!-- 页尾 -->
+  <div class="mingSingleEnd">
+    <p>Update in {{ .Lastmod.Format "Monday, January 2, 2006" }} by {{ .Site.Params.Author }}</p>
+  </div>
+
+</div>
+
+{{ end }}

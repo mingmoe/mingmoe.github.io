@@ -1,0 +1,36 @@
+
+{{/* 头部html */}}
+<header class="mingHeader">
+
+    {{/* 显示图片 */}}
+    {{ with .Site.Params.HeadImage }}
+        <img src="{{ . }}" alt="head image">
+    {{ end }}
+
+    {{/* 显示Title */}}
+    <h1><a href="{{ .Site.BaseURL }}">{{ .Site.Params.Title }}</a></h1>
+
+    {{/* 显示子Title */}}
+    <h2>{{ .Site.Params.Subtitle }}</h2>
+
+
+</header>
+
+{{/* 导航栏 */}}
+<nav class="mingNavigation">
+    <ul>
+        <li>
+            <a href="/">Blog</a>
+        </li>
+        <li>
+            <a href="/about">About</a>
+        </li>
+        <li>
+            <a href="/categories">Categories</a>
+        </li>
+        <li>
+            <a href="/archives">Archives</a>
+        </li>
+    </ul>
+</nav>
+

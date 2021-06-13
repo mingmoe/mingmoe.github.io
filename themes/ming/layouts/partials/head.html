@@ -1,0 +1,19 @@
+{{/* ming 头 HTML */}}
+<head>
+    {{/*  设置一些元素 */}}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{/* 引入初始化css */}}
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+
+    {{/* 加载sass */}}
+    {{ $options := (dict "outputStyle" "compressed" "enableSourceMap" true "includePaths" "sass/" "transpiler" "dartsass") }}
+    {{ $style := resources.Get "scss/main.scss" | resources.ToCSS $options | minify }}
+    {{/* 引入 */}}
+    <link rel="stylesheet" type="text/css" href="{{ $style.Permalink }}">
+
+    {{/* 引入js脚本 */}}
+
+</head>

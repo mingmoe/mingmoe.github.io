@@ -1,0 +1,16 @@
+// 内容样式
+
+@use 'define';
+
+.mingContent {
+    @include define.mingInit();
+
+    // 占用75%的长度
+    flex: 0 0 75%;
+
+    background-color: #fdfdfd;
+
+
+
+
+}

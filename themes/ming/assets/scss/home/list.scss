@@ -1,0 +1,40 @@
+// 列表样式
+
+@use '../define.scss';
+
+.mingListItem {
+    @include define.mingInit();
+
+    padding: 30px 40px;
+
+    display: flex;
+
+    // 链接格式
+    h1 {
+        flex: 1;
+    }
+
+    a {
+        text-decoration: none;
+        color: rgb(15, 15, 15);
+        text-align: center;
+
+        @include define.colorTransition();
+
+        &:hover {
+            color: #0178ff;
+        }
+    }
+
+    // 时间占20%
+    p {
+        color: #6b6b6b;
+
+        flex: 0 0 25%;
+    }
+
+    // 分割线
+    border-color: #6b6b6b;
+    border-bottom-style: dotted;
+    border-width: 1px;
+}

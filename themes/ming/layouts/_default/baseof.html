@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{{/* ming baseof HTML */}}
+<html>
+{{- partial "head.html" . -}}
+
+<body style="background-image : url({{ .Site.Params.BackgroundImage }});background-repeat:repeat;">
+    {{/* 引入页首 */}}
+    {{ partial "header.html" . }}
+
+    {{/* 设置标题 */}}
+    <title>{{ block "title" . }} {{ .Site.Title }} {{ end }}</title>
+
+    {{/* 正式内容 */}}
+    <div class="mingMain">
+
+        {{/* 要显示的内容 */}}
+        <main class="mingContent">
+            {{- block "body" . }}{{- end }}
+        </main>
+
+        {{/* 侧边栏 */}}
+        <aside class="mingSider">
+            {{ partial "sider" . }}
+
+            {{ .Site.Params.SiderHtml }}
+        </aside>
+
+    </div>
+
+    {{/* 引入页脚 */}}
+    {{ partial "footer.html" . }}
+</body>
+
+</html>

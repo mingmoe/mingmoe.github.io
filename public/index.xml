@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MingMoe的网络博客</title>
+    <link>http://blog.kawayi.moe/</link>
+    <description>Recent content on MingMoe的网络博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language><atom:link href="http://blog.kawayi.moe/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About Me</title>
+      <link>http://blog.kawayi.moe/about/</link>
+      <pubDate>Sun, 13 Jun 2021 19:13:44 +0800</pubDate>
+      
+      <guid>http://blog.kawayi.moe/about/</guid>
+      <description>&lt;p&gt;(｡･∀･)ﾉﾞ嗨。你好。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,47 @@
+// 侧边样式
+
+@use 'define';
+
+.mingSider {
+    @include define.mingInit();
+
+    // 占用25%的长度
+    flex: 1;
+
+    background-color: #eaeaea;
+
+    padding: 15px 10px;
+
+    // 重置样式
+    p h1 h2 h3 h3 h5 h6 {
+        @include define.mingInit();
+        color: #6b6b6b;
+    }
+
+    // 列表样式
+    ul {
+        @include define.mingInit();
+        list-style-type: none;
+        overflow: hidden;
+    }
+
+    li {
+        @include define.mingInit();
+    }
+
+    // 链接样式
+    a {
+        text-decoration: none;
+        color: rgb(50, 190, 255);
+        text-align: center;
+
+        -webkit-transition: color 0.6s;
+        -moz-transition: color 0.6s;
+        -o-transition: color 0.6s;
+        transition: color 0.6s;
+
+        &:hover {
+            color: #002fff;
+        }
+    }
+}

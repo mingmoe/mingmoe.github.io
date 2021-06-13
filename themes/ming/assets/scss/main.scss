@@ -1,0 +1,19 @@
+// ming的sass文件
+
+@use 'define.scss';
+@use 'header.scss';
+@use 'navigation.scss';
+@use 'sider.scss';
+@use 'content.scss';
+@use 'footer.scss';
+@use 'home/index.scss';
+@use 'home/list.scss';
+@use 'home/markdown.scss';
+
+// 存放一个包含content和sider的布局
+.mingMain {
+    @include define.mingContent();
+
+    display: -webkit-flex;
+    display: flex;
+}

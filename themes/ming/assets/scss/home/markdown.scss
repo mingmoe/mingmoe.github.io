@@ -1,0 +1,55 @@
+// ming的markdown样式
+
+@use '../define.scss';
+
+// 总领
+.mingSingleMain {
+    @include define.mingInit();
+
+    margin: 30px 30px;
+}
+
+// markdown所用
+.mingMarkdownStyle {
+    // 在markdown上下做分割线
+    border-color: #6b6b6b;
+    border-bottom-style: dotted;
+    border-top-style: dotted;
+    border-width: 1px;
+}
+
+// 页首
+.mingSingleHead {
+
+    // 日期和分类
+    p {
+        color: #6b6b6b;
+
+        a {
+            text-decoration: none;
+            color: rgb(50, 190, 255);
+            text-align: center;
+
+            @include define.colorTransition();
+
+            &:hover {
+                color: #0178ff;
+            }
+        }
+    }
+}
+
+// 页尾
+.mingSingleEnd {
+    a {
+        text-decoration: none;
+        color: rgb(50, 190, 255);
+        text-align: center;
+
+        @include define.colorTransition();
+
+        &:hover {
+            color: #0178ff;
+        }
+    }
+}
