@@ -1,0 +1,33 @@
+// ming的门面样式
+
+@use '../base/base.scss';
+
+.mingFacade {
+    // 初始化
+    @include base.mingInit();
+
+    // 设置背景颜色和文本居中
+    text-align: center;
+    background-color: base.$facadeBackgroundColor;
+
+    // 填充
+    padding: 25px;
+
+    // 设置Title和Subtitle样式
+    h1 {
+        color: white;
+    }
+
+    p {
+        color: base.$facadeSubtitleTextColor;
+    }
+
+    // 设置不同设备下的字体大小
+    @include base.mingDesktop {
+        font-size: 1.8rem;
+    }
+
+    @include base.mingMobile {
+        font-size: 1.4rem;
+    }
+}

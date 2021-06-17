@@ -1,0 +1,37 @@
+// 页脚样式
+
+@use '../base/base.scss';
+
+.mingFooter {
+    @include base.mingInit();
+
+    // 设置背景颜色
+    background: base.$footerBackgroundColor;
+
+    // 设置边框
+    border-style: dotted none none none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-width: 1px;
+
+    // 填充一些像素
+    padding: 10px;
+
+    // 给页脚留一些空位
+    margin-bottom: 10%;
+
+    // 设置元素颜色
+    * {
+        @include base.mingInit();
+        color: base.$footerElementColor;
+    }
+
+    // 设置按钮渐变色
+    a {
+        @include base.colorTransition();
+
+        &:hover {
+            color: base.$footerLinkHoverColor;
+        }
+    }
+}

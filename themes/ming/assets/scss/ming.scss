@@ -1,0 +1,13 @@
+// ming的全局定义
+
+// use
+@use 'base/base.scss';
+@use 'base/body.scss';
+@use 'common/facade.scss';
+@use 'common/nav.scss';
+@use 'common/sider.scss';
+@use 'common/content.scss';
+@use 'common/footer.scss';
+
+@use 'page/index.scss';
+@use 'page/post.scss';

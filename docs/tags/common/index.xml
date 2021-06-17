@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>common on MingMoe的网络博客</title>
+    <link>https://blog.kawayi.moe/tags/common/</link>
+    <description>Recent content in common on MingMoe的网络博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 17 Jun 2021 20:28:12 +0800</lastBuildDate><atom:link href="https://blog.kawayi.moe/tags/common/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hello World</title>
+      <link>https://blog.kawayi.moe/2021/june/thursday/hello-world/</link>
+      <pubDate>Thu, 17 Jun 2021 20:28:12 +0800</pubDate>
+      
+      <guid>https://blog.kawayi.moe/2021/june/thursday/hello-world/</guid>
+      <description>&lt;p&gt;这是本博客的第一篇文章！&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

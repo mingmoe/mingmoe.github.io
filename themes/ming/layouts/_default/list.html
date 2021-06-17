@@ -1,34 +1,49 @@
-{{/* ming列表页面 */}}
-
-{{ define "body" }}
-{{/* 家页面模板 */}}
-
-<div class="UserInput">{{.Content}}</div>
-
-<!-- 遍历分页器 -->
-{{ range .Paginator.Pages }}
-<div class="mingListItem">
-
-    <!-- 显示 时间 -->
-    <p>{{ .Date.Format "Jan 2, 2006" }}</p>
-
-    <!-- 显示 链接 -->
-    <h1><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
-
-    <!-- End -->
-</div>
+{{ define "title" }}
+    {{ .Page.Title }}
 {{ end }}
 
-<!-- 翻页按钮 -->
-<div>
-    <!-- 上/下一页 -->
-    {{ if .Paginator.HasNext }}
-    <a class="olderButton" href="{{ .Paginator.Next.URL }}">← Older</a>
-    {{ end }}
 
-    {{ if .Paginator.HasPrev }}
-    <a class="newerButton" href="{{ .Paginator.Prev.URL }}">Newer →</a>
-    {{ end }}
+{{/*列表页面*/}}
+{{ define "main" }}
+<!-- 列表文件主要内容 -->
+
+<!--分类列表头-->
+<div class="listHeader">
+    <h1>{{ .Data.Singular }}:{{ .Page.Title }}</h1>
 </div>
+
+<!--分页-->
+{{ range .Paginator.Pages }}
+
+<article class="mingIndexItem">
+
+    <!--描述-->
+    <div class="description">
+        <!-- 显示:日期-->
+        <p>{{ .Date.Format "Monday, January 2, 2006" }}</p>
+    </div>
+
+    <!--标题-->
+    <div class="title">
+        <h1>{{ .Title }}</h1>
+    </div>
+
+    <!--阅读更多-->
+    <div class="readMore">
+        <a href="{{ .Permalink }}">Read More <(￣︶￣)↗[GO!]</a> </div> </article> {{ end }} <!--设置上一页/下一页按钮--> <div>
+
+                {{ if .Paginator.HasNext}}
+                <a class="nextPageButton" href="{{ .Paginator.Next.URL }}">
+                    Older
+                </a>
+                {{ end }}
+
+                {{ if .Paginator.HasPrev }}
+                <a class="lastPageButton" href="{{ .Paginator.Prev.URL }}">
+                    Newer
+                </a>
+                {{ end }}
+
+    </div>
 
 {{ end }}

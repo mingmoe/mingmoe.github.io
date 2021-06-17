@@ -1,0 +1,9 @@
+// 定义ming的body布局
+
+.mingBody {
+    // 设置使得整个页面的节点宽度固定在1024px
+    // 并且使得主要内容始终处于正中间
+    position: relative;
+    margin: 0 auto;
+    max-width: 1024px;
+}

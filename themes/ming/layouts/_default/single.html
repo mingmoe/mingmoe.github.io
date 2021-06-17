@@ -1,30 +1,38 @@
-{{/* ming 单个页面 */}}
-
-{{/* 设置标题 */}}
+{{/* 用于设置标题 */}}
 {{ define "title" }}
-{{ .Title }} &ndash; {{ .Site.Title }}
+{{ .Page.Title }}
 {{ end }}
 
-{{/* 设置页面 */}}
-{{ define "body" }}
 
-<div class="mingSingleMain">
+{{ define "main" }}
+<!-- 单个文件主要内容 -->
 
-  <!-- 设置页首 -->
-  <div class="mingSingleHead">
-    <p>{{ .Date.Format "Monday, January 2, 2006" }} - {{ .Params.categories }}</p>
-    <h1>{{ .Title }}</h1>
-  </div>
+<div class="mingPostContent">
+    <!--生成文章页首-->
+    <div class="postHeader">
+        <!-- 显示:日期|Tag1|Tag2...-->
+        <p>{{ .Date.Format "Monday, January 2, 2006" }}
+            {{- range .Params.tags -}}
+            <span> </span>| <a href="/tags/{{ . }}">{{ . }}</a>
+            {{- end -}}
+        </p>
+    </div>
 
-  <!-- 内容 -->
-  <div class="mingMarkdownStyle">
-    {{ .Content }}
-  </div>
+    <!--生成文章标题-->
+    <div class="postTitle">
+        <h1>{{ .Page.Title }}</h1>
+    </div>
 
-  <!-- 页尾 -->
-  <div class="mingSingleEnd">
-    <p>Update in {{ .Lastmod.Format "Monday, January 2, 2006" }} by {{ .Site.Params.Author }}</p>
-  </div>
+    <!--文章内容-->
+    <div class="postContent">
+        {{ .Page.Content }}
+    </div>
+
+    <!--文章页脚-->
+    <div class="postFooter">
+        <p>Posted by {{ .Site.Params.Author }}.</p>
+        <p>Last update {{ .Page.Lastmod.Format "Monday, January 2, 2006" }}.</p>
+    </div>
 
 </div>
 

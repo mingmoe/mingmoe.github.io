@@ -1,19 +1,33 @@
-{{/* ming 头 HTML */}}
-<head>
-    {{/*  设置一些元素 */}}
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {{/* 引入初始化css */}}
-    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
 
-    {{/* 加载sass */}}
-    {{ $options := (dict "outputStyle" "compressed" "enableSourceMap" true "includePaths" "sass/" "transpiler" "dartsass") }}
-    {{ $style := resources.Get "scss/main.scss" | resources.ToCSS $options | minify }}
-    {{/* 引入 */}}
-    <link rel="stylesheet" type="text/css" href="{{ $style.Permalink }}">
+{{/*加载normalize.css*/}}
+<link type="text/css" rel="stylesheet" href="{{ .Site.BaseURL }}/css/normalize.css">
 
-    {{/* 引入js脚本 */}}
+{{/*加载sass样式*/}}
+{{ $options := (dict "transpiler" "dartsass" "outputStyle" "compressed" "enableSourceMap" true) }}
+{{ $style := resources.Get "scss/ming.scss" | resources.ToCSS $options }}
+<link type="text/css" rel="stylesheet" href="{{ $style.Permalink }}">
 
-</head>
+{{/*设置代码高亮样式表*/}}
+<link type="text/css" rel="stylesheet" href="{{ .Site.BaseURL }}/css/syntax.css">
+
+{{/* 一些内置css样式 */}}
+{{/* 可以让hugo的模板引擎填充参数 */}}
+<style>    
+
+    {{/* 设置背景图片，没有则设置默认颜色 */}}
+    .mingBackground{
+    {{- with .Site.Params.MainBackgroundImage }}
+        background: url({{ . }});
+    {{- else }}
+        background: #aaa;
+    {{- end }}
+    }
+
+    {{/* 设置字体大小。适用于em和rem */}}
+    .mingBased{
+        font-size: 16px;
+    }
+
+</style>
+

@@ -1,0 +1,97 @@
+// ming的导航栏样式
+
+@use '../base/base.scss';
+
+// 桌面端的导航栏
+.mingNav {
+    // 初始化
+    @include base.mingInit();
+
+    // 填充合适的大小
+    padding: 12px 30px;
+
+    // 使得float的元素列表加入计算大小
+    // Note:https://stackoverflow.com/questions/16041229/css-overflowhidden-with-floats
+    overflow: hidden;
+
+    // 设置背景颜色
+    background: base.$navBackgroundColor;
+
+    // 对于生产力端
+    // 使用导航栏
+    @include base.mingDesktop() {
+
+        // 设置无序列表格式
+        ul {
+            // 把导航栏签名的小点点去掉
+            list-style-type: none;
+
+            // 初始化
+            @include base.mingInit();
+        }
+
+        // 设置子元素格式
+        li {
+            // 靠左
+            float: left;
+
+            // 设置分割线
+            border-right: 1px solid rgb(78, 78, 78);
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+
+        // 设置链接格式
+        a {
+            // 删除下划线等修饰
+            text-decoration: none;
+
+            // 设置颜色
+            color: base.$navTextColor;
+
+            // 块状显示
+            display: block;
+
+            // 左右填充一些空间
+            margin: 0px 25px;
+
+            // 颜色渐变
+            @include base.colorTransition();
+
+            &:hover {
+                color: base.$navTextHoverColor;
+            }
+        }
+
+    }
+
+    // 在移动端隐藏
+    @include base.mingMobile() {
+        display: none;
+    }
+}
+
+// 移动端的菜单
+.mingMenu {
+
+    // 初始化
+    @include base.mingInit();
+
+    // 设置背景颜色
+    background: base.$navBackgroundColor;
+
+    // 填充
+    padding: 7px 15px;
+
+    // 设置选择器
+    select {
+        display: block;
+    }
+
+    // 在桌面端隐藏
+    @include base.mingDesktop() {
+        display: none;
+    }
+}

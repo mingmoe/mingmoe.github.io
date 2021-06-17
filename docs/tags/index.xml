@@ -5,6 +5,25 @@
     <link>https://blog.kawayi.moe/tags/</link>
     <description>Recent content in Tags on MingMoe的网络博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language><atom:link href="https://blog.kawayi.moe/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 17 Jun 2021 20:28:12 +0800</lastBuildDate><atom:link href="https://blog.kawayi.moe/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>common</title>
+      <link>https://blog.kawayi.moe/tags/common/</link>
+      <pubDate>Thu, 17 Jun 2021 20:28:12 +0800</pubDate>
+      
+      <guid>https://blog.kawayi.moe/tags/common/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>programming</title>
+      <link>https://blog.kawayi.moe/tags/programming/</link>
+      <pubDate>Thu, 17 Jun 2021 20:28:12 +0800</pubDate>
+      
+      <guid>https://blog.kawayi.moe/tags/programming/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

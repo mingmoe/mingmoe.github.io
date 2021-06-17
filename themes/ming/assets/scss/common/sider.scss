@@ -1,0 +1,26 @@
+// 侧边栏样式
+
+@use '../base/base.scss';
+
+
+.mingSider {
+    @include base.mingInit();
+
+    // 在移动端下隐藏
+    @include base.mingMobile() {
+        display: none;
+    }
+
+    // 设置弹性盒子
+    @include base.flex(1);
+
+    // 背景颜色
+    background: base.$siderBackgroundColor;
+
+    // 填充
+    padding: 15px;
+
+    // 设置边框
+    border-left: dotted;
+    border-left-width: 1px;
+}

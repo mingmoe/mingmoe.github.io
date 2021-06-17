@@ -1,47 +1,56 @@
-{{ define "body" }}
-{{/* 家页面模板 */}}
+{{/* home页面设置 */}}
 
-<div class="UserInput">{{.Content}}</div>
+{{ define "main" }}
+<!-- index文件主要内容 -->
 
-<!-- 遍历 -->
+<!--分页-->
 {{ range .Paginator.Pages }}
-<div class="mingHomeItem">
-    <!-- 显示信息 -->
-    <div class="attachInfo">
-        <p>{{ .Date.Format "Monday, Jan 2, 2006" }} - {{ .Params.categories }}</p>
+
+<article class="mingIndexItem">
+
+    <!--描述-->
+    <div class="description">
+        <!-- 显示:日期|Tag1|Tag2...-->
+        <p>{{ .Date.Format "Monday, January 2, 2006" }}
+            {{- range .Params.tags -}}
+            <span> </span>| <a href="/tags/{{ . }}">{{ . }}</a>
+            {{- end -}}
+        </p>
     </div>
 
-    <!-- 显示 链接 -->
-    <div class="linker">
-        <h1><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
+    <!--标题-->
+    <div class="title">
+        <h1>{{ .Title }}</h1>
     </div>
 
-    <!-- 显示 摘要 -->
-    <div>
-        <article>
-            {{ .Summary }}
-        </article>
+    <!--摘抄-->
+    <div class="excerptContent">
+        {{ .Summary }}
     </div>
 
-    <!-- 显示 read more -->
-    <div>
-        <a href="{{ .Permalink }}" class="readMore">Read More →</a>
+    <!--阅读更多-->
+    <div class="readMore">
+        <a href="{{ .Permalink }}">Read More <(￣︶￣)↗[GO!]</a>
     </div>
 
-    <!-- End -->
-</div>
+</article>
 {{ end }}
 
-<!-- 翻页按钮 -->
+<!--设置上一页/下一页按钮-->
 <div>
-    <!-- 上/下一页 -->
-    {{ if .Paginator.HasNext }}
-    <a class="olderButton" href="{{ .Paginator.Next.URL }}">← Older</a>
-    {{ end }}
+    
+{{ if .Paginator.HasNext}}
+<a class="nextPageButton" href="{{ .Paginator.Next.URL }}">
+    Older
+</a>
+{{ end }}
 
-    {{ if .Paginator.HasPrev }}
-    <a class="newerButton" href="{{ .Paginator.Prev.URL }}">Newer →</a>
-    {{ end }}
+{{ if .Paginator.HasPrev }}
+<a class="lastPageButton" href="{{ .Paginator.Prev.URL }}">
+    Newer
+</a>
+{{ end }}
+
 </div>
 
 {{ end }}

@@ -1,0 +1,50 @@
+<!--导航栏-->
+<!--适用于桌面端-->
+<nav class="mingNav">
+    
+    <ul>
+        <!--blog主页-->
+        <li>
+            <a href="{{ .Site.BaseURL }}/">Blog</a>
+        </li>
+
+        <!--about页面-->
+        <li>
+            <a href="{{ .Site.BaseURL }}/about">About Me</a>
+        </li>
+
+        <!--归档页面-->
+        <li>
+            <a href="{{ .Site.BaseURL }}/archives">Archives</a>
+        </li>
+
+        <!--分类页面-->
+        <li>
+            <a href="{{ .Site.BaseURL }}/categories">Categories</a>
+        </li>
+
+        <!--标签页面-->
+        <li>
+            <a href="{{ .Site.BaseURL }}/tags">Tags</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+<!--下拉式菜单-->
+<!--适用于移动端-->
+<nav class="mingMenu">
+    
+    <select onchange="location = this.value;">
+        <!--保留第一个位置-->
+        <option>Navigate</option>
+        <!--链接同上-->
+        <option value="{{ .Site.BaseURL }}/">🔗 Blog</option>
+        <option value="{{ .Site.BaseURL }}/about">🔗 About Me</option>
+        <option value="{{ .Site.BaseURL }}/archives">🔗 Archives</option>
+        <option value="{{ .Site.BaseURL }}/categories">🔗 Categories</option>
+        <option value="{{ .Site.BaseURL }}/tags">🔗 Tags</option>
+    </select>
+
+</nav>

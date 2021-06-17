@@ -1,34 +1,61 @@
 <!DOCTYPE html>
-{{/* ming baseof HTML */}}
-<html>
-{{- partial "head.html" . -}}
+<!--全局html基础结构-->
+<html lang="zh-CN" class="mingBackground mingBased">
 
-<body style="background-image : url({{ .Site.Params.BackgroundImage }});background-repeat:repeat;">
-    {{/* 引入页首 */}}
-    {{ partial "header.html" . }}
+<!---------------------->
 
-    {{/* 设置标题 */}}
-    <title>{{ block "title" . }} {{ .Site.Title }} {{ end }}</title>
+<head>
+    <!--指定编码-->
+    <meta charset="utf-8">
 
-    {{/* 正式内容 */}}
-    <div class="mingMain">
+    <!--设置viewport信息-->
+    <!--视图宽度=设备视图宽度-->
+    <!--默认缩放=不缩放(1)-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        {{/* 要显示的内容 */}}
+    <!--指定作者-->
+    <meta name="author" content="chhdao & Thanks Octopress">
+
+    <!--设置Title-->
+    <title>
+    {{- block "title" . -}}
+    {{ .Site.Title }}
+    {{- end -}} - {{ .Site.Title }}
+    </title>
+
+    <!--html的头部片段-->
+    {{ partial "head.html" . }}
+
+</head>
+
+<!---------------------->
+
+<body class="mingBody">
+
+    <!--顶板-->
+    {{ partial "common/facade.html" . }}
+
+    <!--导航栏-->
+    {{ partial "common/nav.html" . }}
+
+    <!--设置框架-->
+    <!--包含主要内容和侧边栏-->
+    <div class="mingContentWrapper">
+        <!--加载主要内容-->
         <main class="mingContent">
-            {{- block "body" . }}{{- end }}
+            {{ block "main" . }}
+            <p>No content!</p>
+            {{ end }}
         </main>
-
-        {{/* 侧边栏 */}}
-        <aside class="mingSider">
-            {{ partial "sider" . }}
-
-            {{ .Site.Params.SiderHtml }}
-        </aside>
-
+        
+        <!--加载侧边栏-->
+        {{ partial "common/sider.html" . }}
     </div>
 
-    {{/* 引入页脚 */}}
-    {{ partial "footer.html" . }}
+    <!--加载页脚-->
+    {{ partial "common/footer.html" . }}
+
 </body>
+<!---------------------->
 
 </html>

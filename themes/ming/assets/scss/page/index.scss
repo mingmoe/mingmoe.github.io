@@ -1,0 +1,120 @@
+// index布局的样式
+
+@use '../base/base.scss';
+
+.mingIndexItem {
+    @include base.mingInit();
+
+    // 填充
+    padding: 30px 30px;
+
+    // 描述
+    .description {
+        @include base.mingInit();
+
+        // 设置颜色
+        color: base.$IndexItemHeadTextColor;
+
+        // 设置连接
+        a {
+            color: base.$IndexItemHeadLinkColor;
+
+            text-decoration: none;
+            @include base.colorTransition();
+
+            &:hover {
+                color: base.$IndexItemHeadLinkHoverColor;
+            }
+        }
+    }
+
+    // 标题样式
+    .title {
+        @include base.mingInit();
+    }
+
+    // 内容样式
+    .excerptContent {
+        @include base.mingInit();
+
+    }
+
+    // 设置分割线
+    border-bottom: dotted;
+    border-bottom-width: 1px;
+
+    // 阅读更多按钮格式
+    .readMore {
+        // 基础设置
+        @include base.mingInit();
+
+        // 链接设置
+        a {
+            text-decoration: none;
+            color: base.$IndexItemHeadTextColor;
+            display: inline-block;
+            padding: 10px 20px;
+
+            // 背景颜色
+            background: base.$IndexReadMoreBackgroundColor;
+
+            @include base.backgroundTransition();
+
+            &:hover {
+                background: base.$IndexReadMoreBackgroundHoverColor;
+            }
+
+            // 颜色
+            @include base.colorTransition();
+
+            &:hover {
+                color: base.$IndexReadMoreTextHoverColor;
+            }
+        }
+    }
+}
+
+// 按钮
+@mixin button {
+    @include base.mingInit();
+
+    padding: 10px 30px;
+
+    display: inline-block;
+
+    text-decoration: none;
+
+    color: base.$IndexTurnPageButtonTextColor;
+
+    @include base.colorTransition();
+
+    &:hover {
+        color: base.$IndexTurnPageButtonTextHoverColor;
+    }
+}
+
+// 下一页按钮
+.nextPageButton {
+    @include button();
+
+    float: left;
+
+}
+
+// 上一页按钮
+.lastPageButton {
+    @include button();
+
+    float: right;
+
+}
+
+// 分类法列表头
+.listHeader {
+    @include base.mingInit();
+
+    padding: 10px 30px;
+
+    border-bottom: dotted;
+    border-bottom-width: 1px;
+}

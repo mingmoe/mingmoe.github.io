@@ -1,0 +1,129 @@
+// ming的一些基础东西
+
+// flex的不同浏览器适配
+@mixin flex($values) {
+    -webkit-box-flex: $values;
+    -moz-box-flex: $values;
+    -webkit-flex: $values;
+    -ms-flex: $values;
+    flex: $values;
+}
+
+// 重置位置
+@mixin mingInit {
+    margin: 0 0;
+    padding: 0 0;
+}
+
+// 桌面(生产力设备)
+@mixin mingDesktop {
+
+    // 从768px 算起(iPad)
+    @media only screen and (min-width: 768px) {
+        @content;
+    }
+}
+
+// 移动设备
+@mixin mingMobile {
+
+    // 768px -1px
+    // 防止和mingDesktop产生歧义
+    @media only screen and (max-width: 767px) {
+        @content;
+    }
+}
+
+// transition的适配效果
+@mixin transition($value) {
+    transition: $value;
+    -webkit-transition: $value;
+}
+
+// 颜色渐变
+@mixin colorTransition {
+    @include transition(color 0.8s);
+}
+
+// 背景颜色渐变
+@mixin backgroundTransition {
+    @include transition(background 0.8s);
+}
+
+//==============颜色定义区=================
+
+//==============门面颜色===================
+
+// 门面背景颜色
+$facadeBackgroundColor: #333;
+
+// 门面子标题颜色
+$facadeSubtitleTextColor: #ddd;
+
+//===============页脚颜色==================
+
+// 页脚背景色
+$footerBackgroundColor: linear-gradient(#e0e0e0, #cccccc, #b0b0b0);
+
+// 页脚元素颜色
+$footerElementColor: #4b4b4b;
+
+// 页脚按钮渐变颜色
+$footerLinkHoverColor: #111;
+
+//===============内容颜色==================
+
+// 内容div背景颜色
+$contentBackgroundColor: #f7f7f7;
+
+//==============导航栏颜色==================
+
+// 导航栏背景颜色
+// 移动端的菜单也使用
+$navBackgroundColor: linear-gradient(#e0e0e0, #cccccc, #b0b0b0);
+
+// 导航栏文字颜色
+$navTextColor: #4b4b4b;
+
+// 导航栏文字颜色(hover)
+$navTextHoverColor:#111;
+
+//==============侧边栏颜色=================
+
+// 侧边栏背景颜色
+$siderBackgroundColor: #f1f1f1;
+
+//===============Index颜色================
+// 描述文本颜色
+$IndexItemHeadTextColor: #4b4b4b;
+
+// 链接颜色
+$IndexItemHeadLinkColor: rgb(38, 0, 255);
+
+// 链接hover颜色
+$IndexItemHeadLinkHoverColor: rgb(0, 119, 255);
+
+// readMore按钮文本颜色
+$IndexReadMoreTextColor: #111;
+
+// readMore按钮文本hover颜色
+$IndexReadMoreTextHoverColor: rgb(224, 224, 224);
+
+// readMore按钮背景
+$IndexReadMoreBackgroundColor: rgb(230, 230, 230);
+
+// readMore按钮hover背景
+$IndexReadMoreBackgroundHoverColor: rgb(42, 141, 255);
+
+// 翻页按钮颜色
+$IndexTurnPageButtonTextColor: rgb(196, 196, 196);
+
+// 翻页按钮hover颜色
+$IndexTurnPageButtonTextHoverColor: rgb(0, 151, 252);
+
+//=================内容页面颜色==============
+// 文章页头文字颜色
+$PostHeaderTextColor: #4b4b4b;
+
+// 文章页头文字hover颜色
+$PostHeaderTextHoverColor: rgb(12, 114, 231);

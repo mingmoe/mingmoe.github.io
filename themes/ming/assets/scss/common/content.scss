@@ -1,0 +1,36 @@
+// 内容的容器
+
+@use '../base/base.scss';
+
+// 内含其他布局
+.mingContentWrapper {
+    @include base.mingInit();
+
+    display: flex;
+}
+
+// 除侧边栏外的布局
+.mingContent {
+    // 初始化
+    @include base.mingInit();
+
+    // 设置完全宽度
+    width: 100%;
+
+    // 对于桌面端
+    @include base.mingDesktop() {
+        // 占用70%的空间
+        @include base.flex(0 0 70%);
+    }
+
+    // 对于移动端
+    @include base.mingMobile() {
+        // 占用所有空间
+        // 因为没有侧边栏
+        @include base.flex(1);
+
+    }
+
+    // 设置背景颜色
+    background: base.$contentBackgroundColor;
+}
