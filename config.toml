@@ -1,5 +1,5 @@
 # 一些基础设置
-baseURL = "https://blog.kawayi.moe/"
+baseURL = "https://blog.kawayi.moe"
 languageCode = "zh-cn"
 title = "MingMoe的网络博客"
 
@@ -17,8 +17,8 @@ publishDir = "docs"
   post = "/:year/:monthname/:weekdayname/:title/"
 
 [params]
-  title = "欢迎来到大明朝"
-  subtitle = "This is a subtitle!"
+  title = "欢迎来到大明酱的网络博客📚"
+  subtitle = "一个技术宅的网络博客┗|｀O′|┛ ~~"
   mainBackgroundImage = "/Background.jpg"
   author = "MingMoe"
 
