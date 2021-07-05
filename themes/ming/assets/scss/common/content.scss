@@ -7,6 +7,9 @@
     @include base.mingInit();
 
     display: flex;
+
+    // 占用所有空间
+    width: 100%;
 }
 
 // 除侧边栏外的布局
@@ -14,8 +17,8 @@
     // 初始化
     @include base.mingInit();
 
-    // 设置完全宽度
-    width: 100%;
+    // 设置70%宽度
+    width: 70%;
 
     // 对于桌面端
     @include base.mingDesktop() {

@@ -4,10 +4,12 @@ date = 2021-06-17T20:28:12+08:00
 draft = false
 archives = 2021
 categories = "programming"
-tags = ["programming","common"]
+tags = ["test"]
 +++
 
 这是本博客的第一篇文章！
+
+本博客使用了明酱自己编写的主题哦！
 
 <!--more-->
 

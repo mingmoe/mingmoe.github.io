@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>2021 on MingMoe的网络博客</title>
-    <link>https://blog.kawayi.moe/archives/2021/</link>
-    <description>Recent content in 2021 on MingMoe的网络博客</description>
+    <title>uefi on MingMoe的网络博客</title>
+    <link>https://blog.kawayi.moe/tags/uefi/</link>
+    <description>Recent content in uefi on MingMoe的网络博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 04 Jul 2021 22:43:31 +0800</lastBuildDate><atom:link href="https://blog.kawayi.moe/archives/2021/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Jul 2021 22:43:31 +0800</lastBuildDate><atom:link href="https://blog.kawayi.moe/tags/uefi/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用rust编写一个UEFI引导程序</title>
       <link>https://blog.kawayi.moe/2021/july/sunday/%E4%BD%BF%E7%94%A8rust%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAuefi%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F/</link>
@@ -15,16 +15,6 @@
       <guid>https://blog.kawayi.moe/2021/july/sunday/%E4%BD%BF%E7%94%A8rust%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAuefi%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F/</guid>
       <description>&lt;p&gt;在本篇文章，咱将一起使用rust实现一个UEFI引导程序！&lt;/p&gt;
 &lt;p&gt;将加载一个简单的内核。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Hello World</title>
-      <link>https://blog.kawayi.moe/2021/june/thursday/hello-world/</link>
-      <pubDate>Thu, 17 Jun 2021 20:28:12 +0800</pubDate>
-      
-      <guid>https://blog.kawayi.moe/2021/june/thursday/hello-world/</guid>
-      <description>&lt;p&gt;这是本博客的第一篇文章！&lt;/p&gt;
-&lt;p&gt;本博客使用了明酱自己编写的主题哦！&lt;/p&gt;</description>
     </item>
     
   </channel>

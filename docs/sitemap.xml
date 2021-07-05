@@ -3,33 +3,39 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.kawayi.moe/archives/2021/</loc>
-    <lastmod>2021-06-17T20:28:12+08:00</lastmod>
+    <lastmod>2021-07-04T22:43:31+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/archives/</loc>
-    <lastmod>2021-06-17T20:28:12+08:00</lastmod>
+    <lastmod>2021-07-04T22:43:31+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/categories/</loc>
-    <lastmod>2021-06-17T20:28:12+08:00</lastmod>
+    <lastmod>2021-07-04T22:43:31+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/tags/common/</loc>
-    <lastmod>2021-06-17T20:28:12+08:00</lastmod>
+    <loc>https://blog.kawayi.moe/</loc>
+    <lastmod>2021-07-04T22:43:31+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/post/</loc>
+    <lastmod>2021-07-04T22:43:31+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/categories/programming/</loc>
+    <lastmod>2021-07-04T22:43:31+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/tags/rust/</loc>
+    <lastmod>2021-07-04T22:43:31+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/tags/</loc>
+    <lastmod>2021-07-04T22:43:31+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/tags/uefi/</loc>
+    <lastmod>2021-07-04T22:43:31+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/2021/july/sunday/%E4%BD%BF%E7%94%A8rust%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAuefi%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F/</loc>
+    <lastmod>2021-07-04T22:43:31+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/2021/june/thursday/hello-world/</loc>
     <lastmod>2021-06-17T20:28:12+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/</loc>
-    <lastmod>2021-06-17T20:28:12+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.kawayi.moe/post/</loc>
-    <lastmod>2021-06-17T20:28:12+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.kawayi.moe/tags/programming/</loc>
-    <lastmod>2021-06-17T20:28:12+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.kawayi.moe/categories/programming/</loc>
-    <lastmod>2021-06-17T20:28:12+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.kawayi.moe/tags/</loc>
+    <loc>https://blog.kawayi.moe/tags/test/</loc>
     <lastmod>2021-06-17T20:28:12+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/about/</loc>
