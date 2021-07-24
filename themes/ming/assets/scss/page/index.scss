@@ -1,6 +1,7 @@
 // index布局的样式
 
 @use '../base/base.scss';
+@use "../page/postContent.scss";
 
 .mingIndexItem {
     @include base.mingInit();
@@ -36,6 +37,8 @@
     // 内容样式
     .excerptContent {
         @include base.mingInit();
+
+        @include postContent.content();
     }
 
     // 设置分割线

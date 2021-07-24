@@ -7,9 +7,11 @@ draft = false
 
 (｡･∀･)ﾉﾞ嗨。你好。
 
+一份关于我的简介!
+
 <!--more-->
 
-我是一名中学生。出生于2k+6年9月6号。
+我是一名中学生。出生于2k+6年9月6日。
 
  - 🛠️C++/Java/rust/C# 技能
  - 🖥️Windows/Linux开发
@@ -17,10 +19,16 @@ draft = false
  - 🎵喜欢听音乐
  - ⚙️喜欢造轮子
 
-你也可以叫我彩虹海盗
+曾用名：彩虹海盗
 
-你可以用邮箱联系咱：sudo.free@qq.com
+英文名:{{< beautifulFont >}}MingMoe{{< /beautifulFont >}}
 
-Github:[chhdao](https://github.com/chhdao)
+你可以用[邮箱](mailto:me@kawayi.moe)联系咱
 
-Twitter:[ming_moe](https://twitter.com/ming_moe_)
+或者:
+
+ - Github:[chhdao](https://github.com/chhdao)
+
+ - Twitter:[ming_moe](https://twitter.com/ming_moe_)
+
+ - 知乎:[chhdao](https://www.zhihu.com/people/cai-hong-hai-dao-80)

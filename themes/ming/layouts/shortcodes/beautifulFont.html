@@ -1,0 +1,6 @@
+
+{{ with .Inner }}
+<span class="mingBeautifulFont">{{ . }}</span>
+{{ else }}
+{{ errorf "Not close the beautifulFont short code! At %s" .Position }}
+{{ end }}

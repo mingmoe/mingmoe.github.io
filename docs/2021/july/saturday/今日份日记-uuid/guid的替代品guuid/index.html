@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" class="mingBackground mingBased">
+
+
+
+<head>
+    
+    <meta charset="utf-8">
+
+    
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta name="author" content="chhdao & Thanks Octopress">
+
+    
+    <title>
+今日份日记 - UUID/GUID的替代品:GUUID
+- MingMoe的网络博客
+    </title>
+
+    
+    
+
+
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/normalize.css">
+
+
+
+
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/scss/ming.css">
+
+
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/syntax.css">
+
+
+
+<style>    
+
+    
+    .mingBackground{
+        background: url(/Background.jpg);
+    }
+
+    
+    .mingBased{
+        font-size: 16px;
+    }
+
+</style>
+
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Pacifico&display=swap" rel="stylesheet">
+
+</head>
+
+
+
+<body class="mingBody">
+
+    
+    
+<header class="mingFacade">
+    <h1>
+        欢迎来到大明酱的网络博客📚
+    </h1>
+
+    <p>
+        一个技术宅的网络博客┗|｀O′|┛ ~~
+    </p>
+</header>
+
+    
+    
+
+<nav class="mingNav">
+    
+    <ul>
+        
+        <li>
+            <a href="https://blog.kawayi.moe/">Blog</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/about">About Me</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/archives">Archives</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/categories">Categories</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/tags">Tags</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+
+<nav class="mingMenu">
+    
+    <select onchange="location = this.value;">
+        
+        <option>Navigate</option>
+        
+        <option value="https://blog.kawayi.moe/">🔗 Blog</option>
+        <option value="https://blog.kawayi.moe/about">🔗 About Me</option>
+        <option value="https://blog.kawayi.moe/archives">🔗 Archives</option>
+        <option value="https://blog.kawayi.moe/categories">🔗 Categories</option>
+        <option value="https://blog.kawayi.moe/tags">🔗 Tags</option>
+    </select>
+
+</nav>
+
+    
+    
+    <div class="mingContentWrapper">
+        
+        <main class="mingContent">
+            
+
+
+<div class="mingPostStyle">
+    
+    <div class="postHeader">
+        
+        <p>Saturday, July 24, 2021<span> </span>| <a href="/tags/%e6%97%a5%e8%ae%b0">日记</a></p>
+    </div>
+
+    
+    <div class="postTitle">
+        <h1>今日份日记 - UUID/GUID的替代品:GUUID</h1>
+    </div>
+
+    
+    <div class="postContent">
+        <p>哈，咱最近在写代码的时候，碰到了关于GUID的问题：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-rust" data-lang="rust"><span class="n">Uuid</span>::<span class="n">parse_str</span><span class="p">(</span><span class="kt">str</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>这段代码会出现大小端序的问题。解决方案是使用自行定义的struct进行处理后再操作。非常麻烦。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-rust" data-lang="rust"><span class="cp">#[repr(C)]</span><span class="w">
+</span><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Guid</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="w">    </span><span class="sd">/// The low field of the timestamp.
+</span><span class="sd"></span><span class="w">    </span><span class="n">a</span>: <span class="kt">u32</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="sd">/// The middle field of the timestamp.
+</span><span class="sd"></span><span class="w">    </span><span class="n">b</span>: <span class="kt">u16</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="sd">/// The high field of the timestamp multiplexed with the version number.
+</span><span class="sd"></span><span class="w">    </span><span class="n">c</span>: <span class="kt">u16</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="sd">/// Contains, in this order:
+</span><span class="sd"></span><span class="w">    </span><span class="sd">/// - The high field of the clock sequence multiplexed with the variant.
+</span><span class="sd"></span><span class="w">    </span><span class="sd">/// - The low field of the clock sequence.
+</span><span class="sd"></span><span class="w">    </span><span class="sd">/// - The spatially unique node identifier.
+</span><span class="sd"></span><span class="w">    </span><span class="n">d</span>: <span class="p">[</span><span class="kt">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">8</span><span class="p">],</span><span class="w">
+</span><span class="w"></span><span class="p">}</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">if</span><span class="w"> </span><span class="n">Uuid</span>::<span class="n">from_fields_le</span><span class="p">(</span><span class="w">
+</span><span class="w">            </span><span class="n">guid</span><span class="p">.</span><span class="n">a</span><span class="p">.</span><span class="n">swap_bytes</span><span class="p">(),</span><span class="w">
+</span><span class="w">            </span><span class="n">guid</span><span class="p">.</span><span class="n">b</span><span class="p">.</span><span class="n">swap_bytes</span><span class="p">(),</span><span class="w">
+</span><span class="w">            </span><span class="n">guid</span><span class="p">.</span><span class="n">c</span><span class="p">.</span><span class="n">swap_bytes</span><span class="p">(),</span><span class="w">
+</span><span class="w">            </span><span class="o">&amp;</span><span class="n">guid</span><span class="p">.</span><span class="n">d</span><span class="p">,</span><span class="w">
+</span><span class="w">        </span><span class="p">)</span><span class="w">
+</span><span class="w">        </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span><span class="w">
+</span><span class="w">            </span><span class="o">==</span><span class="w"> </span><span class="n">disk_guid</span><span class="p">{</span><span class="w">
+</span><span class="w">                </span><span class="c1">// ...
+</span><span class="c1"></span><span class="w">            </span><span class="p">}</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>所以作者咱萌生了一个自制一个简单的ID格式想法，就叫做GUUID吧^_^。
+名字呢，取自</p>
+<ul>
+<li><code>Universally</code> <code>Unique</code> Identifier</li>
+<li><code>Generalized</code> Unique Identifier</li>
+</ul>
+<p>中标记的单词。即Generalized Universally Unique Identifier。</p>
+<p>标准也比较简单</p>
+<pre><code>  -----------------------------------
+  |    长度:         128位           |
+  |    64 位        |    64 位       |
+  |  00002YPM7N3N9  | A5XP0NRR46QB4 |
+  |  Unix毫秒级时间戳 | 安全随机数       |
+  |  64位无符号整数   | 64位无符号整数  |
+  |  大端序储存       | 大端序储存      |
+  |  字符串使用Crockford Base32储存   |
+  -----------------------------------
+</code></pre><p>项目地址: <a href="https://github.com/GOSCPS/guuid">github</a> <a href="https://crates.io/crates/guuid">crates</a></p>
+    </div>
+
+    
+    <div class="postFooter">
+        <p>Posted by MingMoe.</p>
+        <p>Last update Saturday, July 24, 2021.</p>
+    </div>
+
+</div>
+
+
+        </main>
+        
+        
+        
+
+
+<aside class="mingSider">
+
+    <p>欢迎来到本站[]~（￣▽￣）~*</p>
+
+    
+    <div>
+        <iframe style="overflow: hidden;display: flex;width:100%" width="300" height="30" frameborder="0" scrolling="no" hspace="0" src="https://i.tianqi.com/index.php?c=code&id=34&icon=1"></iframe>
+    </div>
+
+    
+    <div>
+        <a class="twitter-timeline" data-lang="zh-cn" data-height="2048" href="https://twitter.com/ming_moe_?ref_src=twsrc%5Etfw">Tweets by ming_moe_</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+
+</aside>
+    </div>
+
+    
+    
+
+<footer class="mingFooter">
+
+    <p>Powered by <a href="https://gohugo.io/">Hugo</a>.Copyright ©  2021 MingMoe.<br>
+
+    <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+        <img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议
+        </a>进行许可。
+
+    </p>
+
+</footer>
+
+</body>
+
+
+</html>

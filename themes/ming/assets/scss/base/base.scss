@@ -50,6 +50,16 @@
     @include transition(background 0.8s);
 }
 
+// 等宽字体
+@mixin monospaceFont{
+    font-family: "Fira Code", monospace;
+}
+
+// 艺术字体
+@mixin beautifulFont{
+    font-family: 'Pacifico', cursive;
+}
+
 //==============颜色定义区=================
 
 //==============门面颜色===================
@@ -127,3 +137,6 @@ $PostHeaderTextColor: #4b4b4b;
 
 // 文章页头文字hover颜色
 $PostHeaderTextHoverColor: rgb(12, 114, 231);
+
+// 文章内置code元素背景颜色
+$PostCodeBackgroundColor: #e4e4e4;

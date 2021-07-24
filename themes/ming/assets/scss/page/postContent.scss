@@ -1,0 +1,76 @@
+// Post Content样式
+
+@use '../base/base.scss';
+
+// 文章内容样式
+@mixin content {
+    // 初始化
+    @include base.mingInit();
+
+    // 填充四周
+    padding: 10px 0;
+
+    // 限制大小
+    * {
+        overflow: auto;
+        max-width: 100%;
+        max-height: 100%;
+
+        line-height: 1.3em;
+    }
+    
+    // 列表样式
+    ul,ol{
+        list-style-position: inside;
+
+        li *{
+            display: inline;
+        }
+    }
+    ul{
+        list-style-type: disc;
+    }
+    ol{
+        list-style-type: decimal;
+    }
+
+    // 代码块设置
+    .highlight {
+        @include base.mingInit();
+        
+        // 使用等宽字体
+        *{
+            @include base.monospaceFont();
+        }
+
+        // 边缘
+        border: solid;
+        border-width: 1px;
+        border-radius: 10px;
+
+        // 填充
+        padding: 0 10px;
+
+        // 块元素
+        display: block;
+    }
+
+    // 行内代码块设置
+    p code{
+        @include base.mingInit();
+        
+        // 使用等宽字体
+        @include base.monospaceFont();
+        
+        padding: 0px 3px;
+        white-space: pre-wrap;
+        border-radius: 6px;
+        border-style: none;
+        background-color: base.$PostCodeBackgroundColor;
+    }
+
+    code{
+        // 使用等宽字体
+        @include base.monospaceFont();
+    }
+}

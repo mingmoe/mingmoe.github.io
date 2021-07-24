@@ -1,0 +1,10 @@
+// 艺术字
+
+@use './base.scss';
+
+.mingBeautifulFont{
+    @include base.beautifulFont();
+    font-size: 26px;
+    height: 1.5em;
+    display: inline-block;
+}

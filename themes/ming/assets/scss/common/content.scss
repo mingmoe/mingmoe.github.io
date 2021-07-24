@@ -3,6 +3,7 @@
 @use '../base/base.scss';
 
 // 内含其他布局
+// mingContent和mingSider
 .mingContentWrapper {
     @include base.mingInit();
 
@@ -23,6 +24,7 @@
     // 对于桌面端
     @include base.mingDesktop() {
         // 占用70%的空间
+        // 侧边栏占用30的空间
         @include base.flex(0 0 70%);
     }
 

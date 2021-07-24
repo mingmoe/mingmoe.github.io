@@ -3,6 +3,7 @@
 // use
 @use 'base/base.scss';
 @use 'base/body.scss';
+@use 'base/beautifulFont.scss';
 @use 'common/facade.scss';
 @use 'common/nav.scss';
 @use 'common/sider.scss';
@@ -11,3 +12,4 @@
 
 @use 'page/index.scss';
 @use 'page/post.scss';
+@use 'page/postContent.scss';

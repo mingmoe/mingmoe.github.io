@@ -40,3 +40,9 @@ publishDir = "docs"
     noClasses = false
     style = "vs"
     tabWidth = 4
+
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+    # 启用不安全代码
+    unsafe = true
+

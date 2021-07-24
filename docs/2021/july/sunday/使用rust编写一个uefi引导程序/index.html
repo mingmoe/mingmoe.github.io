@@ -54,6 +54,12 @@
 
 
 
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Pacifico&display=swap" rel="stylesheet">
+
 </head>
 
 
@@ -132,7 +138,7 @@
             
 
 
-<div class="mingPostContent">
+<div class="mingPostStyle">
     
     <div class="postHeader">
         
@@ -148,6 +154,7 @@
     <div class="postContent">
         <p>在本篇文章，咱将一起使用rust实现一个UEFI引导程序！</p>
 <p>将加载一个简单的内核。</p>
+<p>值得的是：代码未经过测试，有问题可以联系咱。</p>
 <p>首先，咱们需要创建一个新项目:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -159,6 +166,7 @@
 </div>
 </div><p>咱们还需要使用x86_64-unknown-uefi这个target。不过一般不需要安装。</p>
 <p>接着，咱们设置咱们的<code>cargo.toml</code>。</p>
+<p>我们使用uefi-rs这个库。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -284,7 +292,9 @@
 </span><span class="w"></span><span class="p">}</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
-</div><p>我们再编写一个脚本以构建此项目：</p>
+</div><p>因为我们使用了特殊的target，所以我们需要自己构建标准库等基础措施。</p>
+<p>还需要compiler_builtins提供的一些列操作内存的函数。</p>
+<p>我们再编写一个脚本以构建此项目：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -411,7 +421,111 @@
 也可以从<a href="https://github.com/tianocore/tianocore.github.io/wiki/OVMF">这里</a>找到一些有用的信息。</p>
 <p>不出意外，我们的程序应该没什么动作。</p>
 <p>下面，我们应该可以直接加载内核了。</p>
-<h2 id="todo">TODO</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-rust" data-lang="rust"><span class="sd">/// 读取文件
+</span><span class="sd">/// 
+</span><span class="sd">/// 返回读取到的文件的内容
+</span><span class="sd"></span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">read_file</span><span class="p">(</span><span class="n">path</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="w">        </span><span class="c1">// 获取引导服务
+</span><span class="c1"></span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">boot_services</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IMAGE_SYSTEM_TABLE</span><span class="p">.</span><span class="n">as_mut</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">boot_services</span><span class="p">();</span><span class="w">
+</span><span class="w">
+</span><span class="w">        </span><span class="c1">// 获取fs服务
+</span><span class="c1"></span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">boot_services</span><span class="p">.</span><span class="n">locate_protocol</span>::<span class="o">&lt;</span><span class="n">SimpleFileSystem</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="w">            </span><span class="nb">Ok</span><span class="p">(</span><span class="n">some</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">some</span><span class="p">.</span><span class="n">unwrap</span><span class="p">().</span><span class="n">get</span><span class="p">(),</span><span class="w">
+</span><span class="w">
+</span><span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="n">_err</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">panic</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;Load SimpleFileSystem failed down!&#34;</span><span class="p">),</span><span class="w">
+</span><span class="w">        </span><span class="p">};</span><span class="w">
+</span><span class="w">
+</span><span class="w">        </span><span class="k">crate</span>::<span class="n">tool</span>::<span class="n">print_fmt</span><span class="p">(</span><span class="n">format_args</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;Get fs done.\n&#34;</span><span class="p">));</span><span class="w">
+</span><span class="w">
+</span><span class="w">        </span><span class="c1">// 打开文件
+</span><span class="c1"></span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">dic</span>: <span class="nc">Directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fs</span><span class="p">.</span><span class="n">as_mut</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">open_volume</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span><span class="w">
+</span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dic</span><span class="w">
+</span><span class="w">            </span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="n">FileMode</span>::<span class="n">Read</span><span class="p">,</span><span class="w"> </span><span class="n">FileAttribute</span>::<span class="n">empty</span><span class="p">())</span><span class="w">
+</span><span class="w">            </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span><span class="w">
+</span><span class="w">            </span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span><span class="w">
+</span><span class="w">        </span><span class="c1">// 读取文件
+</span><span class="c1"></span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="n">FileType</span>::<span class="n">Regular</span><span class="p">(</span><span class="k">mut</span><span class="w"> </span><span class="n">reader</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">into_type</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">unwrap</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="w">            </span><span class="c1">// 获取文件大小
+</span><span class="c1"></span><span class="w">            </span><span class="c1">// 设置缓冲区...
+</span><span class="c1"></span><span class="w">            </span><span class="c1">// 应该不会溢出
+</span><span class="c1"></span><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">info_buffer</span>: <span class="p">[</span><span class="kt">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">512</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="k">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">512</span><span class="p">];</span><span class="w">
+</span><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="n">file_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="w">
+</span><span class="w">                </span><span class="p">.</span><span class="n">get_info</span>::<span class="o">&lt;</span><span class="n">FileInfo</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">info_buffer</span><span class="p">)</span><span class="w">
+</span><span class="w">                </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span><span class="w">
+</span><span class="w">                </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span><span class="w">
+</span><span class="w">                </span><span class="p">.</span><span class="n">file_size</span><span class="p">();</span><span class="w">
+</span><span class="w">
+</span><span class="w">            </span><span class="c1">// 读进缓冲区
+</span><span class="c1"></span><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">text_buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec</span><span class="o">!</span><span class="p">[</span><span class="mi">0</span><span class="k">u8</span><span class="p">;</span><span class="w"> </span><span class="n">file_size</span><span class="p">.</span><span class="n">try_into</span><span class="p">().</span><span class="n">unwrap</span><span class="p">()].</span><span class="n">into_boxed_slice</span><span class="p">();</span><span class="w">
+</span><span class="w">
+</span><span class="w">            </span><span class="n">reader</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">text_buffer</span><span class="p">).</span><span class="n">unwrap</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span><span class="w">
+</span><span class="w">            </span><span class="c1">// 转换为字符串
+</span><span class="c1"></span><span class="w">            </span><span class="p">(</span><span class="o">&amp;</span><span class="n">text_buffer</span><span class="p">).</span><span class="n">to_vec</span><span class="p">()</span><span class="w">
+</span><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="w">            </span><span class="n">panic</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;Filed to open file. Look like a Directory&#34;</span><span class="p">);</span><span class="w">
+</span><span class="w">        </span><span class="p">}</span><span class="w">
+</span><span class="w">    </span><span class="p">}</span><span class="w">
+</span><span class="w"></span><span class="p">}</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>emmm&hellip;DONE OT TODO</p>
     </div>
 
     
