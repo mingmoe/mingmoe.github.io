@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     
-    <meta name="author" content="chhdao & Thanks Octopress">
+    <meta name="author" content="MingMoe & Thanks Octopress">
 
     
     <title>
@@ -155,16 +155,16 @@
         <p>哈，咱最近在写代码的时候，碰到了关于GUID的问题：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-rust" data-lang="rust"><span class="n">Uuid</span>::<span class="n">parse_str</span><span class="p">(</span><span class="kt">str</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="n">Uuid</span>::<span class="n">parse_str</span><span class="p">(</span><span class="kt">str</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div><p>这段代码会出现大小端序的问题。解决方案是使用自行定义的struct进行处理后再操作。非常麻烦。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -191,7 +191,7 @@
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-rust" data-lang="rust"><span class="cp">#[repr(C)]</span><span class="w">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="cp">#[repr(C)]</span><span class="w">
 </span><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Guid</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span><span class="w">    </span><span class="sd">/// The low field of the timestamp.
 </span><span class="sd"></span><span class="w">    </span><span class="n">a</span>: <span class="kt">u32</span><span class="p">,</span><span class="w">
@@ -226,7 +226,7 @@
 </ul>
 <p>中标记的单词。即Generalized Universally Unique Identifier。</p>
 <p>标准也比较简单</p>
-<pre><code>  -----------------------------------
+<pre tabindex="0"><code>  -----------------------------------
   |    长度:         128位           |
   |    64 位        |    64 位       |
   |  00002YPM7N3N9  | A5XP0NRR46QB4 |

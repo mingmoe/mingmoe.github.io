@@ -3,24 +3,39 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.kawayi.moe/archives/2021/</loc>
-    <lastmod>2021-07-24T12:21:35+08:00</lastmod>
+    <lastmod>2021-10-11T20:02:02+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/archives/</loc>
-    <lastmod>2021-07-24T12:21:35+08:00</lastmod>
+    <lastmod>2021-10-11T20:02:02+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/categories/</loc>
-    <lastmod>2021-07-24T12:21:35+08:00</lastmod>
+    <lastmod>2021-10-11T20:02:02+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/tags/git/</loc>
+    <lastmod>2021-10-11T20:02:02+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/tags/github-action/</loc>
+    <lastmod>2021-10-11T20:02:02+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/categories/github-action/</loc>
+    <lastmod>2021-10-11T20:02:02+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/</loc>
-    <lastmod>2021-07-24T12:21:35+08:00</lastmod>
+    <lastmod>2021-10-11T20:02:02+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/post/</loc>
-    <lastmod>2021-07-24T12:21:35+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.kawayi.moe/categories/programming/</loc>
-    <lastmod>2021-07-24T12:21:35+08:00</lastmod>
+    <lastmod>2021-10-11T20:02:02+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/tags/</loc>
+    <lastmod>2021-10-11T20:02:02+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/2021/october/monday/%E4%BD%BF%E7%94%A8github-action%E6%8D%95%E8%8E%B7%E4%BA%8B%E4%BB%B6/</loc>
+    <lastmod>2021-10-11T20:02:02+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/2021/october/monday/%E4%BD%BF%E7%94%A8github-action%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81/</loc>
+    <lastmod>2021-10-11T19:53:17+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/categories/programming/</loc>
     <lastmod>2021-07-24T12:21:35+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/2021/july/saturday/%E4%BB%8A%E6%97%A5%E4%BB%BD%E6%97%A5%E8%AE%B0-uuid/guid%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%93%81guuid/</loc>

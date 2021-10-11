@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     
-    <meta name="author" content="chhdao & Thanks Octopress">
+    <meta name="author" content="MingMoe & Thanks Octopress">
 
     
     <title>
@@ -158,10 +158,10 @@
 <p>首先，咱们需要创建一个新项目:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"> $ cargo new hello_uefi
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"> $ cargo new hello_uefi
 </code></pre></td></tr></table>
 </div>
 </div><p>咱们还需要使用x86_64-unknown-uefi这个target。不过一般不需要安装。</p>
@@ -169,7 +169,7 @@
 <p>我们使用uefi-rs这个库。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -187,7 +187,7 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">package</span><span class="p">]</span>
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">package</span><span class="p">]</span>
 <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;hello_uefi&#34;</span>
 <span class="nx">version</span> <span class="p">=</span> <span class="s2">&#34;0.1.0&#34;</span>
 <span class="nx">edition</span> <span class="p">=</span> <span class="s2">&#34;2018&#34;</span>
@@ -208,7 +208,7 @@
 </div><p>然后编写<code>main.rs</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -250,7 +250,7 @@
 </span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-rust" data-lang="rust"><span class="c1">// 禁用自带的东西
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="c1">// 禁用自带的东西
 </span><span class="c1">// 同时启用一些feature
 </span><span class="c1"></span><span class="cp">#![no_std]</span><span class="w">
 </span><span class="w"></span><span class="cp">#![no_main]</span><span class="w">
@@ -297,15 +297,15 @@
 <p>我们再编写一个脚本以构建此项目：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">cargo build --target<span class="o">=</span>x86_64-unknown-uefi -Z build-std<span class="o">=</span>core,compiler_builtins,alloc -Z build-std-features<span class="o">=</span>compiler-builtins-mem
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">cargo build --target<span class="o">=</span>x86_64-unknown-uefi -Z build-std<span class="o">=</span>core,compiler_builtins,alloc -Z build-std-features<span class="o">=</span>compiler-builtins-mem
 </code></pre></td></tr></table>
 </div>
 </div><p>接下来，我们应该就可以编译我们的第一个uefi程序了！</p>
 <p>不出所料，我们应该得到了一个错误:</p>
-<pre><code>error: no global memory allocator found but one is required; link to std or add `#[global_allocator]` to a static item that implements the GlobalAlloc trait.
+<pre tabindex="0"><code>error: no global memory allocator found but one is required; link to std or add `#[global_allocator]` to a static item that implements the GlobalAlloc trait.
 </code></pre><p>看起来，我们并没有给这个程序添加内存分配器。解决方案也都不难:</p>
 <ul>
 <li>
@@ -318,7 +318,7 @@
 <p>下面是内存分配器的源码:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -357,7 +357,7 @@
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-rust" data-lang="rust"><span class="k">use</span><span class="w"> </span><span class="n">core</span>::<span class="n">alloc</span>::<span class="p">{</span><span class="n">GlobalAlloc</span><span class="p">,</span><span class="w"> </span><span class="n">Layout</span><span class="p">};</span><span class="w">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="k">use</span><span class="w"> </span><span class="n">core</span>::<span class="n">alloc</span>::<span class="p">{</span><span class="n">GlobalAlloc</span><span class="p">,</span><span class="w"> </span><span class="n">Layout</span><span class="p">};</span><span class="w">
 </span><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">uefi</span>::<span class="n">table</span>::<span class="n">boot</span>::<span class="n">MemoryType</span><span class="p">;</span><span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="sd">/// UEfi内存分配器
@@ -402,19 +402,19 @@
 <p>有一个名为<code>uefi-run</code>的rust的工具可以帮到我们，install at once:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"> $ cargo install uefi-run
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"> $ cargo install uefi-run
 </code></pre></td></tr></table>
 </div>
 </div><p>用法也很简单:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"> $ uefi-run -b 你的OVMF.fd所在的地址  -q 你的qemu可执行文件的地址，通常是qemu-system-x86_64  你的ELF文件所在的地址 -- 你的QEMU参数列表...
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"> $ uefi-run -b 你的OVMF.fd所在的地址  -q 你的qemu可执行文件的地址，通常是qemu-system-x86_64  你的ELF文件所在的地址 -- 你的QEMU参数列表...
 </code></pre></td></tr></table>
 </div>
 </div><p>OVMF.fd可以从一些Linux发行版的包管理器中找到。
@@ -423,7 +423,7 @@
 <p>下面，我们应该可以直接加载内核了。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -474,7 +474,7 @@
 </span><span class="lnt">49
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-rust" data-lang="rust"><span class="sd">/// 读取文件
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="sd">/// 读取文件
 </span><span class="sd">/// 
 </span><span class="sd">/// 返回读取到的文件的内容
 </span><span class="sd"></span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">read_file</span><span class="p">(</span><span class="n">path</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">

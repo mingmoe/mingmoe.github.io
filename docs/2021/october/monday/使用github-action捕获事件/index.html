@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" class="mingBackground mingBased">
+
+
+
+<head>
+    
+    <meta charset="utf-8">
+
+    
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta name="author" content="MingMoe & Thanks Octopress">
+
+    
+    <title>
+使用GitHub Action捕获事件
+- MingMoe的网络博客
+    </title>
+
+    
+    
+
+
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/normalize.css">
+
+
+
+
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/scss/ming.css">
+
+
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/syntax.css">
+
+
+
+<style>    
+
+    
+    .mingBackground{
+        background: url(/Background.jpg);
+    }
+
+    
+    .mingBased{
+        font-size: 16px;
+    }
+
+</style>
+
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Pacifico&display=swap" rel="stylesheet">
+
+</head>
+
+
+
+<body class="mingBody">
+
+    
+    
+<header class="mingFacade">
+    <h1>
+        欢迎来到大明酱的网络博客📚
+    </h1>
+
+    <p>
+        一个技术宅的网络博客┗|｀O′|┛ ~~
+    </p>
+</header>
+
+    
+    
+
+<nav class="mingNav">
+    
+    <ul>
+        
+        <li>
+            <a href="https://blog.kawayi.moe/">Blog</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/about">About Me</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/archives">Archives</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/categories">Categories</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/tags">Tags</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+
+<nav class="mingMenu">
+    
+    <select onchange="location = this.value;">
+        
+        <option>Navigate</option>
+        
+        <option value="https://blog.kawayi.moe/">🔗 Blog</option>
+        <option value="https://blog.kawayi.moe/about">🔗 About Me</option>
+        <option value="https://blog.kawayi.moe/archives">🔗 Archives</option>
+        <option value="https://blog.kawayi.moe/categories">🔗 Categories</option>
+        <option value="https://blog.kawayi.moe/tags">🔗 Tags</option>
+    </select>
+
+</nav>
+
+    
+    
+    <div class="mingContentWrapper">
+        
+        <main class="mingContent">
+            
+
+
+<div class="mingPostStyle">
+    
+    <div class="postHeader">
+        
+        <p>Monday, October 11, 2021<span> </span>| <a href="/tags/github%20action">github action</a><span> </span>| <a href="/tags/git">git</a></p>
+    </div>
+
+    
+    <div class="postTitle">
+        <h1>使用GitHub Action捕获事件</h1>
+    </div>
+
+    
+    <div class="postContent">
+        <p>GitHub Action可以捕获Github的一些事件（不是所有）</p>
+<p>通常分两部分:</p>
+<ul>
+<li>通过某些事件触发workflow</li>
+<li>在jobs\steps获取事件参数</li>
+</ul>
+<p>第一部分算是比较简单的:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">XXX</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c"># 设置一些触发条件</span><span class="w">
+</span><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">workflow_run</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">workflows</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&#34;CI And CD&#34;</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="w">    </span><span class="nt">types</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="l">completed ]</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>github<a href="https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#example-using-multiple-events-with-activity-types-or-configuration">官方文档</a>有叙述</p>
+<hr>
+<p>第二部分，可能有些小问题，但总体问题不大:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Test Event Catch</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c"># 在workflows &#34;CI And CD&#34;完成时触发这个workflow</span><span class="w">
+</span><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">workflow_run</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">workflows</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&#34;CI And CD&#34;</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="w">    </span><span class="nt">types</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="l">completed ]</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">update-badge</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span><span class="w">
+</span><span class="w">    </span><span class="c"># 获取事件参数</span><span class="w">
+</span><span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">pte_check_suite_url</span><span class="p">:</span><span class="w"> </span><span class="l">${{ github.event.workflow_run.check_suite_url }}</span><span class="w">
+</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Print event result</span><span class="w">
+</span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">echo ${pte_check_suite_url}</span><span class="w">
+</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>注意: github.event后不能直接获取事件的work load。还需要加上事件类型:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># 错误的做法</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">pte_check_suite_url</span><span class="p">:</span><span class="w"> </span><span class="l">${{ github.event.check_suite_url }}</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c"># 正确的做法</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">pte_check_suite_url</span><span class="p">:</span><span class="w"> </span><span class="l">${{ github.event.workflow_run.check_suite_url }}</span><span class="w">
+</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>关于事件所携带的数据和可以使用的事件，可以见GitHub 官方文档:</p>
+<p><a href="https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows">https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows</a></p>
+<p>完.</p>
+    </div>
+
+    
+    <div class="postFooter">
+        <p>Posted by MingMoe.</p>
+        <p>Last update Monday, October 11, 2021.</p>
+    </div>
+
+</div>
+
+
+        </main>
+        
+        
+        
+
+
+<aside class="mingSider">
+
+    <p>欢迎来到本站[]~（￣▽￣）~*</p>
+
+    
+    <div>
+        <iframe style="overflow: hidden;display: flex;width:100%" width="300" height="30" frameborder="0" scrolling="no" hspace="0" src="https://i.tianqi.com/index.php?c=code&id=34&icon=1"></iframe>
+    </div>
+
+    
+    <div>
+        <a class="twitter-timeline" data-lang="zh-cn" data-height="2048" href="https://twitter.com/ming_moe_?ref_src=twsrc%5Etfw">Tweets by ming_moe_</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+
+</aside>
+    </div>
+
+    
+    
+
+<footer class="mingFooter">
+
+    <p>Powered by <a href="https://gohugo.io/">Hugo</a>.Copyright ©  2021 MingMoe.<br>
+
+    <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+        <img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议
+        </a>进行许可。
+
+    </p>
+
+</footer>
+
+</body>
+
+
+</html>

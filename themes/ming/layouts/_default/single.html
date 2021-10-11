@@ -13,7 +13,7 @@
         <!-- 显示:日期|Tag1|Tag2...-->
         <p>{{ .Date.Format "Monday, January 2, 2006" }}
             {{- range .Params.tags -}}
-            <span> </span>| <a href="/tags/{{ . }}">{{ . }}</a>
+            <span> </span>| <a href="/tags/{{ . | urlize }}">{{ . }}</a>
             {{- end -}}
         </p>
     </div>

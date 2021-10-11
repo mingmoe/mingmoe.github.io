@@ -18,7 +18,7 @@
 
     
     <title>
-About Me
+使用Github Action提交代码
 - MingMoe的网络博客
     </title>
 
@@ -142,50 +142,71 @@ About Me
     
     <div class="postHeader">
         
-        <p>Sunday, June 13, 2021</p>
+        <p>Monday, October 11, 2021<span> </span>| <a href="/tags/github%20action">github action</a><span> </span>| <a href="/tags/git">git</a></p>
     </div>
 
     
     <div class="postTitle">
-        <h1>About Me</h1>
+        <h1>使用Github Action提交代码</h1>
     </div>
 
     
     <div class="postContent">
-        <p>(｡･∀･)ﾉﾞ嗨。你好。</p>
-<p>一份关于我的简介!</p>
-<p>我是一名中学生。出生于2k+6年9月6日。</p>
-<ul>
-<li>🛠️C++/Java/rust/C# 技能</li>
-<li>🖥️Windows/Linux开发</li>
-<li>🎮睿智的P社玩家 +100</li>
-<li>🎵喜欢听音乐</li>
-<li>⚙️喜欢造轮子</li>
-</ul>
-<p>曾用名：彩虹海盗</p>
-<p>英文名:
-
-<span class="mingBeautifulFont">MingMoe</span>
-</p>
-<p>你可以用<a href="mailto:me@kawayi.moe">邮箱</a>联系咱</p>
-<p>或者:</p>
-<ul>
-<li>
-<p>Github:<a href="https://github.com/chhdao">chhdao</a></p>
-</li>
-<li>
-<p>Twitter:<a href="https://twitter.com/ming_moe_">ming_moe</a></p>
-</li>
-<li>
-<p>知乎:<a href="https://www.zhihu.com/people/cai-hong-hai-dao-80">chhdao</a></p>
-</li>
-</ul>
+        <!--TODO-->
+<p>笔者最近在研究如何使用GitHub来提交代码。</p>
+<p>只需要使用github官方提供的github动作就可以了:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">   </span><span class="nt">push-code</span><span class="p">:</span><span class="w">
+</span><span class="w">
+</span><span class="w">     </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="c"># 检出代码</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Checkout repository</span><span class="w">
+</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v2</span><span class="w">
+</span><span class="w">
+</span><span class="w">      </span><span class="c"># 配置git</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Config git</span><span class="w">
+</span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span><span class="sd">          git config --global user.name   mingmoe
+</span><span class="sd">          git config --global user.email  sudo.free@qq.com</span><span class="w">          
+</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Push Code</span><span class="w">
+</span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span><span class="sd">            git add .
+</span><span class="sd">            git commit -m &#34;update&#34;
+</span><span class="sd">            git push</span><span class="w">            
+</span></code></pre></td></tr></table>
+</div>
+</div><p>即可提交代码。</p>
+<p>完.</p>
     </div>
 
     
     <div class="postFooter">
         <p>Posted by MingMoe.</p>
-        <p>Last update Sunday, June 13, 2021.</p>
+        <p>Last update Monday, October 11, 2021.</p>
     </div>
 
 </div>

@@ -3,6 +3,8 @@
 @use '../base/base.scss';
 @use "../page/postContent.scss";
 
+// 文章索引
+// 分类法和index共享
 .mingIndexItem {
     @include base.mingInit();
 
