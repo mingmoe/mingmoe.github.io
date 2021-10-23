@@ -6,7 +6,25 @@
     <description>Recent content in Tags on MingMoe的网络博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 11 Oct 2021 20:02:02 +0800</lastBuildDate><atom:link href="https://blog.kawayi.moe/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 23 Oct 2021 15:07:52 +0800</lastBuildDate><atom:link href="https://blog.kawayi.moe/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>java</title>
+      <link>https://blog.kawayi.moe/tags/java/</link>
+      <pubDate>Sat, 23 Oct 2021 15:07:52 +0800</pubDate>
+      
+      <guid>https://blog.kawayi.moe/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>netty</title>
+      <link>https://blog.kawayi.moe/tags/netty/</link>
+      <pubDate>Sat, 23 Oct 2021 15:07:52 +0800</pubDate>
+      
+      <guid>https://blog.kawayi.moe/tags/netty/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>git</title>
       <link>https://blog.kawayi.moe/tags/git/</link>

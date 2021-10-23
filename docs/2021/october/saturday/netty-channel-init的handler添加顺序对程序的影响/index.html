@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" class="mingBackground mingBased">
+
+
+
+<head>
+    
+    <meta charset="utf-8">
+
+    
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta name="author" content="MingMoe & Thanks Octopress">
+
+    
+    <title>
+Netty Channel Init的handler添加顺序对程序的影响
+- MingMoe的网络博客
+    </title>
+
+    
+    
+
+
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/normalize.css">
+
+
+
+
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/scss/ming.css">
+
+
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/syntax.css">
+
+
+
+<style>    
+
+    
+    .mingBackground{
+        background: url(/Background.jpg);
+    }
+
+    
+    .mingBased{
+        font-size: 16px;
+    }
+
+</style>
+
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Pacifico&display=swap" rel="stylesheet">
+
+</head>
+
+
+
+<body class="mingBody">
+
+    
+    
+<header class="mingFacade">
+    <h1>
+        欢迎来到大明酱的网络博客📚
+    </h1>
+
+    <p>
+        一个技术宅的网络博客┗|｀O′|┛ ~~
+    </p>
+</header>
+
+    
+    
+
+<nav class="mingNav">
+    
+    <ul>
+        
+        <li>
+            <a href="https://blog.kawayi.moe/">Blog</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/about">About Me</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/archives">Archives</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/categories">Categories</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/tags">Tags</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+
+<nav class="mingMenu">
+    
+    <select onchange="location = this.value;">
+        
+        <option>Navigate</option>
+        
+        <option value="https://blog.kawayi.moe/">🔗 Blog</option>
+        <option value="https://blog.kawayi.moe/about">🔗 About Me</option>
+        <option value="https://blog.kawayi.moe/archives">🔗 Archives</option>
+        <option value="https://blog.kawayi.moe/categories">🔗 Categories</option>
+        <option value="https://blog.kawayi.moe/tags">🔗 Tags</option>
+    </select>
+
+</nav>
+
+    
+    
+    <div class="mingContentWrapper">
+        
+        <main class="mingContent">
+            
+
+
+<div class="mingPostStyle">
+    
+    <div class="postHeader">
+        
+        <p></span> Saturday, October 23, 2021 </span><span> | <a href="/tags/netty">netty</a></span><span> | <a href="/tags/java">java</a></span></p>
+    </div>
+
+    
+    <div class="postTitle">
+        <h1>Netty Channel Init的handler添加顺序对程序的影响</h1>
+    </div>
+
+    
+    <div class="postContent">
+        <!--TODO-->
+<p>今天在研究netty的时候，碰到了一个channel init的问题:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">NettyChannelInit</span> <span class="kd">extends</span> <span class="n">ChannelInitializer</span><span class="o">&lt;</span><span class="n">NioSocketChannel</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">initChannel</span><span class="o">(</span><span class="n">NioSocketChannel</span>  <span class="n">socketChannel</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="n">var</span> <span class="n">pipeline</span> <span class="o">=</span> <span class="n">socketChannel</span><span class="o">.</span><span class="na">pipeline</span><span class="o">();</span>
+        <span class="n">pipeline</span>
+                <span class="c1">// 添加一个拆包器 (input)
+</span><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet length parser&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">LengthFieldBasedFrameDecoder</span><span class="o">(</span>
+                        <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">,</span>
+                        <span class="n">0</span><span class="o">,</span>
+                        <span class="n">4</span><span class="o">,</span>
+                        <span class="n">0</span><span class="o">,</span>
+                        <span class="c1">// 丢弃长度
+</span><span class="c1"></span>                        <span class="n">4</span>
+                <span class="o">))</span>
+                <span class="c1">// 添加一个包分类器 (input)
+</span><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet classifier&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PacketClassifier</span><span class="o">())</span>
+                <span class="c1">// 添加一些实际处理包的handle (input &amp;&amp; output)
+</span><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet ping handle&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PingPacketHandle</span><span class="o">())</span>
+                <span class="c1">// 添加一个输出解码器 (output)
+</span><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;output encoder&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PacketEncoder</span><span class="o">())</span>
+                <span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这段代码的依据 input-process-output 的handler逻辑顺序（即解码输入handler-逻辑handler-编码输出handler）来添加handler。这将会错误的工作。</p>
+<p>上面的逻辑是:</p>
+<pre tabindex="0"><code>      Input
+           |
+           |
+           |
++----------+-------------+  Channel Pipeline
+|          |             |
+| +--------v-----------+ |
+| |                    |&lt;+---First
+| |                    | |
+| | Handler            | |
+| |                    | |
+| +--------+-----------+ |
+|          |             |
+| +--------v-----------+ |
+| |                    | |
+| |                    | |
+| | Handler            | |
+| |                    | |
+| +--------+-----------+ |
+|          |             |
+| +--------v-----------+ |
+| |                    | |
+| | Handler            | |
+| |                    | |
+| +--------+-----------+ |
+|          |             |
+| +--------v-----------+ |
+| |                    | |
+| | Handler            |&lt;+---Last
+| +--------+-----------+ |
+|          |             |
++----------+-------------+
+           v
+        Output
+</code></pre><p>实际中，这段代码无法正确处理请求——特别是对于输出。</p>
+<p><a href="https://netty.io/4.1/api/io/netty/channel/ChannelPipeline.html">官方文档</a>给了一个小小的例子:</p>
+<pre tabindex="0"><code>  +---------------------------------------------------+---------------+
+  |                           ChannelPipeline         |               |
+  |                                                  \|/              |
+  |    +---------------------+            +-----------+----------+    |
+  |    | Inbound Handler  N  |            | Outbound Handler  1  |    |
+  |    +----------+----------+            +-----------+----------+    |
+  |              /|\                                  |               |
+  |               |                                  \|/              |
+  |    +----------+----------+            +-----------+----------+    |
+  |    | Inbound Handler N-1 |            | Outbound Handler  2  |    |
+  |    +----------+----------+            +-----------+----------+    |
+  |              /|\                                  .               |
+  |               .                                   .               |
+  | ChannelHandlerContext.fireIN_EVT() ChannelHandlerContext.OUT_EVT()|
+  |        [ method call]                       [method call]         |
+  |               .                                   .               |
+  |               .                                  \|/              |
+  |    +----------+----------+            +-----------+----------+    |
+  |    | Inbound Handler  2  |            | Outbound Handler M-1 |    |
+  |    +----------+----------+            +-----------+----------+    |
+  |              /|\                                  |               |
+  |               |                                  \|/              |
+  |    +----------+----------+            +-----------+----------+    |
+  |    | Inbound Handler  1  |            | Outbound Handler  M  |    |
+  |    +----------+----------+            +-----------+----------+    |
+  |              /|\                                  |               |
+  +---------------+-----------------------------------+---------------+
+                  |                                  \|/
+  +---------------+-----------------------------------+---------------+
+  |               |                                   |               |
+  |       [ Socket.read() ]                    [ Socket.write() ]     |
+  |                                                                   |
+  |  Netty Internal I/O Threads (Transport Implementation)            |
+  +-------------------------------------------------------------------+
+</code></pre><p>这个例子可能太过于不直观了。</p>
+<p>而且官方标注了一些关于添加handler的例子:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"> <span class="n">pipeline</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;decoder&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">MyProtocolDecoder</span><span class="o">());</span>
+ <span class="n">pipeline</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;encoder&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">MyProtocolEncoder</span><span class="o">());</span>
+ <span class="n">pipeline</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="n">group</span><span class="o">,</span> <span class="s">&#34;handler&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">MyBusinessLogicHandler</span><span class="o">());</span>
+
+ <span class="c1">// 另一个例子
+</span><span class="c1"></span> <span class="n">ChannelPipeline</span> <span class="n">p</span> <span class="o">=</span> <span class="o">...;</span>
+ <span class="n">pipeline</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;1&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">InboundHandlerA</span><span class="o">());</span>
+ <span class="n">pipeline</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;2&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">InboundHandlerB</span><span class="o">());</span>
+ <span class="n">pipeline</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;3&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">OutboundHandlerA</span><span class="o">());</span>
+ <span class="n">pipeline</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;4&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">OutboundHandlerB</span><span class="o">());</span>
+ <span class="n">pipeline</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;5&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">InboundOutboundHandlerX</span><span class="o">());</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>可以见到，官方给出的handler添加顺序应该是: input-output-process</p>
+<p>并且给了一段文字（对于上面代码的后一个例子）:</p>
+<pre tabindex="0"><code> - 3 and 4 don't implement ChannelInboundHandler, and therefore the actual evaluation order of an inbound event will be: 1, 2, and 5.
+ - 1 and 2 don't implement ChannelOutboundHandler, and therefore the actual evaluation order of a outbound event will be: 5, 4, and 3.
+ - If 5 implements both ChannelInboundHandler and ChannelOutboundHandler, the evaluation order of an inbound and a outbound event could be 125 and 543 respectively.
+</code></pre><p>现在，我们可以得出结论了：</p>
+<ul>
+<li>对于入站数据(input)，将会从ChannelPipeline的头部开始调用handler，跳过没有实现ChannelInboundHandler的handler</li>
+<li>对于出站数据(output)，将会从ChannelPipeline的尾部开始调用handler，跳过没有实现ChannelOutboundHandler的handler</li>
+</ul>
+<p>由此，可以绘出一张简单的示例图:</p>
+<pre tabindex="0"><code>   Input         Output    Channel Pipeline
++----+-------------^---+
+|    |             |   |&lt;---First
+| +--v-------------+-+ |
+| |                  | |
+| |   Handler        | |
+| |                  | |
+| +--+-------------^-+ |
+|    |             |   |
+| +--v-------------+-+ |
+| |                  | |
+| |   Handler        | |
+| |                  | |
+| +--+-------------^-+ |
+|    |             |   |
+| +--v-------------+-+ |
+| |                  | |
+| |   Handler        | |
+| |                  | |
+| |                  | |
+| +--+-------------^-+ |
+|    |             |   |
+| +--v-------------+-+ |
+| |                  | |
+| |   Handler        | |
+| |                  | |
+| +--+---------------+ |
+|    |             ^   |
+|    |             |   |&lt;---Last
++----+-------------+---+
+     |             |
+     +-------------+
+
+     如果handler未实现ChannelInboundHandler;ChannelOutboundHandler;将会跳过Input;Output阶段。
+</code></pre><p>将开头的源代码修正，结果将会是:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">var</span> <span class="n">pipeline</span> <span class="o">=</span> <span class="n">socketChannel</span><span class="o">.</span><span class="na">pipeline</span><span class="o">();</span>
+        <span class="c1">// 添加一个解码器来解析数据长度
+</span><span class="c1"></span>        <span class="n">pipeline</span>
+                <span class="c1">// 添加一个拆包器 (input)
+</span><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet length parser&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">LengthFieldBasedFrameDecoder</span><span class="o">(</span>
+                        <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">,</span>
+                        <span class="n">0</span><span class="o">,</span>
+                        <span class="n">4</span><span class="o">,</span>
+                        <span class="n">0</span><span class="o">,</span>
+                        <span class="c1">// 丢弃长度
+</span><span class="c1"></span>                        <span class="n">4</span>
+                <span class="o">))</span>
+                <span class="c1">// 添加一个包分类器 (input)
+</span><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet classifier&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PacketClassifier</span><span class="o">())</span>
+                <span class="c1">// 添加一个输出解码器 (output)
+</span><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;output encoder&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PacketEncoder</span><span class="o">())</span>
+                <span class="c1">// 添加一些实际处理包的handle(input &amp;&amp; output)
+</span><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet ping handle&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PingPacketHandle</span><span class="o">())</span>
+                <span class="o">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>对于数据，将经过:</p>
+<pre tabindex="0"><code>    input                   output
+    |                       |
+    ↓                       ↑
+    packet length parser    output encoder
+    ↓                       ↑
+    packet classifier       |
+    ↓                       ↑
+    → -------------------→  packet ping handle
+</code></pre><p>well done</p>
+<!--TODO-->
+    </div>
+
+    
+    <div class="postFooter">
+        <p>Posted by MingMoe.</p>
+        <p>Last update Saturday, October 23, 2021.</p>
+    </div>
+
+</div>
+
+
+        </main>
+        
+        
+        
+
+
+<aside class="mingSider">
+
+    <p>欢迎来到本站[]~（￣▽￣）~*</p>
+
+    
+    <div>
+        <iframe style="overflow: hidden;display: flex;width:100%" width="300" height="30" frameborder="0" scrolling="no" hspace="0" src="https://i.tianqi.com/index.php?c=code&id=34&icon=1"></iframe>
+    </div>
+
+    
+    <div>
+        <a class="twitter-timeline" data-lang="zh-cn" data-height="2048" href="https://twitter.com/ming_moe_?ref_src=twsrc%5Etfw">Tweets by ming_moe_</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+
+</aside>
+    </div>
+
+    
+    
+
+<footer class="mingFooter">
+
+    <p>Powered by <a href="https://gohugo.io/">Hugo</a>.Copyright ©  2021 MingMoe.<br>
+
+    <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+        <img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议
+        </a>进行许可。
+
+    </p>
+
+</footer>
+
+</body>
+
+
+</html>

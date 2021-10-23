@@ -3,13 +3,34 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.kawayi.moe/archives/2021/</loc>
-    <lastmod>2021-10-11T20:02:02+08:00</lastmod>
+    <lastmod>2021-10-23T15:07:52+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/archives/</loc>
-    <lastmod>2021-10-11T20:02:02+08:00</lastmod>
+    <lastmod>2021-10-23T15:07:52+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/categories/</loc>
-    <lastmod>2021-10-11T20:02:02+08:00</lastmod>
+    <lastmod>2021-10-23T15:07:52+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/tags/java/</loc>
+    <lastmod>2021-10-23T15:07:52+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/categories/java/</loc>
+    <lastmod>2021-10-23T15:07:52+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/</loc>
+    <lastmod>2021-10-23T15:07:52+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/tags/netty/</loc>
+    <lastmod>2021-10-23T15:07:52+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/2021/october/saturday/netty-channel-init%E7%9A%84handler%E6%B7%BB%E5%8A%A0%E9%A1%BA%E5%BA%8F%E5%AF%B9%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BD%B1%E5%93%8D/</loc>
+    <lastmod>2021-10-23T15:07:52+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/post/</loc>
+    <lastmod>2021-10-23T15:07:52+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/tags/</loc>
+    <lastmod>2021-10-23T15:07:52+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/tags/git/</loc>
     <lastmod>2021-10-11T20:02:02+08:00</lastmod>
@@ -18,15 +39,6 @@
     <lastmod>2021-10-11T20:02:02+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/categories/github-action/</loc>
-    <lastmod>2021-10-11T20:02:02+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.kawayi.moe/</loc>
-    <lastmod>2021-10-11T20:02:02+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.kawayi.moe/post/</loc>
-    <lastmod>2021-10-11T20:02:02+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.kawayi.moe/tags/</loc>
     <lastmod>2021-10-11T20:02:02+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/2021/october/monday/%E4%BD%BF%E7%94%A8github-action%E6%8D%95%E8%8E%B7%E4%BA%8B%E4%BB%B6/</loc>
