@@ -219,4 +219,6 @@ var pipeline = socketChannel.pipeline();
 
 well done
 
+更多内容可以参见:https://www.cnblogs.com/tianzhiliang/p/11739372.html
+
 <!--TODO-->

@@ -19,7 +19,7 @@ publishDir = "docs"
 [params]
   title = "欢迎来到大明酱的网络博客📚"
   subtitle = "一个技术宅的网络博客┗|｀O′|┛ ~~"
-  mainBackgroundImage = "/Background.jpg"
+  mainBackgroundImage = "/Background.webp"
   author = "MingMoe"
 
 # 设置分类法
