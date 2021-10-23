@@ -14,12 +14,9 @@ draft = false
 我是一名中学生。出生于2k+6年9月6日。
 
  - 🛠️C++/Java/rust/C# 技能
- - 🖥️Windows/Linux开发
  - 🎮睿智的P社玩家 +100
  - 🎵喜欢听音乐
  - ⚙️喜欢造轮子
-
-曾用名：彩虹海盗
 
 英文名:{{< beautifulFont >}}MingMoe{{< /beautifulFont >}}
 
@@ -27,8 +24,8 @@ draft = false
 
 或者:
 
- - Github:[chhdao](https://github.com/chhdao)
+ - Github:[MingMoe](https://github.com/mingmoe)
 
  - Twitter:[ming_moe](https://twitter.com/ming_moe_)
 
- - 知乎:[chhdao](https://www.zhihu.com/people/cai-hong-hai-dao-80)
+ - 知乎:[大明酱](https://www.zhihu.com/people/cai-hong-hai-dao-80)

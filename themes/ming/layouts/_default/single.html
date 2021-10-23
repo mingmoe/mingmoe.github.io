@@ -11,9 +11,9 @@
     <!--生成文章页首-->
     <div class="postHeader">
         <!-- 显示:日期|Tag1|Tag2...-->
-        <p>{{ .Date.Format "Monday, January 2, 2006" }}
+        <p></span> {{ .Date.Format "Monday, January 2, 2006" }} </span>
             {{- range .Params.tags -}}
-            <span> </span>| <a href="/tags/{{ . | urlize }}">{{ . }}</a>
+            <span> | <a href="/tags/{{ . | urlize }}">{{ . }}</a></span>
             {{- end -}}
         </p>
     </div>

@@ -7,7 +7,7 @@ title = "MingMoe的网络博客"
 theme = "ming"
 
 # 设置分页
-paginate = 8
+paginate = 6
 
 # 设置文章输出路径
 publishDir = "docs"
