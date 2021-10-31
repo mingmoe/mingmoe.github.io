@@ -6,7 +6,21 @@
     <description>Recent content on MingMoe的网络博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 23 Oct 2021 15:07:52 +0800</lastBuildDate><atom:link href="https://blog.kawayi.moe/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 31 Oct 2021 10:27:33 +0800</lastBuildDate><atom:link href="https://blog.kawayi.moe/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gradle代码片段总结</title>
+      <link>https://blog.kawayi.moe/2021/october/sunday/gradle%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Sun, 31 Oct 2021 10:27:33 +0800</pubDate>
+      
+      <guid>https://blog.kawayi.moe/2021/october/sunday/gradle%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E6%80%BB%E7%BB%93/</guid>
+      <description>&lt;p&gt;汇总了一些gradle常用代码片段，包括:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;汇集所有子项目的javadoc&lt;/li&gt;
+&lt;li&gt;汇集所有子项目的source/javadoc jar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;至于汇集所有依赖到同一个jar包里的，笔者依然是使用插件的方式(shadowJar)实现。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Netty Channel Init的handler添加顺序对程序的影响</title>
       <link>https://blog.kawayi.moe/2021/october/saturday/netty-channel-init%E7%9A%84handler%E6%B7%BB%E5%8A%A0%E9%A1%BA%E5%BA%8F%E5%AF%B9%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BD%B1%E5%93%8D/</link>
