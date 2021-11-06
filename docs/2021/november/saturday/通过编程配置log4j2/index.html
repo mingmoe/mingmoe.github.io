@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" class="mingBackground mingBased">
+
+
+
+<head>
+    
+    <meta charset="utf-8">
+
+    
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta name="author" content="MingMoe & Thanks Octopress">
+
+    
+    <title>
+通过编程配置log4j2
+- MingMoe的网络博客
+    </title>
+
+    
+    
+
+
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/normalize.css">
+
+
+
+
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/scss/ming.css">
+
+
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/syntax.css">
+
+
+
+<style>    
+
+    
+    .mingBackground{
+        background: url(/Background.webp);
+    }
+
+    
+    .mingBased{
+        font-size: 16px;
+    }
+
+</style>
+
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Pacifico&display=swap" rel="stylesheet">
+
+</head>
+
+
+
+<body class="mingBody">
+
+    
+    
+<header class="mingFacade">
+    <h1>
+        欢迎来到大明酱的网络博客📚
+    </h1>
+
+    <p>
+        一个技术宅的网络博客┗|｀O′|┛ ~~
+    </p>
+</header>
+
+    
+    
+
+<nav class="mingNav">
+    
+    <ul>
+        
+        <li>
+            <a href="https://blog.kawayi.moe/">Blog</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/about">About Me</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/archives">Archives</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/categories">Categories</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/tags">Tags</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+
+<nav class="mingMenu">
+    
+    <select onchange="location = this.value;">
+        
+        <option>Navigate</option>
+        
+        <option value="https://blog.kawayi.moe/">🔗 Blog</option>
+        <option value="https://blog.kawayi.moe/about">🔗 About Me</option>
+        <option value="https://blog.kawayi.moe/archives">🔗 Archives</option>
+        <option value="https://blog.kawayi.moe/categories">🔗 Categories</option>
+        <option value="https://blog.kawayi.moe/tags">🔗 Tags</option>
+    </select>
+
+</nav>
+
+    
+    
+    <div class="mingContentWrapper">
+        
+        <main class="mingContent">
+            
+
+
+<div class="mingPostStyle">
+    
+    <div class="postHeader">
+        
+        <p></span> Saturday, November 6, 2021 </span><span> | <a href="/tags/log4j2">log4j2</a></span><span> | <a href="/tags/java">java</a></span></p>
+    </div>
+
+    
+    <div class="postTitle">
+        <h1>通过编程配置log4j2</h1>
+    </div>
+
+    
+    <div class="postContent">
+        <p>最近在使用Log4j2的时候，碰到了一些问题：无论是使用<code>Configurator.initialize</code>还是<code>LogManager.getContext().reconfigure()</code>都无法完全更新log4j2的配置。</p>
+<p>在查看了Log4j2的源代码过后，笔者找到了解决方案。</p>
+<p>tl;dr.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">Configurator</span><span class="o">.</span><span class="na">initialize</span><span class="o">(</span>
+    <span class="n">ClassLoader</span><span class="o">.</span><span class="na">getSystemClassLoader</span><span class="o">(),</span>
+    <span class="n">configuration</span>
+<span class="o">);</span>
+
+<span class="n">Configurator</span><span class="o">.</span><span class="na">initialize</span><span class="o">(</span>
+    <span class="n">configuration</span>
+<span class="o">);</span>
+<span class="c1">// 缺一不可
+</span></code></pre></td></tr></table>
+</div>
+</div><p>如果观察<code>LogManager.getLogger(Class&lt;?&gt;)</code>，会发现其调用的是<code>getContext(cls.getClassLoader(), false).getLogger(cls);</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="n">Logger</span> <span class="nf">getLogger</span><span class="o">(</span><span class="kd">final</span> <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">final</span> <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">cls</span> <span class="o">=</span> <span class="n">callerClass</span><span class="o">(</span><span class="n">clazz</span><span class="o">);</span>
+    <span class="c1">// note this:     ↓
+</span><span class="c1"></span>    <span class="k">return</span> <span class="n">getContext</span><span class="o">(</span><span class="n">cls</span><span class="o">.</span><span class="na">getClassLoader</span><span class="o">(),</span> <span class="kc">false</span><span class="o">).</span><span class="na">getLogger</span><span class="o">(</span><span class="n">cls</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>对比之下的<code>LogManager.getLogger(String)</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="n">Logger</span> <span class="nf">getLogger</span><span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// note this:         ↓
+</span><span class="c1"></span>        <span class="k">return</span> <span class="n">name</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">getContext</span><span class="o">(</span><span class="kc">false</span><span class="o">).</span><span class="na">getLogger</span><span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="o">:</span> <span class="n">getLogger</span><span class="o">(</span><span class="n">StackLocatorUtil</span><span class="o">.</span><span class="na">getCallerClass</span><span class="o">(</span><span class="n">2</span><span class="o">));</span>
+    <span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果使用<code>LogManager.getLogger(String)</code>这个函数，那么loader将会是null(对比之下，<code>LogManager.getLogger(Class&lt;?&gt;)</code>使用<code>cls.getClassLoader()</code>获取了loader)。可能会有一条可疑的警告信息:
+<code>WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.</code>
+并且会获取到与带有loader参数不同的<code>LoggerContext</code>。</p>
+<p><code>getLogger(Class&lt;?&gt;)</code>虽然一直作为log4j2的典型用法，仍然有一些第三方库使用<code>getLogger(String)</code>。比如netty。</p>
+<p>所需需要对带classLoader参数和不带此参数的<code>LoggerContext</code>都进行更新。代码见上。</p>
+    </div>
+
+    
+    <div class="postFooter">
+        <p>Posted by MingMoe.</p>
+        <p>Last update Saturday, November 6, 2021.</p>
+    </div>
+
+</div>
+
+
+        </main>
+        
+        
+        
+
+
+<aside class="mingSider">
+
+    <p>欢迎来到本站[]~（￣▽￣）~*</p>
+
+    
+    <div>
+        <iframe style="overflow: hidden;display: flex;width:100%" width="300" height="30" frameborder="0" scrolling="no" hspace="0" src="https://i.tianqi.com/index.php?c=code&id=34&icon=1"></iframe>
+    </div>
+
+    
+    <div>
+        <a class="twitter-timeline" data-lang="zh-cn" data-height="2048" href="https://twitter.com/ming_moe_?ref_src=twsrc%5Etfw"></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+
+</aside>
+    </div>
+
+    
+    
+
+<footer class="mingFooter">
+
+    <p>Powered by <a href="https://gohugo.io/">Hugo</a>.Copyright ©  2021 MingMoe.<br>
+
+    <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+        <img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议
+        </a>进行许可。
+
+    </p>
+
+</footer>
+
+</body>
+
+
+</html>
