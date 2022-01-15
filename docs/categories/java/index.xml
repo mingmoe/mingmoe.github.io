@@ -6,7 +6,16 @@
     <description>Recent content in java on MingMoe的网络博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 06 Nov 2021 00:23:14 +0800</lastBuildDate><atom:link href="https://blog.kawayi.moe/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 Jan 2022 22:16:02 +0800</lastBuildDate><atom:link href="https://blog.kawayi.moe/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java17新Native API初体验</title>
+      <link>https://blog.kawayi.moe/2022/january/saturday/java17%E6%96%B0native-api%E5%88%9D%E4%BD%93%E9%AA%8C/</link>
+      <pubDate>Sat, 15 Jan 2022 22:16:02 +0800</pubDate>
+      
+      <guid>https://blog.kawayi.moe/2022/january/saturday/java17%E6%96%B0native-api%E5%88%9D%E4%BD%93%E9%AA%8C/</guid>
+      <description>&lt;p&gt;最近在使用Java编写程序，需要和c++进行交互。正好碰到了Java17新添加的Native API（类似JNI）。来自&lt;a href=&#34;https://openjdk.java.net/jeps/412&#34;&gt;JEP 412&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>通过编程配置log4j2</title>
       <link>https://blog.kawayi.moe/2021/november/saturday/%E9%80%9A%E8%BF%87%E7%BC%96%E7%A8%8B%E9%85%8D%E7%BD%AElog4j2/</link>

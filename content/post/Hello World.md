@@ -102,3 +102,11 @@ var foo = function (bar) {
 
 console.log(foo(5));
 ```
+
+| Method Type | Function Descriptor | C Type |
+| :----: | :-----: | :-----: |
+| MemoryAddress.class | CLinker.C_POINTER | 任何类型的指针 |
+| long.class | CLinker.C_LONG_LONG | unsigned long long |
+| int.class | CLinker.C_INT | int |
+| short.class | CLinker.C_SHORT | short |
+| 以此类推，还有double,char等基本类型 | none | none |
