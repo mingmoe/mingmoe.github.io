@@ -3,7 +3,7 @@ title = "使用Github Action提交代码"
 date = 2021-10-11T19:53:17+08:00
 draft = false
 archives = 2021
-categories = "github action"
+categories = "programming helper"
 tags = ["github action","git"]
 +++
 

@@ -3,7 +3,7 @@ title = "通过编程配置log4j2"
 date = 2021-11-06T00:23:14+08:00
 draft = false
 archives = 2021
-categories = "java"
+categories = "programming"
 tags = ["log4j2","java"]
 +++
 

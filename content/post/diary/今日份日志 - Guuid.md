@@ -3,7 +3,7 @@ title = "今日份日记 - UUID/GUID的替代品:GUUID"
 date = 2021-07-24T12:21:35+08:00
 draft = false
 archives = 2021
-categories = "programming"
+categories = "日记"
 tags = ["日记"]
 +++
 

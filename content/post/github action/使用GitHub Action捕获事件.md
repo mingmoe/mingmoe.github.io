@@ -3,7 +3,7 @@ title = "使用GitHub Action捕获事件"
 date = 2021-10-11T20:02:02+08:00
 draft = false
 archives = 2021
-categories = "github action"
+categories = "programming helper"
 tags = ["github action","git"]
 +++
 

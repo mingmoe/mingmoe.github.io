@@ -6,7 +6,17 @@
     <description>Recent content on MingMoe的网络博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 15 Jan 2022 22:16:02 +0800</lastBuildDate><atom:link href="https://blog.kawayi.moe/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Feb 2022 00:23:47 +0800</lastBuildDate><atom:link href="https://blog.kawayi.moe/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>拓扑排序算法（依赖排序）</title>
+      <link>https://blog.kawayi.moe/2022/february/sunday/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E4%BE%9D%E8%B5%96%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Sun, 06 Feb 2022 00:23:47 +0800</pubDate>
+      
+      <guid>https://blog.kawayi.moe/2022/february/sunday/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E4%BE%9D%E8%B5%96%E6%8E%92%E5%BA%8F/</guid>
+      <description>&lt;p&gt;笔者曾经实现过几个toy build system。这些构建系统都离不开拓扑排序算法：一个将一个有向无环图进行排序的算法。&lt;/p&gt;
+&lt;p&gt;哈哈，这么说可能有点抽象。举个例子，就是：吃饭前要做饭，做饭前要洗手，遵循一个特定的顺序，不能乱来。拓扑排序正是排序此类事务的算法。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Java17新Native API初体验</title>
       <link>https://blog.kawayi.moe/2022/january/saturday/java17%E6%96%B0native-api%E5%88%9D%E4%BD%93%E9%AA%8C/</link>

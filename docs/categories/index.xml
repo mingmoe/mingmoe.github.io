@@ -6,31 +6,40 @@
     <description>Recent content in Categories on MingMoe的网络博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 15 Jan 2022 22:16:02 +0800</lastBuildDate><atom:link href="https://blog.kawayi.moe/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Feb 2022 00:23:47 +0800</lastBuildDate><atom:link href="https://blog.kawayi.moe/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>java</title>
-      <link>https://blog.kawayi.moe/categories/java/</link>
-      <pubDate>Sat, 15 Jan 2022 22:16:02 +0800</pubDate>
+      <title>algorithm</title>
+      <link>https://blog.kawayi.moe/categories/algorithm/</link>
+      <pubDate>Sun, 06 Feb 2022 00:23:47 +0800</pubDate>
       
-      <guid>https://blog.kawayi.moe/categories/java/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>github action</title>
-      <link>https://blog.kawayi.moe/categories/github-action/</link>
-      <pubDate>Mon, 11 Oct 2021 20:02:02 +0800</pubDate>
-      
-      <guid>https://blog.kawayi.moe/categories/github-action/</guid>
+      <guid>https://blog.kawayi.moe/categories/algorithm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>programming</title>
       <link>https://blog.kawayi.moe/categories/programming/</link>
-      <pubDate>Sat, 24 Jul 2021 12:21:35 +0800</pubDate>
+      <pubDate>Sat, 15 Jan 2022 22:16:02 +0800</pubDate>
       
       <guid>https://blog.kawayi.moe/categories/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>programming helper</title>
+      <link>https://blog.kawayi.moe/categories/programming-helper/</link>
+      <pubDate>Mon, 11 Oct 2021 20:02:02 +0800</pubDate>
+      
+      <guid>https://blog.kawayi.moe/categories/programming-helper/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>日记</title>
+      <link>https://blog.kawayi.moe/categories/%E6%97%A5%E8%AE%B0/</link>
+      <pubDate>Sat, 24 Jul 2021 12:21:35 +0800</pubDate>
+      
+      <guid>https://blog.kawayi.moe/categories/%E6%97%A5%E8%AE%B0/</guid>
       <description></description>
     </item>
     

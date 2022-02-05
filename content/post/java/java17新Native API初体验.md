@@ -3,7 +3,7 @@ title = "Java17新Native API初体验"
 date = 2022-01-15T22:16:02+08:00
 draft = false
 archives = 2022
-categories = "java"
+categories = "programming"
 tags = ["native","java"]
 +++
 

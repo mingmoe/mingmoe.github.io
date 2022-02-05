@@ -3,7 +3,7 @@ title = "Gradle代码片段总结"
 date = 2021-10-31T10:27:33+08:00
 draft = false
 archives = 2021
-categories = "java"
+categories = "programming"
 tags = ["gradle","java"]
 +++
 

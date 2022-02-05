@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" class="mingBackground mingBased">
+
+
+
+<head>
+    
+    <meta charset="utf-8">
+
+    
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta name="author" content="MingMoe & Thanks Octopress">
+
+    
+    <title>
+拓扑排序算法（依赖排序）
+- MingMoe的网络博客
+    </title>
+
+    
+    
+
+
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/normalize.css">
+
+
+
+
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/scss/ming.css">
+
+
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/syntax.css">
+
+
+
+<style>    
+
+    
+    .mingBackground{
+        background: url(/Background.webp);
+    }
+
+    
+    .mingBased{
+        font-size: 16px;
+    }
+
+</style>
+
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Pacifico&display=swap" rel="stylesheet">
+
+</head>
+
+
+
+<body class="mingBody">
+
+    
+    
+<header class="mingFacade">
+    <h1>
+        欢迎来到大明酱的网络博客📚
+    </h1>
+
+    <p>
+        一个技术宅的网络博客┗|｀O′|┛ ~~
+    </p>
+</header>
+
+    
+    
+
+<nav class="mingNav">
+    
+    <ul>
+        
+        <li>
+            <a href="https://blog.kawayi.moe/">Blog</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/about">About Me</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/archives">Archives</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/categories">Categories</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/tags">Tags</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+
+<nav class="mingMenu">
+    
+    <select onchange="location = this.value;">
+        
+        <option>Navigate</option>
+        
+        <option value="https://blog.kawayi.moe/">🔗 Blog</option>
+        <option value="https://blog.kawayi.moe/about">🔗 About Me</option>
+        <option value="https://blog.kawayi.moe/archives">🔗 Archives</option>
+        <option value="https://blog.kawayi.moe/categories">🔗 Categories</option>
+        <option value="https://blog.kawayi.moe/tags">🔗 Tags</option>
+    </select>
+
+</nav>
+
+    
+    
+    <div class="mingContentWrapper">
+        
+        <main class="mingContent">
+            
+
+
+<div class="mingPostStyle">
+    
+    <div class="postHeader">
+        
+        <p></span> Sunday, February 6, 2022 </span><span> | <a href="/tags/algorithm">algorithm</a></span></p>
+    </div>
+
+    
+    <div class="postTitle">
+        <h1>拓扑排序算法（依赖排序）</h1>
+    </div>
+
+    
+    <div class="postContent">
+        <p>笔者曾经实现过几个toy build system。这些构建系统都离不开拓扑排序算法：一个将一个有向无环图进行排序的算法。</p>
+<p>哈哈，这么说可能有点抽象。举个例子，就是：吃饭前要做饭，做饭前要洗手，遵循一个特定的顺序，不能乱来。拓扑排序正是排序此类事务的算法。</p>
+<p>话不多说，上实现!</p>
+<p>代码已经做了注释，相信不言自明。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="c1">// Target.cs
+</span><span class="c1">//==-----------------------------==//
+</span><span class="c1">/// 这个类负责标记一个目标及其依赖
+</span><span class="c1"></span><span class="k">public</span> <span class="k">class</span> <span class="nc">Target</span>
+<span class="p">{</span>
+    <span class="c1">/// &lt;summary&gt;
+</span><span class="c1"></span>    <span class="c1">/// Target名称
+</span><span class="c1"></span>    <span class="c1">/// &lt;/summary&gt;
+</span><span class="c1"></span>    <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="n">init</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="s">&#34;Target Name&#34;</span><span class="p">;</span>
+
+    <span class="c1">/// &lt;summary&gt;
+</span><span class="c1"></span>    <span class="c1">/// Target的依赖
+</span><span class="c1"></span>    <span class="c1">/// &lt;/summary&gt;
+</span><span class="c1"></span>    <span class="k">public</span> <span class="kt">string</span><span class="p">[]</span> <span class="n">Deps</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="n">init</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="n">Array</span><span class="p">.</span><span class="n">Empty</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;();</span>
+<span class="p">}</span>
+
+
+<span class="c1">// Topological.cs
+</span><span class="c1">//==-----------------------------==//
+</span><span class="c1"></span><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+
+<span class="c1">/// 拓扑排序主函数
+</span><span class="c1"></span><span class="k">public</span> <span class="k">static</span> <span class="n">Queue</span><span class="p">&lt;</span><span class="n">Target</span><span class="p">&gt;</span> <span class="n">Sort</span><span class="p">(</span>
+    <span class="c1">// 客户需要的目标
+</span><span class="c1"></span>    <span class="n">Target</span> <span class="n">whatToSort</span><span class="p">,</span>
+    <span class="c1">// 客户所有的目标
+</span><span class="c1"></span>    <span class="n">Target</span><span class="p">[]</span> <span class="n">total</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// 用于标记一个Target的排序状态
+</span><span class="c1"></span>    <span class="c1">// 如果target对应的key未找到，则target还未被排序
+</span><span class="c1"></span>    <span class="c1">// 如果target对应的value为true，则key正在被排序
+</span><span class="c1"></span>    <span class="c1">// 如果value为false，则key已经被排序过，并被加入到输出
+</span><span class="c1"></span>    <span class="n">Dictionary</span><span class="p">&lt;</span><span class="n">Target</span><span class="p">,</span> <span class="kt">bool</span><span class="p">&gt;</span> <span class="n">targetStatus</span> <span class="p">=</span>
+        <span class="k">new</span><span class="p">();</span>
+
+    <span class="c1">// 最后的输出。使用队列来保证顺序
+</span><span class="c1"></span>    <span class="n">Queue</span><span class="p">&lt;</span><span class="n">Target</span><span class="p">&gt;</span> <span class="n">output</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+
+    <span class="c1">// 处理
+</span><span class="c1"></span>    <span class="n">Visit</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="n">whatToSort</span><span class="p">,</span> <span class="n">targetStatus</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">output</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">/// 负责对一个target进行排序
+</span><span class="c1">/// 是一个辅助函数，不应该设置为public
+</span><span class="c1"></span><span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="n">Visit</span><span class="p">(</span>
+    <span class="c1">// 所有的Target
+</span><span class="c1"></span>    <span class="n">Target</span><span class="p">[]</span> <span class="n">total</span><span class="p">,</span>
+    <span class="c1">// 要排序的目标
+</span><span class="c1"></span>    <span class="n">Target</span> <span class="n">target</span><span class="p">,</span>
+    <span class="c1">// target状态
+</span><span class="c1"></span>    <span class="n">Dictionary</span><span class="p">&lt;</span><span class="n">Target</span><span class="p">,</span> <span class="kt">bool</span><span class="p">&gt;</span> <span class="n">targetStatus</span><span class="p">,</span>
+    <span class="c1">// 输出队列
+</span><span class="c1"></span>    <span class="n">Queue</span><span class="p">&lt;</span><span class="n">Target</span><span class="p">&gt;</span> <span class="n">output</span><span class="p">)</span>
+<span class="p">{</span>
+
+    <span class="c1">// 检查要排序的目标的状态
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">targetStatus</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="k">out</span> <span class="kt">bool</span> <span class="n">isSortting</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="c1">// 要排序的目标正在被排序
+</span><span class="c1"></span>        <span class="c1">// 说明我们再次排序了这个目标！存在循环依赖
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">isSortting</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="s">$&#34;Circular dependency detected. At target `{target.Name}`.&#34;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">// 我们要排序的目标及其依赖已经被排序过了
+</span><span class="c1"></span>        <span class="c1">// 并且已经被加入到了输出
+</span><span class="c1"></span>        <span class="c1">// 我们设计是：一个目标只完成一次，so 忽略
+</span><span class="c1"></span>        <span class="k">else</span> <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// 目标没有被设置状态
+</span><span class="c1"></span>    <span class="c1">// 则目标没有被排序过
+</span><span class="c1"></span>    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="c1">// 设置目标状态为：当前正在被排序
+</span><span class="c1"></span>        <span class="n">targetStatus</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+
+        <span class="c1">// 排序所有依赖
+</span><span class="c1"></span>        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">depStr</span> <span class="k">in</span> <span class="n">target</span><span class="p">.</span><span class="n">Deps</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="c1">// 获取依赖
+</span><span class="c1"></span>            <span class="n">Target</span><span class="p">?</span> <span class="n">dep</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+
+            <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">ddepStr</span> <span class="k">in</span> <span class="n">total</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="c1">// 找到依赖
+</span><span class="c1"></span>                <span class="k">if</span> <span class="p">(</span><span class="n">ddepStr</span><span class="p">.</span><span class="n">Name</span> <span class="p">==</span> <span class="n">depStr</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">dep</span> <span class="p">=</span> <span class="n">ddepStr</span><span class="p">;</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">dep</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="s">$&#34;Miss depend `{depStr}` in target `{target.Name}` !&#34;</span><span class="p">);</span>
+
+            <span class="c1">// 对这些依赖进行排序
+</span><span class="c1"></span>            <span class="n">Visit</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="n">dep</span><span class="p">,</span> <span class="n">targetStatus</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// 我们已经将目标的所有依赖添加到输出了
+</span><span class="c1"></span>        <span class="c1">// 确保了执行当前目标之前，依赖目标会被执行
+</span><span class="c1"></span>        <span class="c1">// 则添加当前目标到输出
+</span><span class="c1"></span>        <span class="n">output</span><span class="p">.</span><span class="n">Enqueue</span><span class="p">(</span><span class="n">target</span><span class="p">);</span>
+
+        <span class="c1">// 将当前目标的状态标记为：已经被排序
+</span><span class="c1"></span>        <span class="n">targetStatus</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">target</span><span class="p">);</span>
+        <span class="n">targetStatus</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>最后，附加一个小栗子:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="n">Target</span> <span class="err">吃饭</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+<span class="err">吃饭</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">&#34;吃饭&#34;</span><span class="p">;</span>
+<span class="err">吃饭</span><span class="p">.</span><span class="n">Deps</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[]{</span> <span class="s">&#34;做饭&#34;</span><span class="p">,</span><span class="s">&#34;洗手&#34;</span> <span class="p">};</span>
+
+<span class="n">Target</span> <span class="err">做饭</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+<span class="err">吃饭</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">&#34;做饭&#34;</span><span class="p">;</span>
+<span class="err">吃饭</span><span class="p">.</span><span class="n">Deps</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[]{</span> <span class="s">&#34;洗手&#34;</span> <span class="p">};</span>
+
+<span class="n">Target</span> <span class="err">洗手</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+<span class="err">吃饭</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">&#34;洗手&#34;</span><span class="p">;</span>
+<span class="err">吃饭</span><span class="p">.</span><span class="n">Deps</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[</span><span class="m">0</span><span class="p">]();</span>
+
+<span class="n">Target</span><span class="p">[]</span> <span class="err">所有事务</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Target</span><span class="p">[]{</span><span class="err">吃饭，做饭，洗手</span><span class="p">};</span>
+
+<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">Sort</span><span class="p">(</span><span class="err">吃饭</span><span class="p">,</span><span class="err">所有事物</span><span class="p">);</span>
+
+<span class="k">foreach</span><span class="p">(</span><span class="kt">var</span> <span class="n">whatToDoNext</span> <span class="k">in</span> <span class="n">result</span><span class="p">){</span>
+    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">whatToDoNext</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// result:
+</span><span class="c1">// 洗手 做饭 吃饭
+</span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    
+    <div class="postFooter">
+        <p>Posted by MingMoe.</p>
+        <p>Last update Sunday, February 6, 2022.</p>
+    </div>
+
+</div>
+
+
+        </main>
+        
+        
+        
+
+
+<aside class="mingSider">
+
+    <p>欢迎来到本站[]~（￣▽￣）~*</p>
+
+    
+    <div>
+        <iframe style="overflow: hidden;display: flex;width:100%" width="300" height="30" frameborder="0" scrolling="no" hspace="0" src="https://i.tianqi.com/index.php?c=code&id=34&icon=1"></iframe>
+    </div>
+
+    
+    <div>
+        <a class="twitter-timeline" data-lang="zh-cn" data-height="2048" href="https://twitter.com/ming_moe_?ref_src=twsrc%5Etfw"></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+
+</aside>
+    </div>
+
+    
+    
+
+<footer class="mingFooter">
+
+    <p>Powered by <a href="https://gohugo.io/">Hugo</a>.Copyright ©  2021 MingMoe.<br>
+
+    <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+        <img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议
+        </a>进行许可。
+
+    </p>
+
+</footer>
+
+</body>
+
+
+</html>

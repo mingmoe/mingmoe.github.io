@@ -3,7 +3,7 @@ title = "Netty Channel Init的handler添加顺序对程序的影响"
 date = 2021-10-23T15:07:52+08:00
 draft = false
 archives = 2021
-categories = "java"
+categories = "programming"
 tags = ["netty","java"]
 +++
 
