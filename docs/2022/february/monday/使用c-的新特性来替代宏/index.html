@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" class="mingBackground mingBased">
+
+
+
+<head>
+    
+    <meta charset="utf-8">
+
+    
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta name="author" content="MingMoe & Thanks Octopress">
+
+    
+    <title>
+使用c&#43;&#43;的新特性来替代宏
+- MingMoe的网络博客
+    </title>
+
+    
+    
+
+
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/normalize.css">
+
+
+
+
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/scss/ming.css">
+
+
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/syntax.css">
+
+
+
+<style>    
+
+    
+    .mingBackground{
+        background: url(/Background.webp);
+    }
+
+    
+    .mingBased{
+        font-size: 16px;
+    }
+
+</style>
+
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Pacifico&display=swap" rel="stylesheet">
+
+</head>
+
+
+
+<body class="mingBody">
+
+    
+    
+<header class="mingFacade">
+    <h1>
+        欢迎来到大明酱的网络博客📚
+    </h1>
+
+    <p>
+        一个技术宅的网络博客┗|｀O′|┛ ~~
+    </p>
+</header>
+
+    
+    
+
+<nav class="mingNav">
+    
+    <ul>
+        
+        <li>
+            <a href="https://blog.kawayi.moe/">Blog</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/about">About Me</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/archives">Archives</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/categories">Categories</a>
+        </li>
+
+        
+        <li>
+            <a href="https://blog.kawayi.moe/tags">Tags</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+
+<nav class="mingMenu">
+    
+    <select onchange="location = this.value;">
+        
+        <option>Navigate</option>
+        
+        <option value="https://blog.kawayi.moe/">🔗 Blog</option>
+        <option value="https://blog.kawayi.moe/about">🔗 About Me</option>
+        <option value="https://blog.kawayi.moe/archives">🔗 Archives</option>
+        <option value="https://blog.kawayi.moe/categories">🔗 Categories</option>
+        <option value="https://blog.kawayi.moe/tags">🔗 Tags</option>
+    </select>
+
+</nav>
+
+    
+    
+    <div class="mingContentWrapper">
+        
+        <main class="mingContent">
+            
+
+
+<div class="mingPostStyle">
+    
+    <div class="postHeader">
+        
+        <p></span> Monday, February 21, 2022 </span><span> | <a href="/tags/c&#43;&#43;">c&#43;&#43;</a></span></p>
+    </div>
+
+    
+    <div class="postTitle">
+        <h1>使用c&#43;&#43;的新特性来替代宏</h1>
+    </div>
+
+    
+    <div class="postContent">
+        <p>要说c++或者c中最容易滥用的特性，莫不过于宏。</p>
+<p>事实上，宏有很多缺点，比如难以调试，容易造成污染。（比如Windows.h里就定义了max和min宏，毫无避讳。如果调用xxx.max()之类的函数，那么恭喜你的max被替换了）</p>
+<p>所幸，C++为我们提供了一套机制来减少宏的使用。</p>
+<h3 id="使用stdsource_location来替代__line__和__file__等">使用std::source_location来替代__LINE__和__FILE__等</h3>
+<p>不仅如此，std::source_location还能显示列号等宏并不实现的功能。</p>
+<p>std::source_location的用法如:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#include</span> <span class="cpf">&lt;source_location&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">void</span> <span class="nf">test</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">source_location</span><span class="o">&amp;</span> <span class="n">location</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">source_location</span><span class="o">::</span><span class="n">current</span><span class="p">()){</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;at &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">local</span><span class="p">.</span><span class="n">file_name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;:&#34;</span> <span class="o">&lt;&lt;</span><span class="n">local</span><span class="p">.</span><span class="n">line</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">test</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>至于std::source_location是怎么实现获取源代码位置的呢，可以看看实现。</p>
+<p>现在看看这个<code>std::source_location::current()</code>的实现，其实并不高深:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="n">_NODISCARD</span> <span class="k">static</span> <span class="k">consteval</span> <span class="n">source_location</span> <span class="nf">current</span><span class="p">(</span><span class="k">const</span> <span class="kt">uint_least32_t</span> <span class="n">_Line_</span> <span class="o">=</span> <span class="n">__builtin_LINE</span><span class="p">(),</span>
+        <span class="k">const</span> <span class="kt">uint_least32_t</span> <span class="n">_Column_</span> <span class="o">=</span> <span class="n">__builtin_COLUMN</span><span class="p">(),</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">_File_</span> <span class="o">=</span> <span class="n">__builtin_FILE</span><span class="p">(),</span>
+        <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">_Function_</span> <span class="o">=</span> <span class="n">__builtin_FUNCTION</span><span class="p">())</span> <span class="k">noexcept</span> <span class="p">{</span>
+        <span class="n">source_location</span> <span class="n">_Result</span><span class="p">;</span>
+        <span class="n">_Result</span><span class="p">.</span><span class="n">_Line</span>     <span class="o">=</span> <span class="n">_Line_</span><span class="p">;</span>
+        <span class="n">_Result</span><span class="p">.</span><span class="n">_Column</span>   <span class="o">=</span> <span class="n">_Column_</span><span class="p">;</span>
+        <span class="n">_Result</span><span class="p">.</span><span class="n">_File</span>     <span class="o">=</span> <span class="n">_File_</span><span class="p">;</span>
+        <span class="n">_Result</span><span class="p">.</span><span class="n">_Function</span> <span class="o">=</span> <span class="n">_Function_</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">_Result</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>小小的提示：<code>__builtin_XXXX</code>可以获取调用此函数的源代码处某些信息，内置于编译器中。</p>
+<p>五秒钟的时间来思考他是怎么工作的。</p>
+<hr>
+<p>时间到！</p>
+<p>答案就是：C++会在调用函数之前构造参数，并在调用处构造，即使是默认参数也是如此。编译器会自动在函数的的调用处调用<code>std::source_location::current()</code>来获取源代码参数位置。</p>
+<p>这样，我们就把代码中的<code>__FILE__</code>和<code>__LINE__</code>进行了替换。很轻松，不是么？</p>
+<h3 id="使用模板来替换一部分宏">使用模板来替换一部分宏</h3>
+<p>要说把宏完全替换，这自然是不大可能的，但是用模板，就能替换绝大部分代码生成宏。</p>
+<p>比如，笔者曾写过一段用于定义一个异常类的宏:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#define MAKE_EXCEPTION(Name)                            \
+</span><span class="cp">    class Name ## Excpetion : public Exception{    \
+</span><span class="cp">        </span><span class="cm">/* more define ... */</span><span class="cp">                           \
+</span><span class="cp">    }
+</span></code></pre></td></tr></table>
+</div>
+</div><p>仔细一看，这这种代码生成视乎是模板做不到的，但事实并非如此，而且可以做的更好:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">/// @brief 字符串字面值
+</span><span class="c1"></span>    <span class="k">template</span><span class="o">&lt;</span><span class="n">size_t</span> <span class="n">N</span><span class="o">&gt;</span>
+    <span class="k">struct</span> <span class="nc">StringLiteral</span> <span class="p">{</span>
+        <span class="k">constexpr</span> <span class="nf">StringLiteral</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">str</span><span class="p">)[</span><span class="n">N</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">copy_n</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="kt">char</span> <span class="n">value</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+    <span class="p">};</span>
+
+<span class="c1">// 我们要生成异常的主要模板
+</span><span class="c1"></span><span class="k">template</span><span class="o">&lt;</span><span class="n">utopia</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">StringLiteral</span> <span class="n">exception_name</span><span class="o">&gt;</span>
+    <span class="k">class</span> <span class="nc">UniversalException</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Exception</span> <span class="p">{</span>
+      <span class="k">public</span><span class="o">:</span>
+        <span class="kr">inline</span> <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">get_name</span><span class="p">()</span> <span class="k">const</span> <span class="k">noexcept</span> <span class="k">override</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">{</span> <span class="n">exception_name</span><span class="p">.</span><span class="n">value</span> <span class="p">};</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+
+<span class="c1">// 用法如
+</span><span class="c1"></span><span class="k">using</span> <span class="n">IOException</span> <span class="o">=</span> <span class="n">UniversalException</span><span class="o">&lt;</span><span class="s">&#34;IOException&#34;</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="c1">// throw IOException{&#34;I&#39;m a exception.&#34;};
+</span><span class="c1"></span>
+<span class="c1">// 我们就定义出了一个新异常！
+</span><span class="c1">// std::is_same_v&lt;IOException,UniversalException&lt;&#34;IOException&#34;&gt;&gt; == true
+</span><span class="c1">// std::is_same_v&lt;IOException,UniversalException&lt;&#34;OtherException&#34;&gt;&gt; == false
+</span><span class="c1"></span>
+<span class="c1">// 并且我们支持比宏更多的用法!
+</span><span class="c1">// --------------------------------↓ 通过继承来使用
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">FileSystemException</span> <span class="o">:</span> <span class="k">public</span> <span class="n">UniversalException</span><span class="o">&lt;</span><span class="s">&#34;IOException&#34;</span><span class="o">&gt;</span><span class="p">{</span>
+    <span class="c1">// ...
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="使用inline等替换宏">使用inline等替换宏</h3>
+<p>宏最饱受诟病之处就在于，宏难以调试，难以知道复杂宏的展开结果。</p>
+<p>但是使用inline就可以等价进行替代。并且inline的控制比宏更加灵活，可以做到：Debug时不展开函数，最大化地方便Debug。Release时完全展开，和宏的性能无异。</p>
+<p>可见:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">// 如MD5算法的实现
+</span><span class="c1">//F,G,H,I四个非线性变换函数
+</span><span class="c1"></span><span class="cp">#define F(x, y, z) (((x) &amp; (y)) | ((~x) &amp; (z)))
+</span><span class="cp">#define G(x, y, z) (((x) &amp; (z)) | ((y) &amp; (~z)))
+</span><span class="cp">#define H(x, y, z) ((x) ^ (y) ^ (z))
+</span><span class="cp">#define I(x, y, z) ((y) ^ ((x) | (~z)))
+</span><span class="cp"></span>
+
+<span class="c1">// 使用inline和模板可以定义作:
+</span><span class="c1"></span><span class="k">namespace</span> <span class="n">MD5</span><span class="p">{</span>
+
+    <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+    <span class="kr">inline</span> <span class="n">T</span> <span class="n">F</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">,</span><span class="n">T</span> <span class="n">y</span><span class="p">,</span><span class="n">T</span> <span class="n">z</span><span class="p">){</span>
+        <span class="k">return</span> <span class="p">(((</span><span class="n">x</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="o">|</span> <span class="p">((</span><span class="o">~</span><span class="n">x</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+    <span class="p">}</span>
+    <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+    <span class="kr">inline</span> <span class="n">T</span> <span class="n">G</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">,</span><span class="n">T</span> <span class="n">y</span><span class="p">,</span><span class="n">T</span> <span class="n">z</span><span class="p">){</span>
+        <span class="k">return</span> <span class="p">(((</span><span class="n">x</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">z</span><span class="p">))</span> <span class="o">|</span> <span class="p">((</span><span class="n">y</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="n">z</span><span class="p">)));</span>
+    <span class="p">}</span>
+    <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+    <span class="kr">inline</span> <span class="n">T</span> <span class="n">H</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">,</span><span class="n">T</span> <span class="n">y</span><span class="p">,</span><span class="n">T</span> <span class="n">z</span><span class="p">){</span>
+        <span class="k">return</span> <span class="p">((</span><span class="n">x</span><span class="p">)</span> <span class="o">^</span> <span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">^</span> <span class="p">(</span><span class="n">z</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+    <span class="kr">inline</span> <span class="n">T</span> <span class="n">I</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">,</span><span class="n">T</span> <span class="n">y</span><span class="p">,</span><span class="n">T</span> <span class="n">z</span><span class="p">){</span>
+        <span class="k">return</span> <span class="p">((</span><span class="n">y</span><span class="p">)</span> <span class="o">^</span> <span class="p">((</span><span class="n">x</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="o">~</span><span class="n">z</span><span class="p">)));</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+<span class="c1">// 用法上几乎无异，但调试难度降低了一个级别
+</span><span class="c1">// 并且我们成功防止了命名空间污染
+</span><span class="c1">// 想一想全世界的程序员都把宏的名字定义成 F G H I 或者类似的名字会怎么样？
+</span><span class="c1">// Windows API提供的windows.h已经把max min定义成了宏，引起了许多问题
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="防止宏污染">防止宏污染</h3>
+<p>c++20添加了module机制。</p>
+<p>视乎并没有什么值得注意的，但有一个小小的highlight:通过import关键字导入一个模块不会引入这个模块定义的宏。</p>
+<p>听起来不错，是吧？</p>
+<p>但截至目前，各大构建系统对c++20 module的支持仍然不乐观。</p>
+<p>只能依靠程序员多做一点，来让这个世界变得更美好。</p>
+<p>DONE.</p>
+    </div>
+
+    
+    <div class="postFooter">
+        <p>Posted by MingMoe.</p>
+        <p>Last update Monday, February 21, 2022.</p>
+    </div>
+
+</div>
+
+
+        </main>
+        
+        
+        
+
+
+<aside class="mingSider">
+
+    <p>欢迎来到本站[]~（￣▽￣）~*</p>
+
+    
+    <div>
+        <iframe style="overflow: hidden;display: flex;width:100%" width="300" height="30" frameborder="0" scrolling="no" hspace="0" src="https://i.tianqi.com/index.php?c=code&id=34&icon=1"></iframe>
+    </div>
+
+    
+    <div>
+        <a class="twitter-timeline" data-lang="zh-cn" data-height="2048" href="https://twitter.com/ming_moe_?ref_src=twsrc%5Etfw"></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+
+</aside>
+    </div>
+
+    
+    
+
+<footer class="mingFooter">
+
+    <p>Powered by <a href="https://gohugo.io/">Hugo</a>.Copyright ©  2021 MingMoe.<br>
+
+    <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+        <img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+            知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议
+        </a>进行许可。
+
+    </p>
+
+</footer>
+
+</body>
+
+
+</html>
