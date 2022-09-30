@@ -170,14 +170,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">XXX</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="c"># 设置一些触发条件</span><span class="w">
-</span><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">workflow_run</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">workflows</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&#34;CI And CD&#34;</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span><span class="w">    </span><span class="nt">types</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="l">completed ]</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">XXX</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 设置一些触发条件</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">workflow_run</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">workflows</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&#34;CI And CD&#34;</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">types</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="l">completed ]</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>github<a href="https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#example-using-multiple-events-with-activity-types-or-configuration">官方文档</a>有叙述</p>
 <hr>
@@ -203,57 +203,53 @@
 </span><span class="lnt">17
 </span><span class="lnt">18
 </span><span class="lnt">19
-</span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Test Event Catch</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="c"># 在workflows &#34;CI And CD&#34;完成时触发这个workflow</span><span class="w">
-</span><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">workflow_run</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">workflows</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&#34;CI And CD&#34;</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span><span class="w">    </span><span class="nt">types</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="l">completed ]</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">update-badge</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span><span class="c"># 获取事件参数</span><span class="w">
-</span><span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="nt">pte_check_suite_url</span><span class="p">:</span><span class="w"> </span><span class="l">${{ github.event.workflow_run.check_suite_url }}</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Print event result</span><span class="w">
-</span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">echo ${pte_check_suite_url}</span><span class="w">
-</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Test Event Catch</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 在workflows &#34;CI And CD&#34;完成时触发这个workflow</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">workflow_run</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">workflows</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&#34;CI And CD&#34;</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">types</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="l">completed ]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">update-badge</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 获取事件参数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">pte_check_suite_url</span><span class="p">:</span><span class="w"> </span><span class="l">${{ github.event.workflow_run.check_suite_url }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Print event result</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">echo ${pte_check_suite_url}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>注意: github.event后不能直接获取事件的work load。还需要加上事件类型:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># 错误的做法</span><span class="w">
-</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">pte_check_suite_url</span><span class="p">:</span><span class="w"> </span><span class="l">${{ github.event.check_suite_url }}</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="c"># 正确的做法</span><span class="w">
-</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">pte_check_suite_url</span><span class="p">:</span><span class="w"> </span><span class="l">${{ github.event.workflow_run.check_suite_url }}</span><span class="w">
-</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 错误的做法</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">pte_check_suite_url</span><span class="p">:</span><span class="w"> </span><span class="l">${{ github.event.check_suite_url }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 正确的做法</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">pte_check_suite_url</span><span class="p">:</span><span class="w"> </span><span class="l">${{ github.event.workflow_run.check_suite_url }}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>关于事件所携带的数据和可以使用的事件，可以见GitHub 官方文档:</p>
 <p><a href="https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows">https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows</a></p>

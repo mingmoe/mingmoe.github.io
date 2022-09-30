@@ -161,8 +161,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"> $ cargo new hello_uefi
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"> $ cargo new hello_uefi
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>咱们还需要使用x86_64-unknown-uefi这个target。不过一般不需要安装。</p>
 <p>接着，咱们设置咱们的<code>cargo.toml</code>。</p>
@@ -187,23 +187,23 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">package</span><span class="p">]</span>
-<span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;hello_uefi&#34;</span>
-<span class="nx">version</span> <span class="p">=</span> <span class="s2">&#34;0.1.0&#34;</span>
-<span class="nx">edition</span> <span class="p">=</span> <span class="s2">&#34;2018&#34;</span>
-
-<span class="p">[</span><span class="nx">profile</span><span class="p">.</span><span class="nx">dev</span><span class="p">]</span>
-<span class="c"># 禁用栈展开</span>
-<span class="nx">panic</span> <span class="p">=</span> <span class="s2">&#34;abort&#34;</span>
-
-<span class="p">[</span><span class="nx">profile</span><span class="p">.</span><span class="nx">release</span><span class="p">]</span>
-<span class="c"># 同上</span>
-<span class="nx">panic</span> <span class="p">=</span> <span class="s2">&#34;abort&#34;</span>
-
-<span class="p">[</span><span class="nx">dependencies</span><span class="p">]</span>
-<span class="c"># 引入uefi</span>
-<span class="nx">uefi</span> <span class="p">=</span> <span class="s2">&#34;0.11.0&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">package</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;hello_uefi&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">version</span> <span class="p">=</span> <span class="s2">&#34;0.1.0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">edition</span> <span class="p">=</span> <span class="s2">&#34;2018&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">profile</span><span class="p">.</span><span class="nx">dev</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="c"># 禁用栈展开</span>
+</span></span><span class="line"><span class="cl"><span class="nx">panic</span> <span class="p">=</span> <span class="s2">&#34;abort&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">profile</span><span class="p">.</span><span class="nx">release</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="c"># 同上</span>
+</span></span><span class="line"><span class="cl"><span class="nx">panic</span> <span class="p">=</span> <span class="s2">&#34;abort&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">dependencies</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="c"># 引入uefi</span>
+</span></span><span class="line"><span class="cl"><span class="nx">uefi</span> <span class="p">=</span> <span class="s2">&#34;0.11.0&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后编写<code>main.rs</code></p>
 <div class="highlight"><div class="chroma">
@@ -250,47 +250,47 @@
 </span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="c1">// 禁用自带的东西
-</span><span class="c1">// 同时启用一些feature
-</span><span class="c1"></span><span class="cp">#![no_std]</span><span class="w">
-</span><span class="w"></span><span class="cp">#![no_main]</span><span class="w">
-</span><span class="w"></span><span class="cp">#![feature(abi_efiapi)]</span><span class="w">
-</span><span class="w"></span><span class="cp">#![feature(panic_info_message)]</span><span class="w">
-</span><span class="w"></span><span class="cp">#![feature(alloc_error_handler)]</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">core</span>::<span class="n">panic</span>::<span class="n">PanicInfo</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="k">extern</span><span class="w"> </span><span class="k">crate</span><span class="w"> </span><span class="n">alloc</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="c1">// 载入uefi定义
-</span><span class="c1"></span><span class="k">use</span><span class="w"> </span><span class="n">core</span>::<span class="n">fmt</span>::<span class="n">Write</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">uefi</span>::<span class="n">prelude</span>::<span class="o">*</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">uefi</span>::<span class="n">CStr16</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="c1">// 全局系统表
-</span><span class="c1"></span><span class="k">pub</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">IMAGE_HANDLE</span>: <span class="nb">Option</span><span class="o">&lt;</span><span class="n">Handle</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">None</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">IMAGE_SYSTEM_TABLE</span>: <span class="nb">Option</span><span class="o">&lt;</span><span class="n">SystemTable</span><span class="o">&lt;</span><span class="n">Boot</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">None</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="sd">/// 入口函数
-</span><span class="sd"></span><span class="cp">#[no_mangle]</span><span class="w">
-</span><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="k">fn</span> <span class="nf">efi_main</span><span class="p">(</span><span class="n">handle</span>: <span class="nc">Handle</span><span class="p">,</span><span class="w"> </span><span class="n">system_table</span>: <span class="nc">SystemTable</span><span class="o">&lt;</span><span class="n">Boot</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">Status</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">    </span><span class="c1">// 初始化全局变量
-</span><span class="c1"></span><span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">        </span><span class="n">IMAGE_HANDLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span><span class="w">
-</span><span class="w">        </span><span class="n">IMAGE_SYSTEM_TABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">system_table</span><span class="p">);</span><span class="w">
-</span><span class="w">    </span><span class="p">}</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span><span class="c1">// 什么都不干
-</span><span class="c1"></span><span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{}</span><span class="w">
-</span><span class="w"></span><span class="p">}</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="sd">/// panic擦屁股函数
-</span><span class="sd"></span><span class="cp">#[panic_handler]</span><span class="w">
-</span><span class="w"></span><span class="k">fn</span> <span class="nf">panic</span><span class="p">(</span><span class="n">panic_info</span>: <span class="kp">&amp;</span><span class="nc">PanicInfo</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="o">!</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">    </span><span class="c1">// 什么都不干
-</span><span class="c1"></span><span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{}</span><span class="w">
-</span><span class="w"></span><span class="p">}</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="c1">// 禁用自带的东西
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 同时启用一些feature
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#![no_std]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cp">#![no_main]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cp">#![feature(abi_efiapi)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cp">#![feature(panic_info_message)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cp">#![feature(alloc_error_handler)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">core</span>::<span class="n">panic</span>::<span class="n">PanicInfo</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">extern</span><span class="w"> </span><span class="k">crate</span><span class="w"> </span><span class="n">alloc</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 载入uefi定义
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">use</span><span class="w"> </span><span class="n">core</span>::<span class="n">fmt</span>::<span class="n">Write</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">uefi</span>::<span class="n">prelude</span>::<span class="o">*</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">uefi</span>::<span class="n">CStr16</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 全局系统表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">pub</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">IMAGE_HANDLE</span>: <span class="nb">Option</span><span class="o">&lt;</span><span class="n">Handle</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">None</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">IMAGE_SYSTEM_TABLE</span>: <span class="nb">Option</span><span class="o">&lt;</span><span class="n">SystemTable</span><span class="o">&lt;</span><span class="n">Boot</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">None</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="sd">/// 入口函数
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="cp">#[no_mangle]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="k">fn</span> <span class="nf">efi_main</span><span class="p">(</span><span class="n">handle</span>: <span class="nc">Handle</span><span class="p">,</span><span class="w"> </span><span class="n">system_table</span>: <span class="nc">SystemTable</span><span class="o">&lt;</span><span class="n">Boot</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">Status</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 初始化全局变量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">IMAGE_HANDLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">IMAGE_SYSTEM_TABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">system_table</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 什么都不干
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="sd">/// panic擦屁股函数
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="cp">#[panic_handler]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">panic</span><span class="p">(</span><span class="n">panic_info</span>: <span class="kp">&amp;</span><span class="nc">PanicInfo</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="o">!</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 什么都不干
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>因为我们使用了特殊的target，所以我们需要自己构建标准库等基础措施。</p>
 <p>还需要compiler_builtins提供的一些列操作内存的函数。</p>
@@ -300,8 +300,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">cargo build --target<span class="o">=</span>x86_64-unknown-uefi -Z build-std<span class="o">=</span>core,compiler_builtins,alloc -Z build-std-features<span class="o">=</span>compiler-builtins-mem
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cargo build --target<span class="o">=</span>x86_64-unknown-uefi -Z build-std<span class="o">=</span>core,compiler_builtins,alloc -Z build-std-features<span class="o">=</span>compiler-builtins-mem
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>接下来，我们应该就可以编译我们的第一个uefi程序了！</p>
 <p>不出所料，我们应该得到了一个错误:</p>
@@ -357,44 +357,44 @@
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="k">use</span><span class="w"> </span><span class="n">core</span>::<span class="n">alloc</span>::<span class="p">{</span><span class="n">GlobalAlloc</span><span class="p">,</span><span class="w"> </span><span class="n">Layout</span><span class="p">};</span><span class="w">
-</span><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">uefi</span>::<span class="n">table</span>::<span class="n">boot</span>::<span class="n">MemoryType</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="sd">/// UEfi内存分配器
-</span><span class="sd"></span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">UefiAllocator</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="sd">/// 实现内存分配器
-</span><span class="sd"></span><span class="k">unsafe</span><span class="w"> </span><span class="k">impl</span><span class="w"> </span><span class="n">GlobalAlloc</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">UefiAllocator</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="k">fn</span> <span class="nf">alloc</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">layout</span>: <span class="nc">Layout</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="o">*</span><span class="k">mut</span><span class="w"> </span><span class="kt">u8</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">boot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IMAGE_SYSTEM_TABLE</span><span class="p">.</span><span class="n">as_ref</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">boot_services</span><span class="p">();</span><span class="w">
-</span><span class="w">
-</span><span class="w">        </span><span class="c1">// 内存类型为LOADER_DATA(即数据)
-</span><span class="c1"></span><span class="w">        </span><span class="n">boot</span><span class="p">.</span><span class="n">allocate_pool</span><span class="p">(</span><span class="n">MemoryType</span>::<span class="n">LOADER_DATA</span><span class="p">,</span><span class="w"> </span><span class="n">layout</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w">
-</span><span class="w">            </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span><span class="w">
-</span><span class="w">            </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span><span class="w">
-</span><span class="w">    </span><span class="p">}</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="k">fn</span> <span class="nf">dealloc</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">ptr</span>: <span class="o">*</span><span class="k">mut</span><span class="w"> </span><span class="kt">u8</span><span class="p">,</span><span class="w"> </span><span class="n">_layout</span>: <span class="nc">Layout</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">boot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IMAGE_SYSTEM_TABLE</span><span class="p">.</span><span class="n">as_ref</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">boot_services</span><span class="p">();</span><span class="w">
-</span><span class="w">
-</span><span class="w">        </span><span class="n">boot</span><span class="p">.</span><span class="n">free_pool</span><span class="p">(</span><span class="n">ptr</span><span class="p">).</span><span class="n">unwrap</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
-</span><span class="w">    </span><span class="p">}</span><span class="w">
-</span><span class="w"></span><span class="p">}</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="sd">/// 设置内存分配器
-</span><span class="sd"></span><span class="cp">#[global_allocator]</span><span class="w">
-</span><span class="w"></span><span class="k">static</span><span class="w"> </span><span class="n">GLOBAL</span>: <span class="nc">UefiAllocator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UefiAllocator</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="sd">/// 设置分配error处理函数
-</span><span class="sd"></span><span class="cp">#[alloc_error_handler]</span><span class="w">
-</span><span class="w"></span><span class="k">fn</span> <span class="nf">alloc_error_catch</span><span class="p">(</span><span class="n">layout</span>: <span class="nc">core</span>::<span class="n">alloc</span>::<span class="n">Layout</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="o">!</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">    </span><span class="fm">panic!</span><span class="p">(</span><span class="w">
-</span><span class="w">        </span><span class="s">&#34;Couldn&#39;t alloc memory! Size:{0} Align:{1}&#34;</span><span class="p">,</span><span class="w">
-</span><span class="w">        </span><span class="n">layout</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="w">
-</span><span class="w">        </span><span class="n">layout</span><span class="p">.</span><span class="n">align</span><span class="p">()</span><span class="w">
-</span><span class="w">    </span><span class="p">);</span><span class="w">
-</span><span class="w"></span><span class="p">}</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">core</span>::<span class="n">alloc</span>::<span class="p">{</span><span class="n">GlobalAlloc</span><span class="p">,</span><span class="w"> </span><span class="n">Layout</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">uefi</span>::<span class="n">table</span>::<span class="n">boot</span>::<span class="n">MemoryType</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="sd">/// UEfi内存分配器
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">UefiAllocator</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="sd">/// 实现内存分配器
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="k">unsafe</span><span class="w"> </span><span class="k">impl</span><span class="w"> </span><span class="n">GlobalAlloc</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">UefiAllocator</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="k">fn</span> <span class="nf">alloc</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">layout</span>: <span class="nc">Layout</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="o">*</span><span class="k">mut</span><span class="w"> </span><span class="kt">u8</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">boot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IMAGE_SYSTEM_TABLE</span><span class="p">.</span><span class="n">as_ref</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">boot_services</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 内存类型为LOADER_DATA(即数据)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">        </span><span class="n">boot</span><span class="p">.</span><span class="n">allocate_pool</span><span class="p">(</span><span class="n">MemoryType</span>::<span class="n">LOADER_DATA</span><span class="p">,</span><span class="w"> </span><span class="n">layout</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="k">fn</span> <span class="nf">dealloc</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">ptr</span>: <span class="o">*</span><span class="k">mut</span><span class="w"> </span><span class="kt">u8</span><span class="p">,</span><span class="w"> </span><span class="n">_layout</span>: <span class="nc">Layout</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">boot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IMAGE_SYSTEM_TABLE</span><span class="p">.</span><span class="n">as_ref</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">boot_services</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">boot</span><span class="p">.</span><span class="n">free_pool</span><span class="p">(</span><span class="n">ptr</span><span class="p">).</span><span class="n">unwrap</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="sd">/// 设置内存分配器
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="cp">#[global_allocator]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">static</span><span class="w"> </span><span class="n">GLOBAL</span>: <span class="nc">UefiAllocator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UefiAllocator</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="sd">/// 设置分配error处理函数
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="cp">#[alloc_error_handler]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">alloc_error_catch</span><span class="p">(</span><span class="n">layout</span>: <span class="nc">core</span>::<span class="n">alloc</span>::<span class="n">Layout</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="o">!</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">panic!</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;Couldn&#39;t alloc memory! Size:{0} Align:{1}&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">layout</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">layout</span><span class="p">.</span><span class="n">align</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>UEFI中的allocate_pool()内存以8字节对齐，我们不需要再关心此事（8字节是rust的最大对齐）。</p>
 <p>我们现在应该可以顺利通过编译。</p>
@@ -405,8 +405,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"> $ cargo install uefi-run
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"> $ cargo install uefi-run
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>用法也很简单:</p>
 <div class="highlight"><div class="chroma">
@@ -414,8 +414,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"> $ uefi-run -b 你的OVMF.fd所在的地址  -q 你的qemu可执行文件的地址，通常是qemu-system-x86_64  你的ELF文件所在的地址 -- 你的QEMU参数列表...
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"> $ uefi-run -b 你的OVMF.fd所在的地址  -q 你的qemu可执行文件的地址，通常是qemu-system-x86_64  你的ELF文件所在的地址 -- 你的QEMU参数列表...
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>OVMF.fd可以从一些Linux发行版的包管理器中找到。
 也可以从<a href="https://github.com/tianocore/tianocore.github.io/wiki/OVMF">这里</a>找到一些有用的信息。</p>
@@ -474,56 +474,56 @@
 </span><span class="lnt">49
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="sd">/// 读取文件
-</span><span class="sd">/// 
-</span><span class="sd">/// 返回读取到的文件的内容
-</span><span class="sd"></span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">read_file</span><span class="p">(</span><span class="n">path</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">        </span><span class="c1">// 获取引导服务
-</span><span class="c1"></span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">boot_services</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IMAGE_SYSTEM_TABLE</span><span class="p">.</span><span class="n">as_mut</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">boot_services</span><span class="p">();</span><span class="w">
-</span><span class="w">
-</span><span class="w">        </span><span class="c1">// 获取fs服务
-</span><span class="c1"></span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">boot_services</span><span class="p">.</span><span class="n">locate_protocol</span>::<span class="o">&lt;</span><span class="n">SimpleFileSystem</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">            </span><span class="nb">Ok</span><span class="p">(</span><span class="n">some</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">some</span><span class="p">.</span><span class="n">unwrap</span><span class="p">().</span><span class="n">get</span><span class="p">(),</span><span class="w">
-</span><span class="w">
-</span><span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="n">_err</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">panic!</span><span class="p">(</span><span class="s">&#34;Load SimpleFileSystem failed down!&#34;</span><span class="p">),</span><span class="w">
-</span><span class="w">        </span><span class="p">};</span><span class="w">
-</span><span class="w">
-</span><span class="w">        </span><span class="k">crate</span>::<span class="n">tool</span>::<span class="n">print_fmt</span><span class="p">(</span><span class="fm">format_args!</span><span class="p">(</span><span class="s">&#34;Get fs done.\n&#34;</span><span class="p">));</span><span class="w">
-</span><span class="w">
-</span><span class="w">        </span><span class="c1">// 打开文件
-</span><span class="c1"></span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">dic</span>: <span class="nc">Directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fs</span><span class="p">.</span><span class="n">as_mut</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">open_volume</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
-</span><span class="w">
-</span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dic</span><span class="w">
-</span><span class="w">            </span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="n">FileMode</span>::<span class="n">Read</span><span class="p">,</span><span class="w"> </span><span class="n">FileAttribute</span>::<span class="n">empty</span><span class="p">())</span><span class="w">
-</span><span class="w">            </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span><span class="w">
-</span><span class="w">            </span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
-</span><span class="w">
-</span><span class="w">        </span><span class="c1">// 读取文件
-</span><span class="c1"></span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="n">FileType</span>::<span class="n">Regular</span><span class="p">(</span><span class="k">mut</span><span class="w"> </span><span class="n">reader</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">into_type</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">unwrap</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">            </span><span class="c1">// 获取文件大小
-</span><span class="c1"></span><span class="w">            </span><span class="c1">// 设置缓冲区...
-</span><span class="c1"></span><span class="w">            </span><span class="c1">// 应该不会溢出
-</span><span class="c1"></span><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">info_buffer</span>: <span class="p">[</span><span class="kt">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">512</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="k">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">512</span><span class="p">];</span><span class="w">
-</span><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="n">file_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="w">
-</span><span class="w">                </span><span class="p">.</span><span class="n">get_info</span>::<span class="o">&lt;</span><span class="n">FileInfo</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">info_buffer</span><span class="p">)</span><span class="w">
-</span><span class="w">                </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span><span class="w">
-</span><span class="w">                </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span><span class="w">
-</span><span class="w">                </span><span class="p">.</span><span class="n">file_size</span><span class="p">();</span><span class="w">
-</span><span class="w">
-</span><span class="w">            </span><span class="c1">// 读进缓冲区
-</span><span class="c1"></span><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">text_buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mi">0</span><span class="k">u8</span><span class="p">;</span><span class="w"> </span><span class="n">file_size</span><span class="p">.</span><span class="n">try_into</span><span class="p">().</span><span class="n">unwrap</span><span class="p">()].</span><span class="n">into_boxed_slice</span><span class="p">();</span><span class="w">
-</span><span class="w">
-</span><span class="w">            </span><span class="n">reader</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">text_buffer</span><span class="p">).</span><span class="n">unwrap</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
-</span><span class="w">
-</span><span class="w">            </span><span class="c1">// 转换为字符串
-</span><span class="c1"></span><span class="w">            </span><span class="p">(</span><span class="o">&amp;</span><span class="n">text_buffer</span><span class="p">).</span><span class="n">to_vec</span><span class="p">()</span><span class="w">
-</span><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">            </span><span class="fm">panic!</span><span class="p">(</span><span class="s">&#34;Filed to open file. Look like a Directory&#34;</span><span class="p">);</span><span class="w">
-</span><span class="w">        </span><span class="p">}</span><span class="w">
-</span><span class="w">    </span><span class="p">}</span><span class="w">
-</span><span class="w"></span><span class="p">}</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="sd">/// 读取文件
+</span></span></span><span class="line"><span class="cl"><span class="sd">/// 
+</span></span></span><span class="line"><span class="cl"><span class="sd">/// 返回读取到的文件的内容
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">read_file</span><span class="p">(</span><span class="n">path</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 获取引导服务
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">boot_services</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IMAGE_SYSTEM_TABLE</span><span class="p">.</span><span class="n">as_mut</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">boot_services</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 获取fs服务
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">boot_services</span><span class="p">.</span><span class="n">locate_protocol</span>::<span class="o">&lt;</span><span class="n">SimpleFileSystem</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nb">Ok</span><span class="p">(</span><span class="n">some</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">some</span><span class="p">.</span><span class="n">unwrap</span><span class="p">().</span><span class="n">get</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="n">_err</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">panic!</span><span class="p">(</span><span class="s">&#34;Load SimpleFileSystem failed down!&#34;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">crate</span>::<span class="n">tool</span>::<span class="n">print_fmt</span><span class="p">(</span><span class="fm">format_args!</span><span class="p">(</span><span class="s">&#34;Get fs done.\n&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 打开文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">dic</span>: <span class="nc">Directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fs</span><span class="p">.</span><span class="n">as_mut</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">open_volume</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dic</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="n">FileMode</span>::<span class="n">Read</span><span class="p">,</span><span class="w"> </span><span class="n">FileAttribute</span>::<span class="n">empty</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 读取文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="n">FileType</span>::<span class="n">Regular</span><span class="p">(</span><span class="k">mut</span><span class="w"> </span><span class="n">reader</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">into_type</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">unwrap</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// 获取文件大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">            </span><span class="c1">// 设置缓冲区...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">            </span><span class="c1">// 应该不会溢出
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">info_buffer</span>: <span class="p">[</span><span class="kt">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">512</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="k">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">512</span><span class="p">];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="n">file_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="n">get_info</span>::<span class="o">&lt;</span><span class="n">FileInfo</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">info_buffer</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="n">file_size</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// 读进缓冲区
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">text_buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mi">0</span><span class="k">u8</span><span class="p">;</span><span class="w"> </span><span class="n">file_size</span><span class="p">.</span><span class="n">try_into</span><span class="p">().</span><span class="n">unwrap</span><span class="p">()].</span><span class="n">into_boxed_slice</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">reader</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">text_buffer</span><span class="p">).</span><span class="n">unwrap</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// 转换为字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">            </span><span class="p">(</span><span class="o">&amp;</span><span class="n">text_buffer</span><span class="p">).</span><span class="n">to_vec</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="fm">panic!</span><span class="p">(</span><span class="s">&#34;Filed to open file. Look like a Directory&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>emmm&hellip;DONE OT TODO</p>
     </div>

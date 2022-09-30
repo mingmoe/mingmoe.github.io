@@ -5,7 +5,7 @@
 
 
 <head>
-	<meta name="generator" content="Hugo 0.92.2" />
+	<meta name="generator" content="Hugo 0.99.1" />
     
     <meta charset="utf-8">
 
@@ -145,6 +145,32 @@
     
     <div class="description">
         
+        <p><span>Saturday, September 24, 2022</span><span> | <a href="/tags/%E6%97%A5%E8%AE%B0">日记</a></span></p>
+    </div>
+
+    
+    <div class="title">
+        <h1>最后的通牒</h1>
+    </div>
+
+    
+    <div class="excerptContent">
+        <p>对三明二中最后的通牒。</p>
+    </div>
+
+    
+    <div class="readMore">
+        <a href="https://blog.kawayi.moe/2022/september/saturday/%E6%9C%80%E5%90%8E%E7%9A%84%E9%80%9A%E7%89%92/">Read More &lt;(￣︶￣)↗[GO!]</a>
+    </div>
+
+</article>
+
+
+<article class="mingIndexItem">
+
+    
+    <div class="description">
+        
         <p><span>Monday, February 21, 2022</span><span> | <a href="/tags/c&#43;&#43;">c&#43;&#43;</a></span></p>
     </div>
 
@@ -274,86 +300,6 @@
     
     <div class="readMore">
         <a href="https://blog.kawayi.moe/2021/october/sunday/gradle%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E6%80%BB%E7%BB%93/">Read More &lt;(￣︶￣)↗[GO!]</a>
-    </div>
-
-</article>
-
-
-<article class="mingIndexItem">
-
-    
-    <div class="description">
-        
-        <p><span>Saturday, October 23, 2021</span><span> | <a href="/tags/netty">netty</a></span><span> | <a href="/tags/java">java</a></span></p>
-    </div>
-
-    
-    <div class="title">
-        <h1>Netty Channel Init的handler添加顺序对程序的影响</h1>
-    </div>
-
-    
-    <div class="excerptContent">
-        <!--TODO-->
-<p>今天在研究netty的时候，碰到了一个channel init的问题:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">NettyChannelInit</span> <span class="kd">extends</span> <span class="n">ChannelInitializer</span><span class="o">&lt;</span><span class="n">NioSocketChannel</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">initChannel</span><span class="o">(</span><span class="n">NioSocketChannel</span>  <span class="n">socketChannel</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-        <span class="n">var</span> <span class="n">pipeline</span> <span class="o">=</span> <span class="n">socketChannel</span><span class="o">.</span><span class="na">pipeline</span><span class="o">();</span>
-        <span class="n">pipeline</span>
-                <span class="c1">// 添加一个拆包器 (input)
-</span><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet length parser&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">LengthFieldBasedFrameDecoder</span><span class="o">(</span>
-                        <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">,</span>
-                        <span class="n">0</span><span class="o">,</span>
-                        <span class="n">4</span><span class="o">,</span>
-                        <span class="n">0</span><span class="o">,</span>
-                        <span class="c1">// 丢弃长度
-</span><span class="c1"></span>                        <span class="n">4</span>
-                <span class="o">))</span>
-                <span class="c1">// 添加一个包分类器 (input)
-</span><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet classifier&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PacketClassifier</span><span class="o">())</span>
-                <span class="c1">// 添加一些实际处理包的handle (input &amp;&amp; output)
-</span><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet ping handle&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PingPacketHandle</span><span class="o">())</span>
-                <span class="c1">// 添加一个输出解码器 (output)
-</span><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;output encoder&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PacketEncoder</span><span class="o">())</span>
-                <span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>这段代码的依据 input-process-output 的handler逻辑顺序（即解码输入handler-逻辑handler-编码输出handler）来添加handler。这将会错误的工作。</p>
-    </div>
-
-    
-    <div class="readMore">
-        <a href="https://blog.kawayi.moe/2021/october/saturday/netty-channel-init%E7%9A%84handler%E6%B7%BB%E5%8A%A0%E9%A1%BA%E5%BA%8F%E5%AF%B9%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BD%B1%E5%93%8D/">Read More &lt;(￣︶￣)↗[GO!]</a>
     </div>
 
 </article>

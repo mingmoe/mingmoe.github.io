@@ -198,42 +198,42 @@ Gradle代码片段总结
 </span><span class="lnt">35
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="c1">// 声明
-</span><span class="c1"></span><span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">&#34;allJavadoc&#34;</span><span class="o">,</span><span class="n">Javadoc</span><span class="o">)</span>
-<span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">&#34;allJavaSourceJar&#34;</span><span class="o">,</span><span class="n">Jar</span><span class="o">)</span>
-<span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">&#34;allJavadocJar&#34;</span><span class="o">,</span><span class="n">Jar</span><span class="o">)</span>
-
-<span class="c1">// 解析项目过后的设置
-</span><span class="c1"></span><span class="n">gradle</span><span class="o">.</span><span class="na">projectsEvaluated</span> <span class="o">{</span>
-    <span class="n">gradle</span> <span class="o">-&gt;</span>
-        <span class="o">{</span>
-            <span class="c1">// 生成所有子项目的javadoc到同一个目录
-</span><span class="c1"></span>            <span class="n">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="s2">&#34;allJavadoc&#34;</span><span class="o">,</span><span class="n">Javadoc</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">description</span> <span class="s2">&#34;Collect all subproject javadoc into one directory&#34;</span>
-
-                <span class="n">it</span><span class="o">.</span><span class="na">source</span> <span class="n">subprojects</span><span class="o">.</span><span class="na">collect</span> <span class="o">{</span> <span class="n">project</span> <span class="o">-&gt;</span> <span class="n">project</span><span class="o">.</span><span class="na">sourceSets</span><span class="o">.</span><span class="na">main</span><span class="o">.</span><span class="na">allJava</span> <span class="o">}</span>
-
-                <span class="n">it</span><span class="o">.</span><span class="na">classpath</span> <span class="o">=</span> <span class="n">files</span><span class="o">(</span><span class="n">subprojects</span><span class="o">.</span><span class="na">collect</span> <span class="o">{</span> <span class="n">project</span> <span class="o">-&gt;</span> <span class="n">project</span><span class="o">.</span><span class="na">sourceSets</span><span class="o">.</span><span class="na">main</span><span class="o">.</span><span class="na">compileClasspath</span> <span class="o">})</span>
-            <span class="o">}</span>
-            <span class="c1">// 生成所有子项目的源代码的jar
-</span><span class="c1"></span>            <span class="n">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="s2">&#34;allJavaSourceJar&#34;</span><span class="o">,</span><span class="n">Jar</span><span class="o">){</span>
-                <span class="n">description</span> <span class="s2">&#34;Collect all subproject source code into one jar&#34;</span>
-
-                <span class="n">it</span><span class="o">.</span><span class="na">dependsOn</span><span class="o">(</span><span class="n">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="s2">&#34;classes&#34;</span><span class="o">))</span>
-
-                <span class="n">it</span><span class="o">.</span><span class="na">from</span> <span class="n">subprojects</span><span class="o">.</span><span class="na">collect</span> <span class="o">{</span> <span class="n">project</span> <span class="o">-&gt;</span> <span class="n">project</span><span class="o">.</span><span class="na">sourceSets</span><span class="o">.</span><span class="na">main</span><span class="o">.</span><span class="na">allSource</span> <span class="o">}</span>
-            <span class="o">}</span>
-            <span class="c1">// 生成所有子项目的javadoc的jar
-</span><span class="c1"></span>            <span class="n">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="s2">&#34;allJavadocJar&#34;</span><span class="o">,</span><span class="n">Jar</span><span class="o">){</span>
-                <span class="n">description</span> <span class="s2">&#34;Collect all subproject javadoc into one jar&#34;</span>
-
-                <span class="n">it</span><span class="o">.</span><span class="na">dependsOn</span><span class="o">(</span><span class="n">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="s2">&#34;allJavadoc&#34;</span><span class="o">))</span>
-
-                <span class="n">it</span><span class="o">.</span><span class="na">from</span> <span class="s2">&#34;${rootProject.rootDir.toString()}/${javadocReleasePath.toString()}&#34;</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="c1">// 声明
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">&#34;allJavadoc&#34;</span><span class="o">,</span><span class="n">Javadoc</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">&#34;allJavaSourceJar&#34;</span><span class="o">,</span><span class="n">Jar</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">&#34;allJavadocJar&#34;</span><span class="o">,</span><span class="n">Jar</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 解析项目过后的设置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">gradle</span><span class="o">.</span><span class="na">projectsEvaluated</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gradle</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 生成所有子项目的javadoc到同一个目录
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="s2">&#34;allJavadoc&#34;</span><span class="o">,</span><span class="n">Javadoc</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">description</span> <span class="s2">&#34;Collect all subproject javadoc into one directory&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">it</span><span class="o">.</span><span class="na">source</span> <span class="n">subprojects</span><span class="o">.</span><span class="na">collect</span> <span class="o">{</span> <span class="n">project</span> <span class="o">-&gt;</span> <span class="n">project</span><span class="o">.</span><span class="na">sourceSets</span><span class="o">.</span><span class="na">main</span><span class="o">.</span><span class="na">allJava</span> <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">it</span><span class="o">.</span><span class="na">classpath</span> <span class="o">=</span> <span class="n">files</span><span class="o">(</span><span class="n">subprojects</span><span class="o">.</span><span class="na">collect</span> <span class="o">{</span> <span class="n">project</span> <span class="o">-&gt;</span> <span class="n">project</span><span class="o">.</span><span class="na">sourceSets</span><span class="o">.</span><span class="na">main</span><span class="o">.</span><span class="na">compileClasspath</span> <span class="o">})</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 生成所有子项目的源代码的jar
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="s2">&#34;allJavaSourceJar&#34;</span><span class="o">,</span><span class="n">Jar</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">                <span class="n">description</span> <span class="s2">&#34;Collect all subproject source code into one jar&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">it</span><span class="o">.</span><span class="na">dependsOn</span><span class="o">(</span><span class="n">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="s2">&#34;classes&#34;</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">it</span><span class="o">.</span><span class="na">from</span> <span class="n">subprojects</span><span class="o">.</span><span class="na">collect</span> <span class="o">{</span> <span class="n">project</span> <span class="o">-&gt;</span> <span class="n">project</span><span class="o">.</span><span class="na">sourceSets</span><span class="o">.</span><span class="na">main</span><span class="o">.</span><span class="na">allSource</span> <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 生成所有子项目的javadoc的jar
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="s2">&#34;allJavadocJar&#34;</span><span class="o">,</span><span class="n">Jar</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">                <span class="n">description</span> <span class="s2">&#34;Collect all subproject javadoc into one jar&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">it</span><span class="o">.</span><span class="na">dependsOn</span><span class="o">(</span><span class="n">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="s2">&#34;allJavadoc&#34;</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">it</span><span class="o">.</span><span class="na">from</span> <span class="s2">&#34;${rootProject.rootDir.toString()}/${javadocReleasePath.toString()}&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果子项目要依赖这些任务，可以以此形式调用:</p>
 <div class="highlight"><div class="chroma">
@@ -243,10 +243,10 @@ Gradle代码片段总结
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="s2">&#34;test&#34;</span><span class="o">){</span>
-    <span class="n">dependsOn</span> <span class="n">rootProject</span><span class="o">.</span><span class="na">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="s2">&#34;allJavaSourceJar&#34;</span><span class="o">)</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="s2">&#34;test&#34;</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dependsOn</span> <span class="n">rootProject</span><span class="o">.</span><span class="na">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="s2">&#34;allJavaSourceJar&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>ref:</code> <a href="https://stackoverflow.com/questions/63287292/how-to-combine-multiple-javadoc-into-one-using-gradle">https://stackoverflow.com/questions/63287292/how-to-combine-multiple-javadoc-into-one-using-gradle</a></p>
 <p><code>ref:</code> <a href="https://www.heqiangfly.com/2016/03/18/development-tool-gradle-lifecycle/">https://www.heqiangfly.com/2016/03/18/development-tool-gradle-lifecycle/</a></p>

@@ -3,27 +3,36 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.kawayi.moe/archives/2022/</loc>
-    <lastmod>2022-02-21T20:38:05+08:00</lastmod>
+    <lastmod>2022-09-24T17:53:33+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/archives/</loc>
-    <lastmod>2022-02-21T20:38:05+08:00</lastmod>
+    <lastmod>2022-09-24T17:53:33+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/categories/</loc>
+    <lastmod>2022-09-24T17:53:33+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/</loc>
+    <lastmod>2022-09-24T17:53:33+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/post/</loc>
+    <lastmod>2022-09-24T17:53:33+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/tags/</loc>
+    <lastmod>2022-09-24T17:53:33+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/tags/%E6%97%A5%E8%AE%B0/</loc>
+    <lastmod>2022-09-24T17:53:33+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/categories/%E6%97%A5%E8%AE%B0/</loc>
+    <lastmod>2022-09-24T17:53:33+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.kawayi.moe/2022/september/saturday/%E6%9C%80%E5%90%8E%E7%9A%84%E9%80%9A%E7%89%92/</loc>
+    <lastmod>2022-09-24T17:53:33+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/tags/c&#43;&#43;/</loc>
     <lastmod>2022-02-21T20:38:05+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/categories/c&#43;&#43;/</loc>
-    <lastmod>2022-02-21T20:38:05+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.kawayi.moe/categories/</loc>
-    <lastmod>2022-02-21T20:38:05+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.kawayi.moe/</loc>
-    <lastmod>2022-02-21T20:38:05+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.kawayi.moe/post/</loc>
-    <lastmod>2022-02-21T20:38:05+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.kawayi.moe/tags/</loc>
     <lastmod>2022-02-21T20:38:05+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/2022/february/monday/%E4%BD%BF%E7%94%A8c-%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7%E6%9D%A5%E6%9B%BF%E4%BB%A3%E5%AE%8F/</loc>
@@ -87,12 +96,6 @@
     <lastmod>2021-10-11T19:53:17+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/2021/july/saturday/%E4%BB%8A%E6%97%A5%E4%BB%BD%E6%97%A5%E8%AE%B0-uuid/guid%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%93%81guuid/</loc>
-    <lastmod>2021-07-24T12:21:35+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.kawayi.moe/tags/%E6%97%A5%E8%AE%B0/</loc>
-    <lastmod>2021-07-24T12:21:35+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.kawayi.moe/categories/%E6%97%A5%E8%AE%B0/</loc>
     <lastmod>2021-07-24T12:21:35+08:00</lastmod>
   </url><url>
     <loc>https://blog.kawayi.moe/tags/rust/</loc>

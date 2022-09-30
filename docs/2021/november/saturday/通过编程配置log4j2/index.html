@@ -168,16 +168,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">Configurator</span><span class="o">.</span><span class="na">initialize</span><span class="o">(</span>
-    <span class="n">ClassLoader</span><span class="o">.</span><span class="na">getSystemClassLoader</span><span class="o">(),</span>
-    <span class="n">configuration</span>
-<span class="o">);</span>
-
-<span class="n">Configurator</span><span class="o">.</span><span class="na">initialize</span><span class="o">(</span>
-    <span class="n">configuration</span>
-<span class="o">);</span>
-<span class="c1">// 缺一不可
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Configurator</span><span class="o">.</span><span class="na">initialize</span><span class="o">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ClassLoader</span><span class="o">.</span><span class="na">getSystemClassLoader</span><span class="o">(),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">configuration</span>
+</span></span><span class="line"><span class="cl"><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Configurator</span><span class="o">.</span><span class="na">initialize</span><span class="o">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">configuration</span>
+</span></span><span class="line"><span class="cl"><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 缺一不可
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果观察<code>LogManager.getLogger(Class&lt;?&gt;)</code>，会发现其调用的是<code>getContext(cls.getClassLoader(), false).getLogger(cls);</code>。</p>
 <div class="highlight"><div class="chroma">
@@ -189,12 +189,12 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="n">Logger</span> <span class="nf">getLogger</span><span class="o">(</span><span class="kd">final</span> <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">final</span> <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">cls</span> <span class="o">=</span> <span class="n">callerClass</span><span class="o">(</span><span class="n">clazz</span><span class="o">);</span>
-    <span class="c1">// note this:     ↓
-</span><span class="c1"></span>    <span class="k">return</span> <span class="n">getContext</span><span class="o">(</span><span class="n">cls</span><span class="o">.</span><span class="na">getClassLoader</span><span class="o">(),</span> <span class="kc">false</span><span class="o">).</span><span class="na">getLogger</span><span class="o">(</span><span class="n">cls</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="n">Logger</span> <span class="nf">getLogger</span><span class="o">(</span><span class="kd">final</span> <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">cls</span> <span class="o">=</span> <span class="n">callerClass</span><span class="o">(</span><span class="n">clazz</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// note this:     ↓
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">getContext</span><span class="o">(</span><span class="n">cls</span><span class="o">.</span><span class="na">getClassLoader</span><span class="o">(),</span> <span class="kc">false</span><span class="o">).</span><span class="na">getLogger</span><span class="o">(</span><span class="n">cls</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>对比之下的<code>LogManager.getLogger(String)</code></p>
 <div class="highlight"><div class="chroma">
@@ -205,11 +205,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="n">Logger</span> <span class="nf">getLogger</span><span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// note this:         ↓
-</span><span class="c1"></span>        <span class="k">return</span> <span class="n">name</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">getContext</span><span class="o">(</span><span class="kc">false</span><span class="o">).</span><span class="na">getLogger</span><span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="o">:</span> <span class="n">getLogger</span><span class="o">(</span><span class="n">StackLocatorUtil</span><span class="o">.</span><span class="na">getCallerClass</span><span class="o">(</span><span class="n">2</span><span class="o">));</span>
-    <span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="n">Logger</span> <span class="nf">getLogger</span><span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// note this:         ↓
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="n">name</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">getContext</span><span class="o">(</span><span class="kc">false</span><span class="o">).</span><span class="na">getLogger</span><span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="o">:</span> <span class="n">getLogger</span><span class="o">(</span><span class="n">StackLocatorUtil</span><span class="o">.</span><span class="na">getCallerClass</span><span class="o">(</span><span class="n">2</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果使用<code>LogManager.getLogger(String)</code>这个函数，那么loader将会是null(对比之下，<code>LogManager.getLogger(Class&lt;?&gt;)</code>使用<code>cls.getClassLoader()</code>获取了loader)。可能会有一条可疑的警告信息:
 <code>WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.</code>

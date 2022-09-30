@@ -172,17 +172,17 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#include</span> <span class="cpf">&lt;source_location&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="kt">void</span> <span class="nf">test</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">source_location</span><span class="o">&amp;</span> <span class="n">location</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">source_location</span><span class="o">::</span><span class="n">current</span><span class="p">()){</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;at &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">local</span><span class="p">.</span><span class="n">file_name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;:&#34;</span> <span class="o">&lt;&lt;</span><span class="n">local</span><span class="p">.</span><span class="n">line</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="n">test</span><span class="p">()</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;source_location&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">source_location</span><span class="o">&amp;</span> <span class="n">location</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">source_location</span><span class="o">::</span><span class="n">current</span><span class="p">()){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;at &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">local</span><span class="p">.</span><span class="n">file_name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;:&#34;</span> <span class="o">&lt;&lt;</span><span class="n">local</span><span class="p">.</span><span class="n">line</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">test</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>至于std::source_location是怎么实现获取源代码位置的呢，可以看看实现。</p>
 <p>现在看看这个<code>std::source_location::current()</code>的实现，其实并不高深:</p>
@@ -200,17 +200,17 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="n">_NODISCARD</span> <span class="k">static</span> <span class="k">consteval</span> <span class="n">source_location</span> <span class="nf">current</span><span class="p">(</span><span class="k">const</span> <span class="kt">uint_least32_t</span> <span class="n">_Line_</span> <span class="o">=</span> <span class="n">__builtin_LINE</span><span class="p">(),</span>
-        <span class="k">const</span> <span class="kt">uint_least32_t</span> <span class="n">_Column_</span> <span class="o">=</span> <span class="n">__builtin_COLUMN</span><span class="p">(),</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">_File_</span> <span class="o">=</span> <span class="n">__builtin_FILE</span><span class="p">(),</span>
-        <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">_Function_</span> <span class="o">=</span> <span class="n">__builtin_FUNCTION</span><span class="p">())</span> <span class="k">noexcept</span> <span class="p">{</span>
-        <span class="n">source_location</span> <span class="n">_Result</span><span class="p">;</span>
-        <span class="n">_Result</span><span class="p">.</span><span class="n">_Line</span>     <span class="o">=</span> <span class="n">_Line_</span><span class="p">;</span>
-        <span class="n">_Result</span><span class="p">.</span><span class="n">_Column</span>   <span class="o">=</span> <span class="n">_Column_</span><span class="p">;</span>
-        <span class="n">_Result</span><span class="p">.</span><span class="n">_File</span>     <span class="o">=</span> <span class="n">_File_</span><span class="p">;</span>
-        <span class="n">_Result</span><span class="p">.</span><span class="n">_Function</span> <span class="o">=</span> <span class="n">_Function_</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">_Result</span><span class="p">;</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">_NODISCARD</span> <span class="k">static</span> <span class="k">consteval</span> <span class="n">source_location</span> <span class="nf">current</span><span class="p">(</span><span class="k">const</span> <span class="kt">uint_least32_t</span> <span class="n">_Line_</span> <span class="o">=</span> <span class="n">__builtin_LINE</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="kt">uint_least32_t</span> <span class="n">_Column_</span> <span class="o">=</span> <span class="n">__builtin_COLUMN</span><span class="p">(),</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">_File_</span> <span class="o">=</span> <span class="n">__builtin_FILE</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">_Function_</span> <span class="o">=</span> <span class="n">__builtin_FUNCTION</span><span class="p">())</span> <span class="k">noexcept</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">source_location</span> <span class="n">_Result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_Result</span><span class="p">.</span><span class="n">_Line</span>     <span class="o">=</span> <span class="n">_Line_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_Result</span><span class="p">.</span><span class="n">_Column</span>   <span class="o">=</span> <span class="n">_Column_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_Result</span><span class="p">.</span><span class="n">_File</span>     <span class="o">=</span> <span class="n">_File_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_Result</span><span class="p">.</span><span class="n">_Function</span> <span class="o">=</span> <span class="n">_Function_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">_Result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>小小的提示：<code>__builtin_XXXX</code>可以获取调用此函数的源代码处某些信息，内置于编译器中。</p>
 <p>五秒钟的时间来思考他是怎么工作的。</p>
@@ -229,11 +229,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#define MAKE_EXCEPTION(Name)                            \
-</span><span class="cp">    class Name ## Excpetion : public Exception{    \
-</span><span class="cp">        </span><span class="cm">/* more define ... */</span><span class="cp">                           \
-</span><span class="cp">    }
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#define MAKE_EXCEPTION(Name)                            \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    class Name ## Excpetion : public Exception{    \
+</span></span></span><span class="line"><span class="cl"><span class="cp">        </span><span class="cm">/* more define ... */</span><span class="cp">                           \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    }
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>仔细一看，这这种代码生成视乎是模板做不到的，但事实并非如此，而且可以做的更好:</p>
 <div class="highlight"><div class="chroma">
@@ -272,39 +272,39 @@
 </span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">/// @brief 字符串字面值
-</span><span class="c1"></span>    <span class="k">template</span><span class="o">&lt;</span><span class="n">size_t</span> <span class="n">N</span><span class="o">&gt;</span>
-    <span class="k">struct</span> <span class="nc">StringLiteral</span> <span class="p">{</span>
-        <span class="k">constexpr</span> <span class="nf">StringLiteral</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">str</span><span class="p">)[</span><span class="n">N</span><span class="p">])</span> <span class="p">{</span>
-            <span class="n">std</span><span class="o">::</span><span class="n">copy_n</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
-        <span class="p">}</span>
-
-        <span class="kt">char</span> <span class="n">value</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
-    <span class="p">};</span>
-
-<span class="c1">// 我们要生成异常的主要模板
-</span><span class="c1"></span><span class="k">template</span><span class="o">&lt;</span><span class="n">utopia</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">StringLiteral</span> <span class="n">exception_name</span><span class="o">&gt;</span>
-    <span class="k">class</span> <span class="nc">UniversalException</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Exception</span> <span class="p">{</span>
-      <span class="k">public</span><span class="o">:</span>
-        <span class="kr">inline</span> <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">get_name</span><span class="p">()</span> <span class="k">const</span> <span class="k">noexcept</span> <span class="k">override</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">{</span> <span class="n">exception_name</span><span class="p">.</span><span class="n">value</span> <span class="p">};</span>
-        <span class="p">}</span>
-    <span class="p">};</span>
-
-<span class="c1">// 用法如
-</span><span class="c1"></span><span class="k">using</span> <span class="n">IOException</span> <span class="o">=</span> <span class="n">UniversalException</span><span class="o">&lt;</span><span class="s">&#34;IOException&#34;</span><span class="o">&gt;</span><span class="p">;</span>
-<span class="c1">// throw IOException{&#34;I&#39;m a exception.&#34;};
-</span><span class="c1"></span>
-<span class="c1">// 我们就定义出了一个新异常！
-</span><span class="c1">// std::is_same_v&lt;IOException,UniversalException&lt;&#34;IOException&#34;&gt;&gt; == true
-</span><span class="c1">// std::is_same_v&lt;IOException,UniversalException&lt;&#34;OtherException&#34;&gt;&gt; == false
-</span><span class="c1"></span>
-<span class="c1">// 并且我们支持比宏更多的用法!
-</span><span class="c1">// --------------------------------↓ 通过继承来使用
-</span><span class="c1"></span><span class="k">class</span> <span class="nc">FileSystemException</span> <span class="o">:</span> <span class="k">public</span> <span class="n">UniversalException</span><span class="o">&lt;</span><span class="s">&#34;IOException&#34;</span><span class="o">&gt;</span><span class="p">{</span>
-    <span class="c1">// ...
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">/// @brief 字符串字面值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">template</span><span class="o">&lt;</span><span class="n">size_t</span> <span class="n">N</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="nc">StringLiteral</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">constexpr</span> <span class="nf">StringLiteral</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">str</span><span class="p">)[</span><span class="n">N</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">std</span><span class="o">::</span><span class="n">copy_n</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">char</span> <span class="n">value</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 我们要生成异常的主要模板
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">template</span><span class="o">&lt;</span><span class="n">utopia</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">StringLiteral</span> <span class="n">exception_name</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">class</span> <span class="nc">UniversalException</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Exception</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">inline</span> <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">get_name</span><span class="p">()</span> <span class="k">const</span> <span class="k">noexcept</span> <span class="k">override</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">{</span> <span class="n">exception_name</span><span class="p">.</span><span class="n">value</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 用法如
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">using</span> <span class="n">IOException</span> <span class="o">=</span> <span class="n">UniversalException</span><span class="o">&lt;</span><span class="s">&#34;IOException&#34;</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// throw IOException{&#34;I&#39;m a exception.&#34;};
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 我们就定义出了一个新异常！
+</span></span></span><span class="line"><span class="cl"><span class="c1">// std::is_same_v&lt;IOException,UniversalException&lt;&#34;IOException&#34;&gt;&gt; == true
+</span></span></span><span class="line"><span class="cl"><span class="c1">// std::is_same_v&lt;IOException,UniversalException&lt;&#34;OtherException&#34;&gt;&gt; == false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 并且我们支持比宏更多的用法!
+</span></span></span><span class="line"><span class="cl"><span class="c1">// --------------------------------↓ 通过继承来使用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">FileSystemException</span> <span class="o">:</span> <span class="k">public</span> <span class="n">UniversalException</span><span class="o">&lt;</span><span class="s">&#34;IOException&#34;</span><span class="o">&gt;</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="使用inline等替换宏">使用inline等替换宏</h3>
 <p>宏最饱受诟病之处就在于，宏难以调试，难以知道复杂宏的展开结果。</p>
@@ -347,40 +347,40 @@
 </span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">// 如MD5算法的实现
-</span><span class="c1">//F,G,H,I四个非线性变换函数
-</span><span class="c1"></span><span class="cp">#define F(x, y, z) (((x) &amp; (y)) | ((~x) &amp; (z)))
-</span><span class="cp">#define G(x, y, z) (((x) &amp; (z)) | ((y) &amp; (~z)))
-</span><span class="cp">#define H(x, y, z) ((x) ^ (y) ^ (z))
-</span><span class="cp">#define I(x, y, z) ((y) ^ ((x) | (~z)))
-</span><span class="cp"></span>
-
-<span class="c1">// 使用inline和模板可以定义作:
-</span><span class="c1"></span><span class="k">namespace</span> <span class="n">MD5</span><span class="p">{</span>
-
-    <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
-    <span class="kr">inline</span> <span class="n">T</span> <span class="n">F</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">,</span><span class="n">T</span> <span class="n">y</span><span class="p">,</span><span class="n">T</span> <span class="n">z</span><span class="p">){</span>
-        <span class="k">return</span> <span class="p">(((</span><span class="n">x</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="o">|</span> <span class="p">((</span><span class="o">~</span><span class="n">x</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">z</span><span class="p">)));</span>
-    <span class="p">}</span>
-    <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
-    <span class="kr">inline</span> <span class="n">T</span> <span class="n">G</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">,</span><span class="n">T</span> <span class="n">y</span><span class="p">,</span><span class="n">T</span> <span class="n">z</span><span class="p">){</span>
-        <span class="k">return</span> <span class="p">(((</span><span class="n">x</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">z</span><span class="p">))</span> <span class="o">|</span> <span class="p">((</span><span class="n">y</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="n">z</span><span class="p">)));</span>
-    <span class="p">}</span>
-    <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
-    <span class="kr">inline</span> <span class="n">T</span> <span class="n">H</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">,</span><span class="n">T</span> <span class="n">y</span><span class="p">,</span><span class="n">T</span> <span class="n">z</span><span class="p">){</span>
-        <span class="k">return</span> <span class="p">((</span><span class="n">x</span><span class="p">)</span> <span class="o">^</span> <span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">^</span> <span class="p">(</span><span class="n">z</span><span class="p">));</span>
-    <span class="p">}</span>
-    <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
-    <span class="kr">inline</span> <span class="n">T</span> <span class="n">I</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">,</span><span class="n">T</span> <span class="n">y</span><span class="p">,</span><span class="n">T</span> <span class="n">z</span><span class="p">){</span>
-        <span class="k">return</span> <span class="p">((</span><span class="n">y</span><span class="p">)</span> <span class="o">^</span> <span class="p">((</span><span class="n">x</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="o">~</span><span class="n">z</span><span class="p">)));</span>
-    <span class="p">}</span>
-
-<span class="p">}</span>
-<span class="c1">// 用法上几乎无异，但调试难度降低了一个级别
-</span><span class="c1">// 并且我们成功防止了命名空间污染
-</span><span class="c1">// 想一想全世界的程序员都把宏的名字定义成 F G H I 或者类似的名字会怎么样？
-</span><span class="c1">// Windows API提供的windows.h已经把max min定义成了宏，引起了许多问题
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 如MD5算法的实现
+</span></span></span><span class="line"><span class="cl"><span class="c1">//F,G,H,I四个非线性变换函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define F(x, y, z) (((x) &amp; (y)) | ((~x) &amp; (z)))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define G(x, y, z) (((x) &amp; (z)) | ((y) &amp; (~z)))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define H(x, y, z) ((x) ^ (y) ^ (z))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define I(x, y, z) ((y) ^ ((x) | (~z)))
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 使用inline和模板可以定义作:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">namespace</span> <span class="n">MD5</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">inline</span> <span class="n">T</span> <span class="n">F</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">,</span><span class="n">T</span> <span class="n">y</span><span class="p">,</span><span class="n">T</span> <span class="n">z</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(((</span><span class="n">x</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="o">|</span> <span class="p">((</span><span class="o">~</span><span class="n">x</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">z</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">inline</span> <span class="n">T</span> <span class="n">G</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">,</span><span class="n">T</span> <span class="n">y</span><span class="p">,</span><span class="n">T</span> <span class="n">z</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(((</span><span class="n">x</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">z</span><span class="p">))</span> <span class="o">|</span> <span class="p">((</span><span class="n">y</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="n">z</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">inline</span> <span class="n">T</span> <span class="n">H</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">,</span><span class="n">T</span> <span class="n">y</span><span class="p">,</span><span class="n">T</span> <span class="n">z</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">((</span><span class="n">x</span><span class="p">)</span> <span class="o">^</span> <span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">^</span> <span class="p">(</span><span class="n">z</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">inline</span> <span class="n">T</span> <span class="n">I</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">,</span><span class="n">T</span> <span class="n">y</span><span class="p">,</span><span class="n">T</span> <span class="n">z</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">((</span><span class="n">y</span><span class="p">)</span> <span class="o">^</span> <span class="p">((</span><span class="n">x</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="o">~</span><span class="n">z</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 用法上几乎无异，但调试难度降低了一个级别
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 并且我们成功防止了命名空间污染
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 想一想全世界的程序员都把宏的名字定义成 F G H I 或者类似的名字会怎么样？
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Windows API提供的windows.h已经把max min定义成了宏，引起了许多问题
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="防止宏污染">防止宏污染</h3>
 <p>c++20添加了module机制。</p>

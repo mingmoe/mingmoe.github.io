@@ -271,118 +271,118 @@
 </span><span class="lnt">111
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="c1">// Target.cs
-</span><span class="c1">//==-----------------------------==//
-</span><span class="c1">/// 这个类负责标记一个目标及其依赖
-</span><span class="c1"></span><span class="k">public</span> <span class="k">class</span> <span class="nc">Target</span>
-<span class="p">{</span>
-    <span class="c1">/// &lt;summary&gt;
-</span><span class="c1"></span>    <span class="c1">/// Target名称
-</span><span class="c1"></span>    <span class="c1">/// &lt;/summary&gt;
-</span><span class="c1"></span>    <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="n">init</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="s">&#34;Target Name&#34;</span><span class="p">;</span>
-
-    <span class="c1">/// &lt;summary&gt;
-</span><span class="c1"></span>    <span class="c1">/// Target的依赖
-</span><span class="c1"></span>    <span class="c1">/// &lt;/summary&gt;
-</span><span class="c1"></span>    <span class="k">public</span> <span class="kt">string</span><span class="p">[]</span> <span class="n">Deps</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="n">init</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="n">Array</span><span class="p">.</span><span class="n">Empty</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;();</span>
-<span class="p">}</span>
-
-
-<span class="c1">// Topological.cs
-</span><span class="c1">//==-----------------------------==//
-</span><span class="c1"></span><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
-
-<span class="c1">/// 拓扑排序主函数
-</span><span class="c1"></span><span class="k">public</span> <span class="k">static</span> <span class="n">Queue</span><span class="p">&lt;</span><span class="n">Target</span><span class="p">&gt;</span> <span class="n">Sort</span><span class="p">(</span>
-    <span class="c1">// 客户需要的目标
-</span><span class="c1"></span>    <span class="n">Target</span> <span class="n">whatToSort</span><span class="p">,</span>
-    <span class="c1">// 客户所有的目标
-</span><span class="c1"></span>    <span class="n">Target</span><span class="p">[]</span> <span class="n">total</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="c1">// 用于标记一个Target的排序状态
-</span><span class="c1"></span>    <span class="c1">// 如果target对应的key未找到，则target还未被排序
-</span><span class="c1"></span>    <span class="c1">// 如果target对应的value为true，则key正在被排序
-</span><span class="c1"></span>    <span class="c1">// 如果value为false，则key已经被排序过，并被加入到输出
-</span><span class="c1"></span>    <span class="n">Dictionary</span><span class="p">&lt;</span><span class="n">Target</span><span class="p">,</span> <span class="kt">bool</span><span class="p">&gt;</span> <span class="n">targetStatus</span> <span class="p">=</span>
-        <span class="k">new</span><span class="p">();</span>
-
-    <span class="c1">// 最后的输出。使用队列来保证顺序
-</span><span class="c1"></span>    <span class="n">Queue</span><span class="p">&lt;</span><span class="n">Target</span><span class="p">&gt;</span> <span class="n">output</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
-
-    <span class="c1">// 处理
-</span><span class="c1"></span>    <span class="n">Visit</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="n">whatToSort</span><span class="p">,</span> <span class="n">targetStatus</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
-
-    <span class="k">return</span> <span class="n">output</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="c1">/// 负责对一个target进行排序
-</span><span class="c1">/// 是一个辅助函数，不应该设置为public
-</span><span class="c1"></span><span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="n">Visit</span><span class="p">(</span>
-    <span class="c1">// 所有的Target
-</span><span class="c1"></span>    <span class="n">Target</span><span class="p">[]</span> <span class="n">total</span><span class="p">,</span>
-    <span class="c1">// 要排序的目标
-</span><span class="c1"></span>    <span class="n">Target</span> <span class="n">target</span><span class="p">,</span>
-    <span class="c1">// target状态
-</span><span class="c1"></span>    <span class="n">Dictionary</span><span class="p">&lt;</span><span class="n">Target</span><span class="p">,</span> <span class="kt">bool</span><span class="p">&gt;</span> <span class="n">targetStatus</span><span class="p">,</span>
-    <span class="c1">// 输出队列
-</span><span class="c1"></span>    <span class="n">Queue</span><span class="p">&lt;</span><span class="n">Target</span><span class="p">&gt;</span> <span class="n">output</span><span class="p">)</span>
-<span class="p">{</span>
-
-    <span class="c1">// 检查要排序的目标的状态
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">targetStatus</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="k">out</span> <span class="kt">bool</span> <span class="n">isSortting</span><span class="p">))</span>
-    <span class="p">{</span>
-        <span class="c1">// 要排序的目标正在被排序
-</span><span class="c1"></span>        <span class="c1">// 说明我们再次排序了这个目标！存在循环依赖
-</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">isSortting</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="s">$&#34;Circular dependency detected. At target `{target.Name}`.&#34;</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="c1">// 我们要排序的目标及其依赖已经被排序过了
-</span><span class="c1"></span>        <span class="c1">// 并且已经被加入到了输出
-</span><span class="c1"></span>        <span class="c1">// 我们设计是：一个目标只完成一次，so 忽略
-</span><span class="c1"></span>        <span class="k">else</span> <span class="k">return</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="c1">// 目标没有被设置状态
-</span><span class="c1"></span>    <span class="c1">// 则目标没有被排序过
-</span><span class="c1"></span>    <span class="k">else</span>
-    <span class="p">{</span>
-        <span class="c1">// 设置目标状态为：当前正在被排序
-</span><span class="c1"></span>        <span class="n">targetStatus</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
-
-        <span class="c1">// 排序所有依赖
-</span><span class="c1"></span>        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">depStr</span> <span class="k">in</span> <span class="n">target</span><span class="p">.</span><span class="n">Deps</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="c1">// 获取依赖
-</span><span class="c1"></span>            <span class="n">Target</span><span class="p">?</span> <span class="n">dep</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
-
-            <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">ddepStr</span> <span class="k">in</span> <span class="n">total</span><span class="p">)</span>
-            <span class="p">{</span>
-                <span class="c1">// 找到依赖
-</span><span class="c1"></span>                <span class="k">if</span> <span class="p">(</span><span class="n">ddepStr</span><span class="p">.</span><span class="n">Name</span> <span class="p">==</span> <span class="n">depStr</span><span class="p">)</span>
-                <span class="p">{</span>
-                    <span class="n">dep</span> <span class="p">=</span> <span class="n">ddepStr</span><span class="p">;</span>
-                    <span class="k">break</span><span class="p">;</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-
-            <span class="k">if</span> <span class="p">(</span><span class="n">dep</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
-                <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="s">$&#34;Miss depend `{depStr}` in target `{target.Name}` !&#34;</span><span class="p">);</span>
-
-            <span class="c1">// 对这些依赖进行排序
-</span><span class="c1"></span>            <span class="n">Visit</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="n">dep</span><span class="p">,</span> <span class="n">targetStatus</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
-        <span class="p">}</span>
-
-        <span class="c1">// 我们已经将目标的所有依赖添加到输出了
-</span><span class="c1"></span>        <span class="c1">// 确保了执行当前目标之前，依赖目标会被执行
-</span><span class="c1"></span>        <span class="c1">// 则添加当前目标到输出
-</span><span class="c1"></span>        <span class="n">output</span><span class="p">.</span><span class="n">Enqueue</span><span class="p">(</span><span class="n">target</span><span class="p">);</span>
-
-        <span class="c1">// 将当前目标的状态标记为：已经被排序
-</span><span class="c1"></span>        <span class="n">targetStatus</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">target</span><span class="p">);</span>
-        <span class="n">targetStatus</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="c1">// Target.cs</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//==-----------------------------==//</span>
+</span></span><span class="line"><span class="cl"><span class="cs">/// 这个类负责标记一个目标及其依赖</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Target</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// Target名称</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">init</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="s">&#34;Target Name&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// Target的依赖</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">string</span><span class="p">[]</span> <span class="n">Deps</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">init</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="n">Array</span><span class="p">.</span><span class="n">Empty</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Topological.cs</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//==-----------------------------==//</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cs">/// 拓扑排序主函数</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">static</span> <span class="n">Queue</span><span class="p">&lt;</span><span class="n">Target</span><span class="p">&gt;</span> <span class="n">Sort</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 客户需要的目标</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Target</span> <span class="n">whatToSort</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 客户所有的目标</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Target</span><span class="p">[]</span> <span class="n">total</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 用于标记一个Target的排序状态</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果target对应的key未找到，则target还未被排序</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果target对应的value为true，则key正在被排序</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果value为false，则key已经被排序过，并被加入到输出</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Dictionary</span><span class="p">&lt;</span><span class="n">Target</span><span class="p">,</span> <span class="kt">bool</span><span class="p">&gt;</span> <span class="n">targetStatus</span> <span class="p">=</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 最后的输出。使用队列来保证顺序</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Queue</span><span class="p">&lt;</span><span class="n">Target</span><span class="p">&gt;</span> <span class="n">output</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 处理</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Visit</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="n">whatToSort</span><span class="p">,</span> <span class="n">targetStatus</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">output</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cs">/// 负责对一个target进行排序</span>
+</span></span><span class="line"><span class="cl"><span class="cs">/// 是一个辅助函数，不应该设置为public</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="n">Visit</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 所有的Target</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Target</span><span class="p">[]</span> <span class="n">total</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 要排序的目标</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Target</span> <span class="n">target</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// target状态</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Dictionary</span><span class="p">&lt;</span><span class="n">Target</span><span class="p">,</span> <span class="kt">bool</span><span class="p">&gt;</span> <span class="n">targetStatus</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 输出队列</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Queue</span><span class="p">&lt;</span><span class="n">Target</span><span class="p">&gt;</span> <span class="n">output</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 检查要排序的目标的状态</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">targetStatus</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="k">out</span> <span class="kt">bool</span> <span class="n">isSortting</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 要排序的目标正在被排序</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 说明我们再次排序了这个目标！存在循环依赖</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">isSortting</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="s">$&#34;Circular dependency detected. At target `{target.Name}`.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 我们要排序的目标及其依赖已经被排序过了</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 并且已经被加入到了输出</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 我们设计是：一个目标只完成一次，so 忽略</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 目标没有被设置状态</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 则目标没有被排序过</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 设置目标状态为：当前正在被排序</span>
+</span></span><span class="line"><span class="cl">        <span class="n">targetStatus</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 排序所有依赖</span>
+</span></span><span class="line"><span class="cl">        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">depStr</span> <span class="k">in</span> <span class="n">target</span><span class="p">.</span><span class="n">Deps</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 获取依赖</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Target</span><span class="p">?</span> <span class="n">dep</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">ddepStr</span> <span class="k">in</span> <span class="n">total</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 找到依赖</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">ddepStr</span><span class="p">.</span><span class="n">Name</span> <span class="p">==</span> <span class="n">depStr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">dep</span> <span class="p">=</span> <span class="n">ddepStr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">dep</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="s">$&#34;Miss depend `{depStr}` in target `{target.Name}` !&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// 对这些依赖进行排序</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Visit</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="n">dep</span><span class="p">,</span> <span class="n">targetStatus</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 我们已经将目标的所有依赖添加到输出了</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 确保了执行当前目标之前，依赖目标会被执行</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 则添加当前目标到输出</span>
+</span></span><span class="line"><span class="cl">        <span class="n">output</span><span class="p">.</span><span class="n">Enqueue</span><span class="p">(</span><span class="n">target</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 将当前目标的状态标记为：已经被排序</span>
+</span></span><span class="line"><span class="cl">        <span class="n">targetStatus</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">target</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">targetStatus</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>最后，附加一个小栗子:</p>
 <div class="highlight"><div class="chroma">
@@ -411,29 +411,29 @@
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="n">Target</span> <span class="err">吃饭</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
-<span class="err">吃饭</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">&#34;吃饭&#34;</span><span class="p">;</span>
-<span class="err">吃饭</span><span class="p">.</span><span class="n">Deps</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[]{</span> <span class="s">&#34;做饭&#34;</span><span class="p">,</span><span class="s">&#34;洗手&#34;</span> <span class="p">};</span>
-
-<span class="n">Target</span> <span class="err">做饭</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
-<span class="err">吃饭</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">&#34;做饭&#34;</span><span class="p">;</span>
-<span class="err">吃饭</span><span class="p">.</span><span class="n">Deps</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[]{</span> <span class="s">&#34;洗手&#34;</span> <span class="p">};</span>
-
-<span class="n">Target</span> <span class="err">洗手</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
-<span class="err">吃饭</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">&#34;洗手&#34;</span><span class="p">;</span>
-<span class="err">吃饭</span><span class="p">.</span><span class="n">Deps</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[</span><span class="m">0</span><span class="p">]();</span>
-
-<span class="n">Target</span><span class="p">[]</span> <span class="err">所有事务</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Target</span><span class="p">[]{</span><span class="err">吃饭，做饭，洗手</span><span class="p">};</span>
-
-<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">Sort</span><span class="p">(</span><span class="err">吃饭</span><span class="p">,</span><span class="err">所有事物</span><span class="p">);</span>
-
-<span class="k">foreach</span><span class="p">(</span><span class="kt">var</span> <span class="n">whatToDoNext</span> <span class="k">in</span> <span class="n">result</span><span class="p">){</span>
-    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">whatToDoNext</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="c1">// result:
-</span><span class="c1">// 洗手 做饭 吃饭
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="n">Target</span> <span class="err">吃饭</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="err">吃饭</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">&#34;吃饭&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="err">吃饭</span><span class="p">.</span><span class="n">Deps</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[]{</span> <span class="s">&#34;做饭&#34;</span><span class="p">,</span><span class="s">&#34;洗手&#34;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Target</span> <span class="err">做饭</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="err">吃饭</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">&#34;做饭&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="err">吃饭</span><span class="p">.</span><span class="n">Deps</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[]{</span> <span class="s">&#34;洗手&#34;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Target</span> <span class="err">洗手</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="err">吃饭</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">&#34;洗手&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="err">吃饭</span><span class="p">.</span><span class="n">Deps</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[</span><span class="m">0</span><span class="p">]();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Target</span><span class="p">[]</span> <span class="err">所有事务</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Target</span><span class="p">[]{</span><span class="err">吃饭，做饭，洗手</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">Sort</span><span class="p">(</span><span class="err">吃饭</span><span class="p">,</span><span class="err">所有事物</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="kt">var</span> <span class="n">whatToDoNext</span> <span class="k">in</span> <span class="n">result</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">whatToDoNext</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// result:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 洗手 做饭 吃饭</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
