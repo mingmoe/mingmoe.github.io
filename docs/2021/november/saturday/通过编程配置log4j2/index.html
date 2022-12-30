@@ -207,7 +207,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="n">Logger</span> <span class="nf">getLogger</span><span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// note this:         ↓
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="n">name</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">getContext</span><span class="o">(</span><span class="kc">false</span><span class="o">).</span><span class="na">getLogger</span><span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="o">:</span> <span class="n">getLogger</span><span class="o">(</span><span class="n">StackLocatorUtil</span><span class="o">.</span><span class="na">getCallerClass</span><span class="o">(</span><span class="n">2</span><span class="o">));</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="n">name</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">getContext</span><span class="o">(</span><span class="kc">false</span><span class="o">).</span><span class="na">getLogger</span><span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="o">:</span> <span class="n">getLogger</span><span class="o">(</span><span class="n">StackLocatorUtil</span><span class="o">.</span><span class="na">getCallerClass</span><span class="o">(</span><span class="mi">2</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -255,7 +255,7 @@
 
 <footer class="mingFooter">
 
-    <p>Powered by <a href="https://gohugo.io/">Hugo</a>.Copyright ©  2021 MingMoe.<br>
+    <p>Powered by <a href="https://gohugo.io/">Hugo</a>.Copyright ©  2021-2023 MingMoe.<br>
 
     <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
         <img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">

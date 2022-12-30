@@ -6,32 +6,15 @@
     <description>Recent content in 日记 on MingMoe的网络博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 24 Sep 2022 17:53:33 +0800</lastBuildDate><atom:link href="https://blog.kawayi.moe/tags/%E6%97%A5%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Dec 2022 21:40:33 +0800</lastBuildDate><atom:link href="https://blog.kawayi.moe/tags/%E6%97%A5%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>最后的通牒</title>
-      <link>https://blog.kawayi.moe/2022/september/saturday/%E6%9C%80%E5%90%8E%E7%9A%84%E9%80%9A%E7%89%92/</link>
-      <pubDate>Sat, 24 Sep 2022 17:53:33 +0800</pubDate>
+      <title>我在二中的生活——首义</title>
+      <link>https://blog.kawayi.moe/2022/december/wednesday/%E6%88%91%E5%9C%A8%E4%BA%8C%E4%B8%AD%E7%9A%84%E7%94%9F%E6%B4%BB%E9%A6%96%E4%B9%89/</link>
+      <pubDate>Wed, 28 Dec 2022 21:40:33 +0800</pubDate>
       
-      <guid>https://blog.kawayi.moe/2022/september/saturday/%E6%9C%80%E5%90%8E%E7%9A%84%E9%80%9A%E7%89%92/</guid>
-      <description>&lt;p&gt;对三明二中最后的通牒。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>今日份日记 - UUID/GUID的替代品:GUUID</title>
-      <link>https://blog.kawayi.moe/2021/july/saturday/%E4%BB%8A%E6%97%A5%E4%BB%BD%E6%97%A5%E8%AE%B0-uuid/guid%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%93%81guuid/</link>
-      <pubDate>Sat, 24 Jul 2021 12:21:35 +0800</pubDate>
-      
-      <guid>https://blog.kawayi.moe/2021/july/saturday/%E4%BB%8A%E6%97%A5%E4%BB%BD%E6%97%A5%E8%AE%B0-uuid/guid%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%93%81guuid/</guid>
-      <description>&lt;p&gt;哈，咱最近在写代码的时候，碰到了关于GUID的问题：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Uuid&lt;/span&gt;::&lt;span class=&#34;n&#34;&gt;parse_str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;unwrap&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;这段代码会出现大小端序的问题。解决方案是使用自行定义的struct进行处理后再操作。非常麻烦。&lt;/p&gt;</description>
+      <guid>https://blog.kawayi.moe/2022/december/wednesday/%E6%88%91%E5%9C%A8%E4%BA%8C%E4%B8%AD%E7%9A%84%E7%94%9F%E6%B4%BB%E9%A6%96%E4%B9%89/</guid>
+      <description>&lt;p&gt;从踏进二中校门那一天算起，我到二中也有一个学期了。&lt;/p&gt;
+&lt;p&gt;来到二中的第一个学期，我的感受可以浓缩成一个字：累。&lt;/p&gt;</description>
     </item>
     
   </channel>

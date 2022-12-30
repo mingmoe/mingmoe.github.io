@@ -28,4 +28,3 @@ draft = false
 
  - Twitter:[ming_moe](https://twitter.com/ming_moe_)
 
- - 知乎:[大明酱](https://www.zhihu.com/people/cai-hong-hai-dao-80)

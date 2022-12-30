@@ -189,11 +189,11 @@ Netty Channel Init的handler添加顺序对程序的影响
 </span></span><span class="line"><span class="cl">                <span class="c1">// 添加一个拆包器 (input)
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet length parser&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">LengthFieldBasedFrameDecoder</span><span class="o">(</span>
 </span></span><span class="line"><span class="cl">                        <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                        <span class="n">0</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                        <span class="n">4</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                        <span class="n">0</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="mi">0</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="mi">4</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="mi">0</span><span class="o">,</span>
 </span></span><span class="line"><span class="cl">                        <span class="c1">// 丢弃长度
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="n">4</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="mi">4</span>
 </span></span><span class="line"><span class="cl">                <span class="o">))</span>
 </span></span><span class="line"><span class="cl">                <span class="c1">// 添加一个包分类器 (input)
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet classifier&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PacketClassifier</span><span class="o">())</span>
@@ -383,11 +383,11 @@ Netty Channel Init的handler添加顺序对程序的影响
 </span></span><span class="line"><span class="cl">                <span class="c1">// 添加一个拆包器 (input)
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet length parser&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">LengthFieldBasedFrameDecoder</span><span class="o">(</span>
 </span></span><span class="line"><span class="cl">                        <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                        <span class="n">0</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                        <span class="n">4</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                        <span class="n">0</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="mi">0</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="mi">4</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="mi">0</span><span class="o">,</span>
 </span></span><span class="line"><span class="cl">                        <span class="c1">// 丢弃长度
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="n">4</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="mi">4</span>
 </span></span><span class="line"><span class="cl">                <span class="o">))</span>
 </span></span><span class="line"><span class="cl">                <span class="c1">// 添加一个包分类器 (input)
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet classifier&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PacketClassifier</span><span class="o">())</span>
@@ -449,7 +449,7 @@ Netty Channel Init的handler添加顺序对程序的影响
 
 <footer class="mingFooter">
 
-    <p>Powered by <a href="https://gohugo.io/">Hugo</a>.Copyright ©  2021 MingMoe.<br>
+    <p>Powered by <a href="https://gohugo.io/">Hugo</a>.Copyright ©  2021-2023 MingMoe.<br>
 
     <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
         <img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
