@@ -2,121 +2,121 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://blog.kawayi.moe/archives/2023/</loc>
+    <loc>http://localhost:1313/archives/2023/</loc>
     <lastmod>2023-07-26T05:06:29+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/archives/</loc>
+    <loc>http://localhost:1313/archives/</loc>
     <lastmod>2023-07-26T05:06:29+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/categories/</loc>
+    <loc>http://localhost:1313/categories/</loc>
     <lastmod>2023-07-26T05:06:29+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/tags/copy/</loc>
+    <loc>http://localhost:1313/tags/copy/</loc>
     <lastmod>2023-07-26T05:06:29+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/</loc>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2023-07-26T05:06:29+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/post/</loc>
+    <loc>http://localhost:1313/post/</loc>
     <lastmod>2023-07-26T05:06:29+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/tags/</loc>
+    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2023-07-26T05:06:29+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/categories/think/</loc>
+    <loc>http://localhost:1313/categories/think/</loc>
     <lastmod>2023-07-26T05:06:29+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/tags/think/</loc>
+    <loc>http://localhost:1313/tags/think/</loc>
     <lastmod>2023-07-26T05:06:29+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/2023/july/wednesday/%E4%BD%9C%E6%8F%96%E4%B8%BB%E4%B9%89/</loc>
+    <loc>http://localhost:1313/2023/july/wednesday/%E4%BD%9C%E6%8F%96%E4%B8%BB%E4%B9%89/</loc>
     <lastmod>2023-07-26T05:06:29+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/archives/2022/</loc>
+    <loc>http://localhost:1313/archives/2022/</loc>
     <lastmod>2022-02-21T20:38:05+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/categories/c&#43;&#43;/</loc>
+    <loc>http://localhost:1313/categories/c&#43;&#43;/</loc>
     <lastmod>2022-02-21T20:38:05+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/tags/c&#43;&#43;/</loc>
+    <loc>http://localhost:1313/tags/c&#43;&#43;/</loc>
     <lastmod>2022-02-21T20:38:05+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/2022/february/monday/%E4%BD%BF%E7%94%A8c-%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7%E6%9D%A5%E6%9B%BF%E4%BB%A3%E5%AE%8F/</loc>
+    <loc>http://localhost:1313/2022/february/monday/%E4%BD%BF%E7%94%A8c-%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7%E6%9D%A5%E6%9B%BF%E4%BB%A3%E5%AE%8F/</loc>
     <lastmod>2022-02-21T20:38:05+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/categories/algorithm/</loc>
+    <loc>http://localhost:1313/categories/algorithm/</loc>
     <lastmod>2022-02-06T00:23:47+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/tags/algorithm/</loc>
+    <loc>http://localhost:1313/tags/algorithm/</loc>
     <lastmod>2022-02-06T00:23:47+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/2022/february/sunday/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E4%BE%9D%E8%B5%96%E6%8E%92%E5%BA%8F/</loc>
+    <loc>http://localhost:1313/2022/february/sunday/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E4%BE%9D%E8%B5%96%E6%8E%92%E5%BA%8F/</loc>
     <lastmod>2022-02-06T00:23:47+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/tags/java/</loc>
+    <loc>http://localhost:1313/tags/java/</loc>
     <lastmod>2022-01-15T22:16:02+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/2022/january/saturday/java17%E6%96%B0native-api%E5%88%9D%E4%BD%93%E9%AA%8C/</loc>
+    <loc>http://localhost:1313/2022/january/saturday/java17%E6%96%B0native-api%E5%88%9D%E4%BD%93%E9%AA%8C/</loc>
     <lastmod>2022-01-15T22:16:02+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/tags/native/</loc>
+    <loc>http://localhost:1313/tags/native/</loc>
     <lastmod>2022-01-15T22:16:02+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/categories/programming/</loc>
+    <loc>http://localhost:1313/categories/programming/</loc>
     <lastmod>2022-01-15T22:16:02+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/archives/2021/</loc>
+    <loc>http://localhost:1313/archives/2021/</loc>
     <lastmod>2021-11-06T00:23:14+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/tags/log4j2/</loc>
+    <loc>http://localhost:1313/tags/log4j2/</loc>
     <lastmod>2021-11-06T00:23:14+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/2021/november/saturday/%E9%80%9A%E8%BF%87%E7%BC%96%E7%A8%8B%E9%85%8D%E7%BD%AElog4j2/</loc>
+    <loc>http://localhost:1313/2021/november/saturday/%E9%80%9A%E8%BF%87%E7%BC%96%E7%A8%8B%E9%85%8D%E7%BD%AElog4j2/</loc>
     <lastmod>2021-11-06T00:23:14+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/tags/gradle/</loc>
+    <loc>http://localhost:1313/tags/gradle/</loc>
     <lastmod>2021-10-31T10:27:33+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/2021/october/sunday/gradle%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E6%80%BB%E7%BB%93/</loc>
+    <loc>http://localhost:1313/2021/october/sunday/gradle%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2021-10-31T10:27:33+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/tags/netty/</loc>
+    <loc>http://localhost:1313/tags/netty/</loc>
     <lastmod>2021-10-23T15:07:52+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/2021/october/saturday/netty-channel-init%E7%9A%84handler%E6%B7%BB%E5%8A%A0%E9%A1%BA%E5%BA%8F%E5%AF%B9%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BD%B1%E5%93%8D/</loc>
+    <loc>http://localhost:1313/2021/october/saturday/netty-channel-init%E7%9A%84handler%E6%B7%BB%E5%8A%A0%E9%A1%BA%E5%BA%8F%E5%AF%B9%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BD%B1%E5%93%8D/</loc>
     <lastmod>2021-10-23T15:07:52+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/tags/git/</loc>
+    <loc>http://localhost:1313/tags/git/</loc>
     <lastmod>2021-10-11T20:02:02+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/tags/github-action/</loc>
+    <loc>http://localhost:1313/tags/github-action/</loc>
     <lastmod>2021-10-11T20:02:02+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/categories/programming-helper/</loc>
+    <loc>http://localhost:1313/categories/programming-helper/</loc>
     <lastmod>2021-10-11T20:02:02+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/2021/october/monday/%E4%BD%BF%E7%94%A8github-action%E6%8D%95%E8%8E%B7%E4%BA%8B%E4%BB%B6/</loc>
+    <loc>http://localhost:1313/2021/october/monday/%E4%BD%BF%E7%94%A8github-action%E6%8D%95%E8%8E%B7%E4%BA%8B%E4%BB%B6/</loc>
     <lastmod>2021-10-11T20:02:02+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/2021/october/monday/%E4%BD%BF%E7%94%A8github-action%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81/</loc>
+    <loc>http://localhost:1313/2021/october/monday/%E4%BD%BF%E7%94%A8github-action%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81/</loc>
     <lastmod>2021-10-11T19:53:17+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/tags/rust/</loc>
+    <loc>http://localhost:1313/tags/rust/</loc>
     <lastmod>2021-07-04T22:43:31+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/tags/uefi/</loc>
+    <loc>http://localhost:1313/tags/uefi/</loc>
     <lastmod>2021-07-04T22:43:31+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/2021/july/sunday/%E4%BD%BF%E7%94%A8rust%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAuefi%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F/</loc>
+    <loc>http://localhost:1313/2021/july/sunday/%E4%BD%BF%E7%94%A8rust%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAuefi%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F/</loc>
     <lastmod>2021-07-04T22:43:31+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/2021/june/thursday/hello-world/</loc>
+    <loc>http://localhost:1313/2021/june/thursday/hello-world/</loc>
     <lastmod>2021-06-17T20:28:12+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/tags/test/</loc>
+    <loc>http://localhost:1313/tags/test/</loc>
     <lastmod>2021-06-17T20:28:12+08:00</lastmod>
   </url><url>
-    <loc>https://blog.kawayi.moe/about/</loc>
+    <loc>http://localhost:1313/about/</loc>
     <lastmod>2021-06-13T19:13:44+08:00</lastmod>
   </url>
 </urlset>

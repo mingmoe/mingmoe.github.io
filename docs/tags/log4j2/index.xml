@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Log4j2 on MingMoe的网络博客</title>
-    <link>https://blog.kawayi.moe/tags/log4j2/</link>
+    <link>http://localhost:1313/tags/log4j2/</link>
     <description>Recent content in Log4j2 on MingMoe的网络博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 06 Nov 2021 00:23:14 +0800</lastBuildDate>
-    <atom:link href="https://blog.kawayi.moe/tags/log4j2/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/log4j2/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>通过编程配置log4j2</title>
-      <link>https://blog.kawayi.moe/2021/november/saturday/%E9%80%9A%E8%BF%87%E7%BC%96%E7%A8%8B%E9%85%8D%E7%BD%AElog4j2/</link>
+      <link>http://localhost:1313/2021/november/saturday/%E9%80%9A%E8%BF%87%E7%BC%96%E7%A8%8B%E9%85%8D%E7%BD%AElog4j2/</link>
       <pubDate>Sat, 06 Nov 2021 00:23:14 +0800</pubDate>
-      <guid>https://blog.kawayi.moe/2021/november/saturday/%E9%80%9A%E8%BF%87%E7%BC%96%E7%A8%8B%E9%85%8D%E7%BD%AElog4j2/</guid>
+      <guid>http://localhost:1313/2021/november/saturday/%E9%80%9A%E8%BF%87%E7%BC%96%E7%A8%8B%E9%85%8D%E7%BD%AElog4j2/</guid>
       <description>&lt;p&gt;最近在使用Log4j2的时候，碰到了一些问题：无论是使用&lt;code&gt;Configurator.initialize&lt;/code&gt;还是&lt;code&gt;LogManager.getContext().reconfigure()&lt;/code&gt;都无法完全更新log4j2的配置。&lt;/p&gt;&#xA;&lt;p&gt;在查看了Log4j2的源代码过后，笔者找到了解决方案。&lt;/p&gt;</description>
     </item>
   </channel>

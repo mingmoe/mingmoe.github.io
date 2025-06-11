@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on MingMoe的网络博客</title>
-    <link>https://blog.kawayi.moe/categories/</link>
+    <link>http://localhost:1313/categories/</link>
     <description>Recent content in Categories on MingMoe的网络博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 26 Jul 2023 05:06:29 +0800</lastBuildDate>
-    <atom:link href="https://blog.kawayi.moe/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Think</title>
-      <link>https://blog.kawayi.moe/categories/think/</link>
+      <link>http://localhost:1313/categories/think/</link>
       <pubDate>Wed, 26 Jul 2023 05:06:29 +0800</pubDate>
-      <guid>https://blog.kawayi.moe/categories/think/</guid>
+      <guid>http://localhost:1313/categories/think/</guid>
       <description></description>
     </item>
     <item>
       <title>C&#43;&#43;</title>
-      <link>https://blog.kawayi.moe/categories/c&#43;&#43;/</link>
+      <link>http://localhost:1313/categories/c&#43;&#43;/</link>
       <pubDate>Mon, 21 Feb 2022 20:38:05 +0800</pubDate>
-      <guid>https://blog.kawayi.moe/categories/c&#43;&#43;/</guid>
+      <guid>http://localhost:1313/categories/c&#43;&#43;/</guid>
       <description></description>
     </item>
     <item>
       <title>Algorithm</title>
-      <link>https://blog.kawayi.moe/categories/algorithm/</link>
+      <link>http://localhost:1313/categories/algorithm/</link>
       <pubDate>Sun, 06 Feb 2022 00:23:47 +0800</pubDate>
-      <guid>https://blog.kawayi.moe/categories/algorithm/</guid>
+      <guid>http://localhost:1313/categories/algorithm/</guid>
       <description></description>
     </item>
     <item>
       <title>Programming</title>
-      <link>https://blog.kawayi.moe/categories/programming/</link>
+      <link>http://localhost:1313/categories/programming/</link>
       <pubDate>Sat, 15 Jan 2022 22:16:02 +0800</pubDate>
-      <guid>https://blog.kawayi.moe/categories/programming/</guid>
+      <guid>http://localhost:1313/categories/programming/</guid>
       <description></description>
     </item>
     <item>
       <title>Programming Helper</title>
-      <link>https://blog.kawayi.moe/categories/programming-helper/</link>
+      <link>http://localhost:1313/categories/programming-helper/</link>
       <pubDate>Mon, 11 Oct 2021 20:02:02 +0800</pubDate>
-      <guid>https://blog.kawayi.moe/categories/programming-helper/</guid>
+      <guid>http://localhost:1313/categories/programming-helper/</guid>
       <description></description>
     </item>
   </channel>

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>C&#43;&#43; on MingMoe的网络博客</title>
-    <link>https://blog.kawayi.moe/categories/c&#43;&#43;/</link>
+    <link>http://localhost:1313/categories/c&#43;&#43;/</link>
     <description>Recent content in C&#43;&#43; on MingMoe的网络博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 21 Feb 2022 20:38:05 +0800</lastBuildDate>
-    <atom:link href="https://blog.kawayi.moe/categories/c++/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/categories/c++/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用c&#43;&#43;的新特性来替代宏</title>
-      <link>https://blog.kawayi.moe/2022/february/monday/%E4%BD%BF%E7%94%A8c-%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7%E6%9D%A5%E6%9B%BF%E4%BB%A3%E5%AE%8F/</link>
+      <link>http://localhost:1313/2022/february/monday/%E4%BD%BF%E7%94%A8c-%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7%E6%9D%A5%E6%9B%BF%E4%BB%A3%E5%AE%8F/</link>
       <pubDate>Mon, 21 Feb 2022 20:38:05 +0800</pubDate>
-      <guid>https://blog.kawayi.moe/2022/february/monday/%E4%BD%BF%E7%94%A8c-%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7%E6%9D%A5%E6%9B%BF%E4%BB%A3%E5%AE%8F/</guid>
+      <guid>http://localhost:1313/2022/february/monday/%E4%BD%BF%E7%94%A8c-%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7%E6%9D%A5%E6%9B%BF%E4%BB%A3%E5%AE%8F/</guid>
       <description>&lt;p&gt;要说c++或者c中最容易滥用的特性，莫不过于宏。&lt;/p&gt;&#xA;&lt;p&gt;事实上，宏有很多缺点，比如难以调试，容易造成污染。（比如Windows.h里就定义了max和min宏，毫无避讳。如果调用xxx.max()之类的函数，那么恭喜你的max被替换了）&lt;/p&gt;&#xA;&lt;p&gt;所幸，C++为我们提供了一套机制来减少宏的使用。&lt;/p&gt;</description>
     </item>
   </channel>

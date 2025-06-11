@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Think on MingMoe的网络博客</title>
-    <link>https://blog.kawayi.moe/tags/think/</link>
+    <link>http://localhost:1313/tags/think/</link>
     <description>Recent content in Think on MingMoe的网络博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 26 Jul 2023 05:06:29 +0800</lastBuildDate>
-    <atom:link href="https://blog.kawayi.moe/tags/think/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/think/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>作揖主义</title>
-      <link>https://blog.kawayi.moe/2023/july/wednesday/%E4%BD%9C%E6%8F%96%E4%B8%BB%E4%B9%89/</link>
+      <link>http://localhost:1313/2023/july/wednesday/%E4%BD%9C%E6%8F%96%E4%B8%BB%E4%B9%89/</link>
       <pubDate>Wed, 26 Jul 2023 05:06:29 +0800</pubDate>
-      <guid>https://blog.kawayi.moe/2023/july/wednesday/%E4%BD%9C%E6%8F%96%E4%B8%BB%E4%B9%89/</guid>
+      <guid>http://localhost:1313/2023/july/wednesday/%E4%BD%9C%E6%8F%96%E4%B8%BB%E4%B9%89/</guid>
       <description>&lt;p&gt;沈二先生与我们谈天，常说生平服膺《红》《老》之学。《红》，就是《红楼梦》；《老》，就是《老子》。这《红》《老》之学的主旨，简便些说，就是无论什么事，都听其自然。&lt;/p&gt;</description>
     </item>
   </channel>

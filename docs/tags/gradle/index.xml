@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Gradle on MingMoe的网络博客</title>
-    <link>https://blog.kawayi.moe/tags/gradle/</link>
+    <link>http://localhost:1313/tags/gradle/</link>
     <description>Recent content in Gradle on MingMoe的网络博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 31 Oct 2021 10:27:33 +0800</lastBuildDate>
-    <atom:link href="https://blog.kawayi.moe/tags/gradle/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/gradle/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Gradle代码片段总结</title>
-      <link>https://blog.kawayi.moe/2021/october/sunday/gradle%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E6%80%BB%E7%BB%93/</link>
+      <link>http://localhost:1313/2021/october/sunday/gradle%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E6%80%BB%E7%BB%93/</link>
       <pubDate>Sun, 31 Oct 2021 10:27:33 +0800</pubDate>
-      <guid>https://blog.kawayi.moe/2021/october/sunday/gradle%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E6%80%BB%E7%BB%93/</guid>
+      <guid>http://localhost:1313/2021/october/sunday/gradle%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E6%80%BB%E7%BB%93/</guid>
       <description>&lt;p&gt;汇总了一些gradle常用代码片段，包括:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;汇集所有子项目的javadoc&lt;/li&gt;&#xA;&lt;li&gt;汇集所有子项目的source/javadoc jar&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;至于汇集所有依赖到同一个jar包里的，笔者依然是使用插件的方式(shadowJar)实现。&lt;/p&gt;</description>
     </item>
   </channel>
