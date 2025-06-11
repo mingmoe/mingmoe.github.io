@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Archives on MingMoe的网络博客</title>
-    <link>http://localhost:1313/archives/</link>
+    <link>https://blog.kawayi.moe/archives/</link>
     <description>Recent content in Archives on MingMoe的网络博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 26 Jul 2023 05:06:29 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/archives/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.kawayi.moe/archives/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2023</title>
-      <link>http://localhost:1313/archives/2023/</link>
+      <link>https://blog.kawayi.moe/archives/2023/</link>
       <pubDate>Wed, 26 Jul 2023 05:06:29 +0800</pubDate>
-      <guid>http://localhost:1313/archives/2023/</guid>
+      <guid>https://blog.kawayi.moe/archives/2023/</guid>
       <description></description>
     </item>
     <item>
       <title>2022</title>
-      <link>http://localhost:1313/archives/2022/</link>
+      <link>https://blog.kawayi.moe/archives/2022/</link>
       <pubDate>Mon, 21 Feb 2022 20:38:05 +0800</pubDate>
-      <guid>http://localhost:1313/archives/2022/</guid>
+      <guid>https://blog.kawayi.moe/archives/2022/</guid>
       <description></description>
     </item>
     <item>
       <title>2021</title>
-      <link>http://localhost:1313/archives/2021/</link>
+      <link>https://blog.kawayi.moe/archives/2021/</link>
       <pubDate>Sat, 06 Nov 2021 00:23:14 +0800</pubDate>
-      <guid>http://localhost:1313/archives/2021/</guid>
+      <guid>https://blog.kawayi.moe/archives/2021/</guid>
       <description></description>
     </item>
   </channel>

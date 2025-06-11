@@ -2,108 +2,108 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on MingMoe的网络博客</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://blog.kawayi.moe/tags/</link>
     <description>Recent content in Tags on MingMoe的网络博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 26 Jul 2023 05:06:29 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.kawayi.moe/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Copy</title>
-      <link>http://localhost:1313/tags/copy/</link>
+      <link>https://blog.kawayi.moe/tags/copy/</link>
       <pubDate>Wed, 26 Jul 2023 05:06:29 +0800</pubDate>
-      <guid>http://localhost:1313/tags/copy/</guid>
+      <guid>https://blog.kawayi.moe/tags/copy/</guid>
       <description></description>
     </item>
     <item>
       <title>Think</title>
-      <link>http://localhost:1313/tags/think/</link>
+      <link>https://blog.kawayi.moe/tags/think/</link>
       <pubDate>Wed, 26 Jul 2023 05:06:29 +0800</pubDate>
-      <guid>http://localhost:1313/tags/think/</guid>
+      <guid>https://blog.kawayi.moe/tags/think/</guid>
       <description></description>
     </item>
     <item>
       <title>C&#43;&#43;</title>
-      <link>http://localhost:1313/tags/c&#43;&#43;/</link>
+      <link>https://blog.kawayi.moe/tags/c&#43;&#43;/</link>
       <pubDate>Mon, 21 Feb 2022 20:38:05 +0800</pubDate>
-      <guid>http://localhost:1313/tags/c&#43;&#43;/</guid>
+      <guid>https://blog.kawayi.moe/tags/c&#43;&#43;/</guid>
       <description></description>
     </item>
     <item>
       <title>Algorithm</title>
-      <link>http://localhost:1313/tags/algorithm/</link>
+      <link>https://blog.kawayi.moe/tags/algorithm/</link>
       <pubDate>Sun, 06 Feb 2022 00:23:47 +0800</pubDate>
-      <guid>http://localhost:1313/tags/algorithm/</guid>
+      <guid>https://blog.kawayi.moe/tags/algorithm/</guid>
       <description></description>
     </item>
     <item>
       <title>Java</title>
-      <link>http://localhost:1313/tags/java/</link>
+      <link>https://blog.kawayi.moe/tags/java/</link>
       <pubDate>Sat, 15 Jan 2022 22:16:02 +0800</pubDate>
-      <guid>http://localhost:1313/tags/java/</guid>
+      <guid>https://blog.kawayi.moe/tags/java/</guid>
       <description></description>
     </item>
     <item>
       <title>Native</title>
-      <link>http://localhost:1313/tags/native/</link>
+      <link>https://blog.kawayi.moe/tags/native/</link>
       <pubDate>Sat, 15 Jan 2022 22:16:02 +0800</pubDate>
-      <guid>http://localhost:1313/tags/native/</guid>
+      <guid>https://blog.kawayi.moe/tags/native/</guid>
       <description></description>
     </item>
     <item>
       <title>Log4j2</title>
-      <link>http://localhost:1313/tags/log4j2/</link>
+      <link>https://blog.kawayi.moe/tags/log4j2/</link>
       <pubDate>Sat, 06 Nov 2021 00:23:14 +0800</pubDate>
-      <guid>http://localhost:1313/tags/log4j2/</guid>
+      <guid>https://blog.kawayi.moe/tags/log4j2/</guid>
       <description></description>
     </item>
     <item>
       <title>Gradle</title>
-      <link>http://localhost:1313/tags/gradle/</link>
+      <link>https://blog.kawayi.moe/tags/gradle/</link>
       <pubDate>Sun, 31 Oct 2021 10:27:33 +0800</pubDate>
-      <guid>http://localhost:1313/tags/gradle/</guid>
+      <guid>https://blog.kawayi.moe/tags/gradle/</guid>
       <description></description>
     </item>
     <item>
       <title>Netty</title>
-      <link>http://localhost:1313/tags/netty/</link>
+      <link>https://blog.kawayi.moe/tags/netty/</link>
       <pubDate>Sat, 23 Oct 2021 15:07:52 +0800</pubDate>
-      <guid>http://localhost:1313/tags/netty/</guid>
+      <guid>https://blog.kawayi.moe/tags/netty/</guid>
       <description></description>
     </item>
     <item>
       <title>Git</title>
-      <link>http://localhost:1313/tags/git/</link>
+      <link>https://blog.kawayi.moe/tags/git/</link>
       <pubDate>Mon, 11 Oct 2021 20:02:02 +0800</pubDate>
-      <guid>http://localhost:1313/tags/git/</guid>
+      <guid>https://blog.kawayi.moe/tags/git/</guid>
       <description></description>
     </item>
     <item>
       <title>Github Action</title>
-      <link>http://localhost:1313/tags/github-action/</link>
+      <link>https://blog.kawayi.moe/tags/github-action/</link>
       <pubDate>Mon, 11 Oct 2021 20:02:02 +0800</pubDate>
-      <guid>http://localhost:1313/tags/github-action/</guid>
+      <guid>https://blog.kawayi.moe/tags/github-action/</guid>
       <description></description>
     </item>
     <item>
       <title>Rust</title>
-      <link>http://localhost:1313/tags/rust/</link>
+      <link>https://blog.kawayi.moe/tags/rust/</link>
       <pubDate>Sun, 04 Jul 2021 22:43:31 +0800</pubDate>
-      <guid>http://localhost:1313/tags/rust/</guid>
+      <guid>https://blog.kawayi.moe/tags/rust/</guid>
       <description></description>
     </item>
     <item>
       <title>Uefi</title>
-      <link>http://localhost:1313/tags/uefi/</link>
+      <link>https://blog.kawayi.moe/tags/uefi/</link>
       <pubDate>Sun, 04 Jul 2021 22:43:31 +0800</pubDate>
-      <guid>http://localhost:1313/tags/uefi/</guid>
+      <guid>https://blog.kawayi.moe/tags/uefi/</guid>
       <description></description>
     </item>
     <item>
       <title>Test</title>
-      <link>http://localhost:1313/tags/test/</link>
+      <link>https://blog.kawayi.moe/tags/test/</link>
       <pubDate>Thu, 17 Jun 2021 20:28:12 +0800</pubDate>
-      <guid>http://localhost:1313/tags/test/</guid>
+      <guid>https://blog.kawayi.moe/tags/test/</guid>
       <description></description>
     </item>
   </channel>
