@@ -5,7 +5,7 @@
 
 
 <head>
-	<meta name="generator" content="Hugo 0.109.0">
+	<meta name="generator" content="Hugo 0.147.8">
     
     <meta charset="utf-8">
 
@@ -25,7 +25,7 @@
     
 
 
-<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/normalize.css">
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe//css/normalize.css">
 
 
 
@@ -33,7 +33,7 @@
 <link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/scss/ming.css">
 
 
-<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/syntax.css">
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe//css/syntax.css">
 
 
 
@@ -85,27 +85,27 @@
     <ul>
         
         <li>
-            <a href="https://blog.kawayi.moe/">Blog</a>
+            <a href="https://blog.kawayi.moe//">Blog</a>
         </li>
 
         
         <li>
-            <a href="https://blog.kawayi.moe/about">About Me</a>
+            <a href="https://blog.kawayi.moe//about">About Me</a>
         </li>
 
         
         <li>
-            <a href="https://blog.kawayi.moe/archives">Archives</a>
+            <a href="https://blog.kawayi.moe//archives">Archives</a>
         </li>
 
         
         <li>
-            <a href="https://blog.kawayi.moe/categories">Categories</a>
+            <a href="https://blog.kawayi.moe//categories">Categories</a>
         </li>
 
         
         <li>
-            <a href="https://blog.kawayi.moe/tags">Tags</a>
+            <a href="https://blog.kawayi.moe//tags">Tags</a>
         </li>
 
     </ul>
@@ -120,11 +120,11 @@
         
         <option>Navigate</option>
         
-        <option value="https://blog.kawayi.moe/">🔗 Blog</option>
-        <option value="https://blog.kawayi.moe/about">🔗 About Me</option>
-        <option value="https://blog.kawayi.moe/archives">🔗 Archives</option>
-        <option value="https://blog.kawayi.moe/categories">🔗 Categories</option>
-        <option value="https://blog.kawayi.moe/tags">🔗 Tags</option>
+        <option value="https://blog.kawayi.moe//">🔗 Blog</option>
+        <option value="https://blog.kawayi.moe//about">🔗 About Me</option>
+        <option value="https://blog.kawayi.moe//archives">🔗 Archives</option>
+        <option value="https://blog.kawayi.moe//categories">🔗 Categories</option>
+        <option value="https://blog.kawayi.moe//tags">🔗 Tags</option>
     </select>
 
 </nav>
@@ -184,30 +184,30 @@
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">NettyChannelInit</span> <span class="kd">extends</span> <span class="n">ChannelInitializer</span><span class="o">&lt;</span><span class="n">NioSocketChannel</span><span class="o">&gt;</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">initChannel</span><span class="o">(</span><span class="n">NioSocketChannel</span>  <span class="n">socketChannel</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">pipeline</span> <span class="o">=</span> <span class="n">socketChannel</span><span class="o">.</span><span class="na">pipeline</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">pipeline</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// 添加一个拆包器 (input)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet length parser&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">LengthFieldBasedFrameDecoder</span><span class="o">(</span>
-</span></span><span class="line"><span class="cl">                        <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                        <span class="mi">0</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                        <span class="mi">4</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                        <span class="mi">0</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                        <span class="c1">// 丢弃长度
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="mi">4</span>
-</span></span><span class="line"><span class="cl">                <span class="o">))</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// 添加一个包分类器 (input)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet classifier&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PacketClassifier</span><span class="o">())</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// 添加一些实际处理包的handle (input &amp;&amp; output)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet ping handle&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PingPacketHandle</span><span class="o">())</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// 添加一个输出解码器 (output)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;output encoder&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PacketEncoder</span><span class="o">())</span>
-</span></span><span class="line"><span class="cl">                <span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">NettyChannelInit</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ChannelInitializer</span><span class="o">&lt;</span><span class="n">NioSocketChannel</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initChannel</span><span class="p">(</span><span class="n">NioSocketChannel</span><span class="w">  </span><span class="n">socketChannel</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">pipeline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">socketChannel</span><span class="p">.</span><span class="na">pipeline</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">pipeline</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 添加一个拆包器 (input)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="s">&#34;packet length parser&#34;</span><span class="p">,</span><span class="k">new</span><span class="w"> </span><span class="n">LengthFieldBasedFrameDecoder</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="n">0</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="n">4</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="n">0</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="c1">// 丢弃长度</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="n">4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 添加一个包分类器 (input)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="s">&#34;packet classifier&#34;</span><span class="p">,</span><span class="k">new</span><span class="w"> </span><span class="n">PacketClassifier</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 添加一些实际处理包的handle (input &amp;&amp; output)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="s">&#34;packet ping handle&#34;</span><span class="p">,</span><span class="k">new</span><span class="w"> </span><span class="n">PingPacketHandle</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 添加一个输出解码器 (output)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="s">&#34;output encoder&#34;</span><span class="p">,</span><span class="k">new</span><span class="w"> </span><span class="n">PacketEncoder</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这段代码的依据 input-process-output 的handler逻辑顺序（即解码输入handler-逻辑handler-编码输出handler）来添加handler。这将会错误的工作。</p>
     </div>
@@ -304,13 +304,13 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Config git</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
 </span></span></span><span class="line"><span class="cl"><span class="sd">          git config --global user.name   mingmoe
-</span></span></span><span class="line"><span class="cl"><span class="sd">          git config --global user.email  sudo.free@qq.com</span><span class="w">          
+</span></span></span><span class="line"><span class="cl"><span class="sd">          git config --global user.email  sudo.free@qq.com</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Push Code</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
 </span></span></span><span class="line"><span class="cl"><span class="sd">            git add .
 </span></span></span><span class="line"><span class="cl"><span class="sd">            git commit -m &#34;update&#34;
-</span></span></span><span class="line"><span class="cl"><span class="sd">            git push</span><span class="w">            
+</span></span></span><span class="line"><span class="cl"><span class="sd">            git push</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>即可提交代码。</p>

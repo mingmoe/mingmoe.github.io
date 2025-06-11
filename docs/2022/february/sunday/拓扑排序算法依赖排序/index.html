@@ -26,7 +26,7 @@
     
 
 
-<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/normalize.css">
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe//css/normalize.css">
 
 
 
@@ -34,7 +34,7 @@
 <link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/scss/ming.css">
 
 
-<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/syntax.css">
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe//css/syntax.css">
 
 
 
@@ -86,27 +86,27 @@
     <ul>
         
         <li>
-            <a href="https://blog.kawayi.moe/">Blog</a>
+            <a href="https://blog.kawayi.moe//">Blog</a>
         </li>
 
         
         <li>
-            <a href="https://blog.kawayi.moe/about">About Me</a>
+            <a href="https://blog.kawayi.moe//about">About Me</a>
         </li>
 
         
         <li>
-            <a href="https://blog.kawayi.moe/archives">Archives</a>
+            <a href="https://blog.kawayi.moe//archives">Archives</a>
         </li>
 
         
         <li>
-            <a href="https://blog.kawayi.moe/categories">Categories</a>
+            <a href="https://blog.kawayi.moe//categories">Categories</a>
         </li>
 
         
         <li>
-            <a href="https://blog.kawayi.moe/tags">Tags</a>
+            <a href="https://blog.kawayi.moe//tags">Tags</a>
         </li>
 
     </ul>
@@ -121,11 +121,11 @@
         
         <option>Navigate</option>
         
-        <option value="https://blog.kawayi.moe/">🔗 Blog</option>
-        <option value="https://blog.kawayi.moe/about">🔗 About Me</option>
-        <option value="https://blog.kawayi.moe/archives">🔗 Archives</option>
-        <option value="https://blog.kawayi.moe/categories">🔗 Categories</option>
-        <option value="https://blog.kawayi.moe/tags">🔗 Tags</option>
+        <option value="https://blog.kawayi.moe//">🔗 Blog</option>
+        <option value="https://blog.kawayi.moe//about">🔗 About Me</option>
+        <option value="https://blog.kawayi.moe//archives">🔗 Archives</option>
+        <option value="https://blog.kawayi.moe//categories">🔗 Categories</option>
+        <option value="https://blog.kawayi.moe//tags">🔗 Tags</option>
     </select>
 
 </nav>
@@ -274,17 +274,17 @@
 <pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="c1">// Target.cs</span>
 </span></span><span class="line"><span class="cl"><span class="c1">//==-----------------------------==//</span>
 </span></span><span class="line"><span class="cl"><span class="cs">/// 这个类负责标记一个目标及其依赖</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Target</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">Target</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
 </span></span><span class="line"><span class="cl">    <span class="cs">/// Target名称</span>
 </span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">init</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="s">&#34;Target Name&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">init</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="s">&#34;Target Name&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
 </span></span><span class="line"><span class="cl">    <span class="cs">/// Target的依赖</span>
 </span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">string</span><span class="p">[]</span> <span class="n">Deps</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">init</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="n">Array</span><span class="p">.</span><span class="n">Empty</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span><span class="p">[]</span> <span class="n">Deps</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">init</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="n">Array</span><span class="p">.</span><span class="n">Empty</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
@@ -293,7 +293,7 @@
 </span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cs">/// 拓扑排序主函数</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">static</span> <span class="n">Queue</span><span class="p">&lt;</span><span class="n">Target</span><span class="p">&gt;</span> <span class="n">Sort</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="n">Queue</span><span class="p">&lt;</span><span class="n">Target</span><span class="p">&gt;</span> <span class="n">Sort</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 客户需要的目标</span>
 </span></span><span class="line"><span class="cl">    <span class="n">Target</span> <span class="n">whatToSort</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 客户所有的目标</span>
@@ -317,7 +317,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cs">/// 负责对一个target进行排序</span>
 </span></span><span class="line"><span class="cl"><span class="cs">/// 是一个辅助函数，不应该设置为public</span>
-</span></span><span class="line"><span class="cl"><span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="n">Visit</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="k">void</span> <span class="n">Visit</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 所有的Target</span>
 </span></span><span class="line"><span class="cl">    <span class="n">Target</span><span class="p">[]</span> <span class="n">total</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 要排序的目标</span>
@@ -347,13 +347,13 @@
 </span></span><span class="line"><span class="cl">    <span class="k">else</span>
 </span></span><span class="line"><span class="cl">    <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 设置目标状态为：当前正在被排序</span>
-</span></span><span class="line"><span class="cl">        <span class="n">targetStatus</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">targetStatus</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="c1">// 排序所有依赖</span>
 </span></span><span class="line"><span class="cl">        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">depStr</span> <span class="k">in</span> <span class="n">target</span><span class="p">.</span><span class="n">Deps</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="c1">// 获取依赖</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Target</span><span class="p">?</span> <span class="n">dep</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Target</span><span class="p">?</span> <span class="n">dep</span> <span class="p">=</span> <span class="kc">null</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">ddepStr</span> <span class="k">in</span> <span class="n">total</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="p">{</span>
@@ -365,7 +365,7 @@
 </span></span><span class="line"><span class="cl">                <span class="p">}</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">dep</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">dep</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="s">$&#34;Miss depend `{depStr}` in target `{target.Name}` !&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// 对这些依赖进行排序</span>
@@ -379,7 +379,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="c1">// 将当前目标的状态标记为：已经被排序</span>
 </span></span><span class="line"><span class="cl">        <span class="n">targetStatus</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">target</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">targetStatus</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">targetStatus</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>

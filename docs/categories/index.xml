@@ -4,53 +4,44 @@
     <title>Categories on MingMoe的网络博客</title>
     <link>https://blog.kawayi.moe/categories/</link>
     <description>Recent content in Categories on MingMoe的网络博客</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 26 Jul 2023 05:06:29 +0800</lastBuildDate><atom:link href="https://blog.kawayi.moe/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 26 Jul 2023 05:06:29 +0800</lastBuildDate>
+    <atom:link href="https://blog.kawayi.moe/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>think</title>
+      <title>Think</title>
       <link>https://blog.kawayi.moe/categories/think/</link>
       <pubDate>Wed, 26 Jul 2023 05:06:29 +0800</pubDate>
-      
       <guid>https://blog.kawayi.moe/categories/think/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>c&#43;&#43;</title>
+      <title>C&#43;&#43;</title>
       <link>https://blog.kawayi.moe/categories/c&#43;&#43;/</link>
       <pubDate>Mon, 21 Feb 2022 20:38:05 +0800</pubDate>
-      
       <guid>https://blog.kawayi.moe/categories/c&#43;&#43;/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>algorithm</title>
+      <title>Algorithm</title>
       <link>https://blog.kawayi.moe/categories/algorithm/</link>
       <pubDate>Sun, 06 Feb 2022 00:23:47 +0800</pubDate>
-      
       <guid>https://blog.kawayi.moe/categories/algorithm/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>programming</title>
+      <title>Programming</title>
       <link>https://blog.kawayi.moe/categories/programming/</link>
       <pubDate>Sat, 15 Jan 2022 22:16:02 +0800</pubDate>
-      
       <guid>https://blog.kawayi.moe/categories/programming/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>programming helper</title>
+      <title>Programming Helper</title>
       <link>https://blog.kawayi.moe/categories/programming-helper/</link>
       <pubDate>Mon, 11 Oct 2021 20:02:02 +0800</pubDate>
-      
       <guid>https://blog.kawayi.moe/categories/programming-helper/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

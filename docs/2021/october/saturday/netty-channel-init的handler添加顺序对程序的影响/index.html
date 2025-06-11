@@ -26,7 +26,7 @@ Netty Channel Init的handler添加顺序对程序的影响
     
 
 
-<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/normalize.css">
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe//css/normalize.css">
 
 
 
@@ -34,7 +34,7 @@ Netty Channel Init的handler添加顺序对程序的影响
 <link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/scss/ming.css">
 
 
-<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/syntax.css">
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe//css/syntax.css">
 
 
 
@@ -86,27 +86,27 @@ Netty Channel Init的handler添加顺序对程序的影响
     <ul>
         
         <li>
-            <a href="https://blog.kawayi.moe/">Blog</a>
+            <a href="https://blog.kawayi.moe//">Blog</a>
         </li>
 
         
         <li>
-            <a href="https://blog.kawayi.moe/about">About Me</a>
+            <a href="https://blog.kawayi.moe//about">About Me</a>
         </li>
 
         
         <li>
-            <a href="https://blog.kawayi.moe/archives">Archives</a>
+            <a href="https://blog.kawayi.moe//archives">Archives</a>
         </li>
 
         
         <li>
-            <a href="https://blog.kawayi.moe/categories">Categories</a>
+            <a href="https://blog.kawayi.moe//categories">Categories</a>
         </li>
 
         
         <li>
-            <a href="https://blog.kawayi.moe/tags">Tags</a>
+            <a href="https://blog.kawayi.moe//tags">Tags</a>
         </li>
 
     </ul>
@@ -121,11 +121,11 @@ Netty Channel Init的handler添加顺序对程序的影响
         
         <option>Navigate</option>
         
-        <option value="https://blog.kawayi.moe/">🔗 Blog</option>
-        <option value="https://blog.kawayi.moe/about">🔗 About Me</option>
-        <option value="https://blog.kawayi.moe/archives">🔗 Archives</option>
-        <option value="https://blog.kawayi.moe/categories">🔗 Categories</option>
-        <option value="https://blog.kawayi.moe/tags">🔗 Tags</option>
+        <option value="https://blog.kawayi.moe//">🔗 Blog</option>
+        <option value="https://blog.kawayi.moe//about">🔗 About Me</option>
+        <option value="https://blog.kawayi.moe//archives">🔗 Archives</option>
+        <option value="https://blog.kawayi.moe//categories">🔗 Categories</option>
+        <option value="https://blog.kawayi.moe//tags">🔗 Tags</option>
     </select>
 
 </nav>
@@ -181,30 +181,30 @@ Netty Channel Init的handler添加顺序对程序的影响
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">NettyChannelInit</span> <span class="kd">extends</span> <span class="n">ChannelInitializer</span><span class="o">&lt;</span><span class="n">NioSocketChannel</span><span class="o">&gt;</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">initChannel</span><span class="o">(</span><span class="n">NioSocketChannel</span>  <span class="n">socketChannel</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">pipeline</span> <span class="o">=</span> <span class="n">socketChannel</span><span class="o">.</span><span class="na">pipeline</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">pipeline</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// 添加一个拆包器 (input)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet length parser&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">LengthFieldBasedFrameDecoder</span><span class="o">(</span>
-</span></span><span class="line"><span class="cl">                        <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                        <span class="mi">0</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                        <span class="mi">4</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                        <span class="mi">0</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                        <span class="c1">// 丢弃长度
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="mi">4</span>
-</span></span><span class="line"><span class="cl">                <span class="o">))</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// 添加一个包分类器 (input)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet classifier&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PacketClassifier</span><span class="o">())</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// 添加一些实际处理包的handle (input &amp;&amp; output)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet ping handle&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PingPacketHandle</span><span class="o">())</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// 添加一个输出解码器 (output)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;output encoder&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PacketEncoder</span><span class="o">())</span>
-</span></span><span class="line"><span class="cl">                <span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">NettyChannelInit</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ChannelInitializer</span><span class="o">&lt;</span><span class="n">NioSocketChannel</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initChannel</span><span class="p">(</span><span class="n">NioSocketChannel</span><span class="w">  </span><span class="n">socketChannel</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">pipeline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">socketChannel</span><span class="p">.</span><span class="na">pipeline</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">pipeline</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 添加一个拆包器 (input)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="s">&#34;packet length parser&#34;</span><span class="p">,</span><span class="k">new</span><span class="w"> </span><span class="n">LengthFieldBasedFrameDecoder</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="n">0</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="n">4</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="n">0</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="c1">// 丢弃长度</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="n">4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 添加一个包分类器 (input)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="s">&#34;packet classifier&#34;</span><span class="p">,</span><span class="k">new</span><span class="w"> </span><span class="n">PacketClassifier</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 添加一些实际处理包的handle (input &amp;&amp; output)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="s">&#34;packet ping handle&#34;</span><span class="p">,</span><span class="k">new</span><span class="w"> </span><span class="n">PingPacketHandle</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 添加一个输出解码器 (output)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="s">&#34;output encoder&#34;</span><span class="p">,</span><span class="k">new</span><span class="w"> </span><span class="n">PacketEncoder</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这段代码的依据 input-process-output 的handler逻辑顺序（即解码输入handler-逻辑handler-编码输出handler）来添加handler。这将会错误的工作。</p>
 <p>上面的逻辑是:</p>
@@ -295,18 +295,18 @@ Netty Channel Init的handler添加顺序对程序的影响
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"> <span class="n">pipeline</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;decoder&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">MyProtocolDecoder</span><span class="o">());</span>
-</span></span><span class="line"><span class="cl"> <span class="n">pipeline</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;encoder&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">MyProtocolEncoder</span><span class="o">());</span>
-</span></span><span class="line"><span class="cl"> <span class="n">pipeline</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="n">group</span><span class="o">,</span> <span class="s">&#34;handler&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">MyBusinessLogicHandler</span><span class="o">());</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> <span class="c1">// 另一个例子
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="n">ChannelPipeline</span> <span class="n">p</span> <span class="o">=</span> <span class="o">...;</span>
-</span></span><span class="line"><span class="cl"> <span class="n">pipeline</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;1&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">InboundHandlerA</span><span class="o">());</span>
-</span></span><span class="line"><span class="cl"> <span class="n">pipeline</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;2&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">InboundHandlerB</span><span class="o">());</span>
-</span></span><span class="line"><span class="cl"> <span class="n">pipeline</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;3&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">OutboundHandlerA</span><span class="o">());</span>
-</span></span><span class="line"><span class="cl"> <span class="n">pipeline</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;4&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">OutboundHandlerB</span><span class="o">());</span>
-</span></span><span class="line"><span class="cl"> <span class="n">pipeline</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;5&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">InboundOutboundHandlerX</span><span class="o">());</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w"> </span><span class="n">pipeline</span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="s">&#34;decoder&#34;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyProtocolDecoder</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">pipeline</span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="s">&#34;encoder&#34;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyProtocolEncoder</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">pipeline</span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="n">group</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;handler&#34;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyBusinessLogicHandler</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="c1">// 另一个例子</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">ChannelPipeline</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">pipeline</span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">InboundHandlerA</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">pipeline</span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="s">&#34;2&#34;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">InboundHandlerB</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">pipeline</span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="s">&#34;3&#34;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OutboundHandlerA</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">pipeline</span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="s">&#34;4&#34;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OutboundHandlerB</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">pipeline</span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="s">&#34;5&#34;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">InboundOutboundHandlerX</span><span class="p">());</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以见到，官方给出的handler添加顺序应该是: input-output-process</p>
 <p>并且给了一段文字（对于上面代码的后一个例子）:</p>
@@ -377,26 +377,26 @@ Netty Channel Init的handler添加顺序对程序的影响
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">var</span> <span class="n">pipeline</span> <span class="o">=</span> <span class="n">socketChannel</span><span class="o">.</span><span class="na">pipeline</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// 添加一个解码器来解析数据长度
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">pipeline</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// 添加一个拆包器 (input)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet length parser&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">LengthFieldBasedFrameDecoder</span><span class="o">(</span>
-</span></span><span class="line"><span class="cl">                        <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                        <span class="mi">0</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                        <span class="mi">4</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                        <span class="mi">0</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                        <span class="c1">// 丢弃长度
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="mi">4</span>
-</span></span><span class="line"><span class="cl">                <span class="o">))</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// 添加一个包分类器 (input)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet classifier&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PacketClassifier</span><span class="o">())</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// 添加一个输出解码器 (output)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;output encoder&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PacketEncoder</span><span class="o">())</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// 添加一些实际处理包的handle(input &amp;&amp; output)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="s">&#34;packet ping handle&#34;</span><span class="o">,</span><span class="k">new</span> <span class="n">PingPacketHandle</span><span class="o">())</span>
-</span></span><span class="line"><span class="cl">                <span class="o">;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">var</span><span class="w"> </span><span class="n">pipeline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">socketChannel</span><span class="p">.</span><span class="na">pipeline</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 添加一个解码器来解析数据长度</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">pipeline</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 添加一个拆包器 (input)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="s">&#34;packet length parser&#34;</span><span class="p">,</span><span class="k">new</span><span class="w"> </span><span class="n">LengthFieldBasedFrameDecoder</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="n">0</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="n">4</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="n">0</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="c1">// 丢弃长度</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="n">4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 添加一个包分类器 (input)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="s">&#34;packet classifier&#34;</span><span class="p">,</span><span class="k">new</span><span class="w"> </span><span class="n">PacketClassifier</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 添加一个输出解码器 (output)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="s">&#34;output encoder&#34;</span><span class="p">,</span><span class="k">new</span><span class="w"> </span><span class="n">PacketEncoder</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 添加一些实际处理包的handle(input &amp;&amp; output)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">addLast</span><span class="p">(</span><span class="s">&#34;packet ping handle&#34;</span><span class="p">,</span><span class="k">new</span><span class="w"> </span><span class="n">PingPacketHandle</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>对于数据，将经过:</p>
 <pre tabindex="0"><code>    input                   output

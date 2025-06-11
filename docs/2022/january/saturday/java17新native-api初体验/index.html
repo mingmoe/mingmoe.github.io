@@ -26,7 +26,7 @@ Java17新Native API初体验
     
 
 
-<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/normalize.css">
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe//css/normalize.css">
 
 
 
@@ -34,7 +34,7 @@ Java17新Native API初体验
 <link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/scss/ming.css">
 
 
-<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe/css/syntax.css">
+<link type="text/css" rel="stylesheet" href="https://blog.kawayi.moe//css/syntax.css">
 
 
 
@@ -86,27 +86,27 @@ Java17新Native API初体验
     <ul>
         
         <li>
-            <a href="https://blog.kawayi.moe/">Blog</a>
+            <a href="https://blog.kawayi.moe//">Blog</a>
         </li>
 
         
         <li>
-            <a href="https://blog.kawayi.moe/about">About Me</a>
+            <a href="https://blog.kawayi.moe//about">About Me</a>
         </li>
 
         
         <li>
-            <a href="https://blog.kawayi.moe/archives">Archives</a>
+            <a href="https://blog.kawayi.moe//archives">Archives</a>
         </li>
 
         
         <li>
-            <a href="https://blog.kawayi.moe/categories">Categories</a>
+            <a href="https://blog.kawayi.moe//categories">Categories</a>
         </li>
 
         
         <li>
-            <a href="https://blog.kawayi.moe/tags">Tags</a>
+            <a href="https://blog.kawayi.moe//tags">Tags</a>
         </li>
 
     </ul>
@@ -121,11 +121,11 @@ Java17新Native API初体验
         
         <option>Navigate</option>
         
-        <option value="https://blog.kawayi.moe/">🔗 Blog</option>
-        <option value="https://blog.kawayi.moe/about">🔗 About Me</option>
-        <option value="https://blog.kawayi.moe/archives">🔗 Archives</option>
-        <option value="https://blog.kawayi.moe/categories">🔗 Categories</option>
-        <option value="https://blog.kawayi.moe/tags">🔗 Tags</option>
+        <option value="https://blog.kawayi.moe//">🔗 Blog</option>
+        <option value="https://blog.kawayi.moe//about">🔗 About Me</option>
+        <option value="https://blog.kawayi.moe//archives">🔗 Archives</option>
+        <option value="https://blog.kawayi.moe//categories">🔗 Categories</option>
+        <option value="https://blog.kawayi.moe//tags">🔗 Tags</option>
     </select>
 
 </nav>
@@ -170,17 +170,17 @@ Java17新Native API初体验
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 需要先加载库
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">System</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="s">&#34;xxx.dll&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">CLinker</span> <span class="n">linker</span> <span class="o">=</span> <span class="n">CLinker</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">MethodHandle</span> <span class="n">init</span> <span class="o">=</span> <span class="n">linker</span><span class="o">.</span><span class="na">downcallHandle</span><span class="o">(</span>
-</span></span><span class="line"><span class="cl">        <span class="n">SymbolLookup</span><span class="o">.</span><span class="na">loaderLookup</span><span class="o">().</span><span class="na">lookup</span><span class="o">(</span><span class="cm">/*你的函数名称*/</span><span class="o">).</span><span class="na">orElseThrow</span><span class="o">(),</span>
-</span></span><span class="line"><span class="cl">        <span class="n">MethodType</span><span class="o">.</span><span class="na">methodType</span><span class="o">(</span><span class="cm">/*你的函数定义*/</span><span class="o">),</span>
-</span></span><span class="line"><span class="cl">        <span class="n">FunctionDescriptor</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="cm">/*你的函数定义*/</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="o">);</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 需要先加载库</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">load</span><span class="p">(</span><span class="s">&#34;xxx.dll&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">CLinker</span><span class="w"> </span><span class="n">linker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CLinker</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">MethodHandle</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">linker</span><span class="p">.</span><span class="na">downcallHandle</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">SymbolLookup</span><span class="p">.</span><span class="na">loaderLookup</span><span class="p">().</span><span class="na">lookup</span><span class="p">(</span><span class="cm">/*你的函数名称*/</span><span class="p">).</span><span class="na">orElseThrow</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">MethodType</span><span class="p">.</span><span class="na">methodType</span><span class="p">(</span><span class="cm">/*你的函数定义*/</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">FunctionDescriptor</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="cm">/*你的函数定义*/</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这样，就可以简单加载一个函数了。我们只需要对返回的函数Hanlde执行调用操作就行了哦。记得填上参数，参数和返回值类型同<code>MethodType</code>的那个参数。ヽ(✿ﾟ▽ﾟ)ノ</p>
 <p>当然，在<code>MethodType.methodType</code>和<code>FunctionDescriptor.of</code>需要填写你的函数的定义。两个函数的调用要对应。例如:</p>
@@ -196,53 +196,53 @@ Java17新Native API初体验
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 这段代码调用的c函数接口是:
-</span></span></span><span class="line"><span class="cl"><span class="c1">// void* ();
-</span></span></span><span class="line"><span class="cl"><span class="c1">// 即一个返回任意类型指针的函数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">MethodType</span><span class="o">.</span><span class="na">methodType</span><span class="o">(</span><span class="n">MemoryAddress</span><span class="o">.</span><span class="na">class</span><span class="o">),</span>
-</span></span><span class="line"><span class="cl">                <span class="n">FunctionDescriptor</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">CLinker</span><span class="o">.</span><span class="na">C_POINTER</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 注意，MemoryAddress.class和CLinker.C_POINTER是对应关系（即指针类型）
-</span></span></span><span class="line"><span class="cl"><span class="c1">// 如果修改，将会在运行时报错
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 这段代码调用的c函数接口是:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// void* ();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 即一个返回任意类型指针的函数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">MethodType</span><span class="p">.</span><span class="na">methodType</span><span class="p">(</span><span class="n">MemoryAddress</span><span class="p">.</span><span class="na">class</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">FunctionDescriptor</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">CLinker</span><span class="p">.</span><span class="na">C_POINTER</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 注意，MemoryAddress.class和CLinker.C_POINTER是对应关系（即指针类型）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 如果修改，将会在运行时报错</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>下面有一个对应关系表，注意，如果返回void（即没有返回值），需要使用<code>MethodType.methodType(void.class,...)</code>和<code>FunctionDescriptor.ofVoid(...)</code>来替代。</p>
 <p>下面是MethodType和FunctionDescriptor的对应关系表:</p>
 <table>
-<thead>
-<tr>
-<th style="text-align:center">Method Type</th>
-<th style="text-align:center">Function Descriptor</th>
-<th style="text-align:center">C Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">MemoryAddress.class</td>
-<td style="text-align:center">CLinker.C_POINTER</td>
-<td style="text-align:center">任何类型的指针</td>
-</tr>
-<tr>
-<td style="text-align:center">long.class</td>
-<td style="text-align:center">CLinker.C_LONG_LONG</td>
-<td style="text-align:center">unsigned long long</td>
-</tr>
-<tr>
-<td style="text-align:center">int.class</td>
-<td style="text-align:center">CLinker.C_INT</td>
-<td style="text-align:center">int</td>
-</tr>
-<tr>
-<td style="text-align:center">short.class</td>
-<td style="text-align:center">CLinker.C_SHORT</td>
-<td style="text-align:center">short</td>
-</tr>
-<tr>
-<td style="text-align:center">以此类推，还有double,char等基本类型</td>
-<td style="text-align:center">none</td>
-<td style="text-align:center">none</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: center">Method Type</th>
+          <th style="text-align: center">Function Descriptor</th>
+          <th style="text-align: center">C Type</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">MemoryAddress.class</td>
+          <td style="text-align: center">CLinker.C_POINTER</td>
+          <td style="text-align: center">任何类型的指针</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">long.class</td>
+          <td style="text-align: center">CLinker.C_LONG_LONG</td>
+          <td style="text-align: center">unsigned long long</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">int.class</td>
+          <td style="text-align: center">CLinker.C_INT</td>
+          <td style="text-align: center">int</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">short.class</td>
+          <td style="text-align: center">CLinker.C_SHORT</td>
+          <td style="text-align: center">short</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">以此类推，还有double,char等基本类型</td>
+          <td style="text-align: center">none</td>
+          <td style="text-align: center">none</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="解析数据结构">解析数据结构</h3>
 <p>为了解析数据结构，我们需要一个Native函数返回一个MemoryAddress：指向数据结构。</p>
@@ -313,46 +313,46 @@ Java17新Native API初体验
 </span><span class="lnt">39
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 数据结构定义
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Bitmap</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">bitmapLeft</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">bitmapTop</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">byte</span><span class="o">[]</span> <span class="n">data</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 解析
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Bitmap</span> <span class="nf">parse</span><span class="o">(</span><span class="n">MemoryAddress</span> <span class="n">ptr</span><span class="o">){</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 将指针转化为可以访问的内存段
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">MemorySegment</span> <span class="n">segment</span>
-</span></span><span class="line"><span class="cl">        <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="na">asSegment</span><span class="o">(</span><span class="cm">/*经过手工计算，结构体的大小位16字节*/</span><span class="mi">16</span><span class="o">,</span><span class="cm">/*使用globalScope需要我们自己释放内存，如果想要JVM来释放，可以使用newImplicitScope，具体见Java文档*/</span><span class="n">ResourceScope</span><span class="o">.</span><span class="na">globalScope</span><span class="o">());</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 根据ABI结构取出结构体的变量
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// MemoryAccess是一个辅助类，可以用来访问内存段
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">var</span> <span class="n">x</span> <span class="o">=</span> <span class="n">MemoryAccess</span><span class="o">.</span><span class="na">getIntAtIndex</span><span class="o">(</span><span class="n">segment</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">var</span> <span class="n">y</span> <span class="o">=</span> <span class="n">MemoryAccess</span><span class="o">.</span><span class="na">getIntAtIndex</span><span class="o">(</span><span class="n">segment</span><span class="o">,</span><span class="mi">1</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">var</span> <span class="n">left</span> <span class="o">=</span> <span class="n">MemoryAccess</span><span class="o">.</span><span class="na">getIntAtIndex</span><span class="o">(</span><span class="n">segment</span><span class="o">,</span><span class="mi">2</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">var</span> <span class="n">top</span> <span class="o">=</span> <span class="n">MemoryAccess</span><span class="o">.</span><span class="na">getIntAtIndex</span><span class="o">(</span><span class="n">segment</span><span class="o">,</span><span class="mi">3</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">var</span> <span class="n">data</span> <span class="o">=</span> <span class="n">MemoryAccess</span><span class="o">.</span><span class="na">getAddressAtOffset</span><span class="o">(</span><span class="n">segment</span><span class="o">,</span><span class="mi">16</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 复制数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Bitmap</span> <span class="n">bitmap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Bitmap</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">    <span class="n">bitmap</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">bitmap</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">bitmap</span><span class="o">.</span><span class="na">bitmapLeft</span> <span class="o">=</span> <span class="n">left</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">bitmap</span><span class="o">.</span><span class="na">bitmapTop</span> <span class="o">=</span> <span class="n">top</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">bitmap</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">*</span> <span class="mi">4</span><span class="o">];</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 复制Bitmap.data里的字节数组
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">segment</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="na">asSegment</span><span class="o">(</span><span class="cm">/*为什么要乘以4，因为c++部分的代码如此。此处填写内存段大小。*/</span><span class="o">(</span><span class="kt">long</span><span class="o">)</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">*</span> <span class="mi">4</span><span class="o">,</span><span class="n">ResourceScope</span><span class="o">.</span><span class="na">globalScope</span><span class="o">());</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// copy
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">segment</span><span class="o">.</span><span class="na">asByteBuffer</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">bitmap</span><span class="o">.</span><span class="na">data</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">bitmap</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 数据结构定义</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Bitmap</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bitmapLeft</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bitmapTop</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 解析</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Bitmap</span><span class="w"> </span><span class="nf">parse</span><span class="p">(</span><span class="n">MemoryAddress</span><span class="w"> </span><span class="n">ptr</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 将指针转化为可以访问的内存段</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">MemorySegment</span><span class="w"> </span><span class="n">segment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="na">asSegment</span><span class="p">(</span><span class="cm">/*经过手工计算，结构体的大小位16字节*/</span><span class="n">16</span><span class="p">,</span><span class="cm">/*使用globalScope需要我们自己释放内存，如果想要JVM来释放，可以使用newImplicitScope，具体见Java文档*/</span><span class="n">ResourceScope</span><span class="p">.</span><span class="na">globalScope</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 根据ABI结构取出结构体的变量</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// MemoryAccess是一个辅助类，可以用来访问内存段</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MemoryAccess</span><span class="p">.</span><span class="na">getIntAtIndex</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span><span class="n">0</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MemoryAccess</span><span class="p">.</span><span class="na">getIntAtIndex</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span><span class="n">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MemoryAccess</span><span class="p">.</span><span class="na">getIntAtIndex</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span><span class="n">2</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">top</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MemoryAccess</span><span class="p">.</span><span class="na">getIntAtIndex</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span><span class="n">3</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MemoryAccess</span><span class="p">.</span><span class="na">getAddressAtOffset</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span><span class="n">16</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 复制数据</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Bitmap</span><span class="w"> </span><span class="n">bitmap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Bitmap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">bitmap</span><span class="p">.</span><span class="na">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">bitmap</span><span class="p">.</span><span class="na">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">bitmap</span><span class="p">.</span><span class="na">bitmapLeft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">left</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">bitmap</span><span class="p">.</span><span class="na">bitmapTop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">top</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">bitmap</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">4</span><span class="o">]</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 复制Bitmap.data里的字节数组</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">segment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="na">asSegment</span><span class="p">(</span><span class="cm">/*为什么要乘以4，因为c++部分的代码如此。此处填写内存段大小。*/</span><span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">4</span><span class="p">,</span><span class="n">ResourceScope</span><span class="p">.</span><span class="na">globalScope</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// copy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">segment</span><span class="p">.</span><span class="na">asByteBuffer</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="n">bitmap</span><span class="p">.</span><span class="na">data</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">bitmap</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="后续">后续</h3>
 <p>Java将继续孵化此API。<em>Java Forward Again!</em></p>
