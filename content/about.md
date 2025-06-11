@@ -11,20 +11,19 @@ draft = false
 
 <!--more-->
 
-我是一名中学生。出生于2k+6年9月6日。
+我是一名中学生。出生于2k+6年。
 
  - 🛠️C++/Java/rust/C# 技能
  - 🎮睿智的P社玩家 +100
  - 🎵喜欢听音乐
  - ⚙️喜欢造轮子
 
-英文名:{{< beautifulFont >}}MingMoe{{< /beautifulFont >}}
+英文名:{{< beautifulFont >}}FouPhal{{< /beautifulFont >}}
 
-你可以用[邮箱](mailto:me@kawayi.moe)联系咱
+你可以用[邮箱](mailto:me@kawayi.moe)联系
 
 或者:
 
  - Github:[MingMoe](https://github.com/mingmoe)
 
  - Twitter:[FouPhal](https://twitter.com/FouPhal)
-
